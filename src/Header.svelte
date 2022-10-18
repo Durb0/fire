@@ -2,14 +2,13 @@
 
 
 
-<div class="footer">
+<div class="header">
 
 </div>
 
 <style>
-.footer {
-  background-color: #f1f1f1;
-  padding: 10px;
+.header {
+  background-color: red;
   text-align: center;
-}
+  grid-row: 1;}
 </style>

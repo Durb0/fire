@@ -6,9 +6,17 @@
 	let name = 'world';
 </script>
 
-<div>
+<main>
 	<Header />
 	<Playground />
 	<Footer />
-</div>
+</main>
 
+<style>
+	main{
+		display: grid;
+		grid-template-rows: repeat(6, 1fr);
+		height: 100vh;
+		width: 100vw;
+	}
+</style>
