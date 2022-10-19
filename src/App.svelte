@@ -15,8 +15,6 @@
 		playground = document.getElementsByClassName("playground")[0];
 		footer = document.getElementsByClassName("footer")[0];
 
-		console.log("header ",header);
-
 		calculateGridLayout();
 	});
 
@@ -35,19 +33,17 @@
 
 		if(width > height){
 			//landscape
-			console.log("landscape");
 			//change grid layout
 			document.body.style.gridTemplateColumns = '1fr 1fr';
 			document.body.style.gridTemplateRows = '1fr 1fr';
 			header.style.gridRow = "1 / 3";
-			header.style.gridColumn = "2";
+			header.style.gridColumn = "1";
 			playground.style.gridRow = "1 / 3";
-			playground.style.gridColumn = "1";
+			playground.style.gridColumn = "2";
 			footer.style.gridRow = "2";
-			footer.style.gridColumn = "2";
+			footer.style.gridColumn = "1";
 		}else{
 			//portrait
-			console.log("portrait");
 			document.body.style.gridTemplateColumns = '1fr';
 			document.body.style.gridTemplateRows ='repeat(6, 1fr)';
 			header.style.gridRow = "1 / 2";
