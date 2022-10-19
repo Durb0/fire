@@ -2,30 +2,60 @@
   	import Header from "./Header.svelte";
   	import Playground from "./Playground.svelte";
   	import Footer from "./Footer.svelte";
+  import { construct_svelte_component } from "svelte/internal";
 
 	let name = 'world';
 	var width =0;
 	var height =0;
 
-	window.addEventListener('resize', function() {
+	let header, playground, footer;
+
+	window.addEventListener("load", function(){
+		header = document.getElementsByClassName("header")[0];
+		playground = document.getElementsByClassName("playground")[0];
+		footer = document.getElementsByClassName("footer")[0];
+
+		console.log("header ",header);
+
 		calculateGridLayout();
 	});
 
-	calculateGridLayout();
-
+	window.addEventListener('resize', function() {
+			calculateGridLayout();
+	});
+	
 	function calculateGridLayout(){
 		width = window.innerWidth;
 		height = window.innerHeight;
+		if (!header || !playground || !footer){
+			console.log("header not found");
+			return;
+		}
+		
 
 		if(width > height){
 			//landscape
 			console.log("landscape");
 			//change grid layout
-			document.documentElement.style.setProperty('--grid-template-columns', '1fr 1fr');
-			document.documentElement.style.setProperty('--grid-template-rows', '1fr 1fr 1fr');
+			document.body.style.gridTemplateColumns = '1fr 1fr';
+			document.body.style.gridTemplateRows = '1fr 1fr';
+			header.style.gridRow = "1 / 3";
+			header.style.gridColumn = "2";
+			playground.style.gridRow = "1 / 3";
+			playground.style.gridColumn = "1";
+			footer.style.gridRow = "2";
+			footer.style.gridColumn = "2";
 		}else{
 			//portrait
 			console.log("portrait");
+			document.body.style.gridTemplateColumns = '1fr';
+			document.body.style.gridTemplateRows ='repeat(6, 1fr)';
+			header.style.gridRow = "1 / 2";
+			header.style.gridColumn = "1";
+			playground.style.gridRow = "2 / 5";
+			playground.style.gridColumn = "1";
+			footer.style.gridRow = "5 / 7";
+			footer.style.gridColumn = "1";
 		}
 	}
 
@@ -41,7 +71,6 @@
 	<style>
 		body{
 			display: grid;
-			grid-template-rows: repeat(6, 1fr);
 			height: 100vh;
 			width: 100vw;
 			overflow: hidden;

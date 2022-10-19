@@ -75,33 +75,39 @@
 <style>
     :root{
         --card_size : 300px;
+        --card_radius: 8px;
     }
 
     .card{
         position: absolute;
         width: var(--card_size);
         height: var(--card_size);
-        border-radius: 8px;
         transition: all 0.3s ease-in-out;
         cursor: -webkit-grab;
         cursor: -moz-grab;
         cursor: grab;
         perspective: 1000px;
+        background-color: transparent;
     }
 
     .card_inner{
         position: relative;
         width: 100%;
         height: 100%;
-        border-radius: 8px;
         transition: transform 0.3s ease-in-out;
         transform-style: preserve-3d;
+        background-color: transparent;
     }
 
     .card img{
         pointer-events: none;
         width: 100%;
         height: 100%;
+        border-radius: var(--card_radius);
+    }
+
+    .flipped{
+        display: none;
     }
 
     .card_front, .card_back{
@@ -110,7 +116,7 @@
         height: 100%;
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
-        border-radius: 10px;
+        border-radius: var(--card_radius);
     }
 
     .card_front{
