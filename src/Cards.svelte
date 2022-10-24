@@ -1,7 +1,7 @@
-<script>
-  import { init } from "svelte/internal";
-    import Card from "./Card.svelte";
+<script>    
+    import CardItem from "./CardItem.svelte";
     import {initCards} from "./func.js";
+    import {game} from "./main.js";
 
     window.onload = function() {
         
@@ -11,9 +11,15 @@
 </script>
 
 <div class="cards">
-    <Card/>
-    <Card/>
-    <Card/>
+    {#await game.cards}
+        <div>loading...</div>
+    {:then cards}
+        {#each cards as card}
+            <CardItem card={card}/>
+        {/each}
+    {:catch error}
+        <div>error</div>
+    {/await}
 </div>
 
 

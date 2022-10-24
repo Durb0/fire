@@ -4,7 +4,6 @@
   	import Footer from "./Footer.svelte";
   import { construct_svelte_component } from "svelte/internal";
 
-	let name = 'world';
 	var width =0;
 	var height =0;
 
@@ -34,14 +33,15 @@
 		if(width > height){
 			//landscape
 			//change grid layout
-			document.body.style.gridTemplateColumns = '1fr 1fr';
-			document.body.style.gridTemplateRows = '1fr 1fr';
-			header.style.gridRow = "1 / 3";
+			document.body.style.gridTemplateColumns = 'repeat(2, 1fr)';
+			document.body.style.gridTemplateRows = 'repeat(2, 1fr)';
+			header.style.gridRow = "1";
 			header.style.gridColumn = "1";
 			playground.style.gridRow = "1 / 3";
 			playground.style.gridColumn = "2";
 			footer.style.gridRow = "2";
 			footer.style.gridColumn = "1";
+			footer.style.width = "calc(50vw - 40px)";
 		}else{
 			//portrait
 			document.body.style.gridTemplateColumns = '1fr';
@@ -52,6 +52,7 @@
 			playground.style.gridColumn = "1";
 			footer.style.gridRow = "5 / 7";
 			footer.style.gridColumn = "1";
+			footer.style.width = "calc(100vw - 40px)";
 		}
 	}
 
@@ -67,8 +68,8 @@
 	<style>
 		body{
 			display: grid;
+			width : 100vw;
 			height: 100vh;
-			width: 100vw;
 			overflow: hidden;
 		}
 	</style>

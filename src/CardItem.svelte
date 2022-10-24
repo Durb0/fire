@@ -2,6 +2,8 @@
     import {pan, swipe} from 'svelte-hammer';
     import { initCards } from './func.js';
 
+    export let card;
+
     function handlePanStart(event) {
         event.target.classList.add("moving");
         event.target.style.transition = "none";
@@ -29,7 +31,7 @@
 
     function handlePanEnd(event) {
         event.target.classList.remove("moving");
-        event.target.style.transition = "0.3s ease-in-out";
+        event.target.style.transition = "all 0.3s ease-in-out";
 
         var moveOutWidth = document.body.clientWidth;
         var keep = Math.abs(event.detail.deltaX) < 80 || Math.abs(event.detail.velocityX) < 0.5;
@@ -47,7 +49,11 @@
             var yMulti = event.detail.deltaY / 80;
             var rotate = xMulti * yMulti;
             event.target.style.transform = 'translate(' + toX + 'px, ' + (toY + event.detail.deltaY) + 'px) rotate(' + rotate + 'deg)';
-            initCards();
+            //wait 0.5s
+            setTimeout(function(){
+                event.target.remove();
+                initCards();
+            }, 500);
         }
     }
 </script>
@@ -59,7 +65,6 @@
     use:pan
     on:panstart = {handlePanStart}
     on:panmove = {handlePanMove}
-    on:pandown = {handlePanMove}
     on:panend = {handlePanEnd}
 >
     <div class="card_inner">
@@ -67,7 +72,7 @@
             <img src="./assets/backCard.png" alt="">
         </div>
         <div class="card_front">
-            <h1>Bonjour</h1>        
+            <h1>{card.title}</h1>        
         </div>
     </div>
 </div>
@@ -104,10 +109,6 @@
         width: 100%;
         height: 100%;
         border-radius: var(--card_radius);
-    }
-
-    .flipped{
-        display: none;
     }
 
     .card_front, .card_back{

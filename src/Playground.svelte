@@ -29,6 +29,8 @@
     }
 
 </script>
+
+
 <div class="playground">
     <Cards/>
 </div>
@@ -37,7 +39,6 @@
 .playground{
   background-color: orange;
   text-align: center;
-  grid-row: 2 / 5;
   display: flex;
   justify-content: center;
   align-items: center;
