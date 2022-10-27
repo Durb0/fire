@@ -1,8 +1,27 @@
 <script>
-    import {pan, swipe} from 'svelte-hammer';
-    import { initCards } from './func.js';
+    import {pan} from 'svelte-hammer';
+    import { w_cards } from './store.js';
+    import { onMount } from 'svelte';
+    import { initCards} from './func.js';
+    import { game } from './main.js';
+
+    let el;
+    let c;
 
     export let card;
+    export let index;
+
+    onMount(() => {
+        if(index==0){
+        //add class flipped to first card
+        el.style.transform = "rotateY(180deg)";
+        c.style.zIndex = "1";
+        }else{
+            c.style.zIndex = "0";
+        }
+    });
+
+    //check if card is the first card
 
     function handlePanStart(event) {
         event.target.classList.add("moving");
@@ -50,9 +69,9 @@
             var rotate = xMulti * yMulti;
             event.target.style.transform = 'translate(' + toX + 'px, ' + (toY + event.detail.deltaY) + 'px) rotate(' + rotate + 'deg)';
             //wait 0.5s
-            setTimeout(function(){
-                event.target.remove();
-                initCards();
+            setTimeout(function(){;
+                game.removeFirstCard();
+                w_cards.update(cards => cards.slice(1));
             }, 500);
         }
     }
@@ -66,13 +85,14 @@
     on:panstart = {handlePanStart}
     on:panmove = {handlePanMove}
     on:panend = {handlePanEnd}
+    bind:this={c}
 >
-    <div class="card_inner">
+    <div class="card_inner" bind:this={el}>
         <div class="card_back">
             <img src="./assets/backCard.png" alt="">
         </div>
         <div class="card_front">
-            <h1>{card.title}</h1>        
+            <h1>{card.title}{index}{card.id}</h1>        
         </div>
     </div>
 </div>
@@ -123,6 +143,10 @@
     .card_front{
         background-color: white;
         transform: rotateY(180deg);
+    }
+
+    .flipped{
+        transform :rotateY(180deg);
     }
 
 </style>

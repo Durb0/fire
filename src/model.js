@@ -4,8 +4,6 @@ export class Game{
         this.reputation = 50;
         this.cards = [];
         this.stock = new Stock();
-        
-        this.generateCards(10);
     }
 
     //
@@ -14,6 +12,34 @@ export class Game{
             this.cards.push(new Card(i));
         }
     }
+
+    removeFirstCard(){
+        function applyResult(card){
+            //numero random entre 1 et 100
+            var rand = Math.floor(Math.random() * 100) + 1;
+            console.log(rand);
+            console.log("max:", card.difficulty+card.interval);
+            console.log("min:", card.difficulty-card.interval);
+            var result = 0;
+            if(rand >= card.difficulty + card.interval){
+                result = 1;
+            }else if(rand >= card.difficulty - card.interval){
+                result = 0;
+            }else{
+                result = -1;
+            }
+            console.log(result);
+            return result;
+        }
+
+        const card = this.cards[0];
+        this.cards.shift();
+        setTimeout(function(){
+            var result = applyResult(card);
+        },card.time);
+    }
+
+    
 }
 
 export class Stock{
@@ -56,8 +82,22 @@ export class Bonus{
 }
 
 export class Card{
-    constructor(title){
+    constructor(id,title,description,type,position){
+        this.id = id;
         this.title = title;
+        this.description = description;
+        this.type = type;
+        this.position = position;
+    }
+}
+
+export class InterventionCard extends Card{
+    constructor(title,description,position,type,time,difficulty,interval){
+        super(title,description,"intervention",position);
+        this.type = type;
+        this.time = time;
+        this.difficulty = difficulty;
+        this.interval = interval;
     }
 }
 

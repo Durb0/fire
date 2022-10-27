@@ -1,25 +1,29 @@
 <script>    
     import CardItem from "./CardItem.svelte";
     import {initCards} from "./func.js";
-    import {game} from "./main.js";
+    import {w_cards} from "./store.js";
 
-    window.onload = function() {
-        
+    let el;
+
+    let list_of_cards;
+
+    w_cards.subscribe(value => {
+        list_of_cards = value;
         initCards();
-    }
-        
+        console.log("list_of_cards", list_of_cards);
+    });
+
+    window.addEventListener("remove_first_card", function(){
+        $w_cards.slice(1);
+        console.log ("remove_first_card");
+    });
 </script>
 
-<div class="cards">
-    {#await game.cards}
-        <div>loading...</div>
-    {:then cards}
-        {#each cards as card}
-            <CardItem card={card}/>
-        {/each}
-    {:catch error}
-        <div>error</div>
-    {/await}
+<div class="cards" bind:this={el}>
+    {#each list_of_cards as card,index (card.id)}
+        <CardItem card={card} index={index}/>
+    {/each}
+
 </div>
 
 
@@ -31,5 +35,5 @@
     justify-content: center;
     align-items: center;
     z-index: 1;
-  }
+}
 </style>

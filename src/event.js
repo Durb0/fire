@@ -1,0 +1,1 @@
+export const remove_first_card =new CustomEvent('remove_first_card');
