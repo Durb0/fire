@@ -1,15 +1,19 @@
 <script>
   import ItemList from "./ItemList.svelte";
 
-  export let el;
+  const typeItem = {
+    Truck: "truck",
+    Chef: "chef",
+    Firefighter: "firefighter"
+  }
 
 </script>
 
 
-<div class="footer" bind:this={el}>
-  <ItemList/>
-  <ItemList/>
-  <ItemList/>
+<div class="footer">
+  <ItemList type={typeItem.Truck}/>
+  <ItemList type={typeItem.Chef}/>
+  <ItemList type={typeItem.Firefighter}/>
 </div>
 
 <style>

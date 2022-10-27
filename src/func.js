@@ -1,3 +1,5 @@
+// Card function
+// ===============
 function initCards() {
     let cards = document.getElementsByClassName("card");
     var newCards = document.querySelectorAll('.card:not(.removed)');

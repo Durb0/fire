@@ -1,4 +1,6 @@
 <script>
+    
+    export let firefighter;
     export let el
     let height;
 
@@ -18,6 +20,8 @@
     
 
 <div bind:this={el} class="item">
+
+    <p>{firefighter.name}</p>
 
 </div>
 
