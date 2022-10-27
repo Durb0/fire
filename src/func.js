@@ -1,3 +1,5 @@
+// Card function
+// ===============
 function initCards() {
     var cards = document.querySelectorAll('.card:not(.removed)');
     if (cards.length > 0){
