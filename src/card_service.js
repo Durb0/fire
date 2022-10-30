@@ -1,30 +1,40 @@
-import { InterventionCard } from './model.js';
+import { InterventionCard, InfoCard } from './model.js';
 import socket from './socket.js';
 import {sleep} from './time.js';
-import {initCards} from './func.js';
 import { game } from './main.js';
 import { w_cards, w_id } from './store.js';
 
-socket.on('InfoCard', function(data) {
-    console.log(data);
-    });
-
-socket.on('InterventionCard',(jdata) => {
-    const data = JSON.parse(jdata);
+function newId(){
     var id= 0;
     w_id.subscribe((value) => {
         id = value;
     });
     w_id.update((value) => value + 1);
-    var card = new InterventionCard(
-        id,
+    return id;
+}
+
+socket.on('InfoCard', function(jdata) {
+    const data = JSON.parse(jdata);
+    var card = new InfoCard(
+        data.id,
         data.title,
         data.description,
         data.position,
-        data.intervention.type,
+        data.info.gain_popularity
+    );
+    game.cards.push(card);
+    w_cards.update(cards => [...cards, card]);
+    });
+
+socket.on('InterventionCard',(jdata) => {
+    const data = JSON.parse(jdata);
+    var card = new InterventionCard(
+        data.id,
+        data.title,
+        data.description,
+        data.position,
         data.intervention.time,
-        data.intervention.difficulty,
-        data.intervention.interval
+        data.intervention.difficulty
     );
     //game.cards.push(card);
     game.cards.push(card);
@@ -32,12 +42,15 @@ socket.on('InterventionCard',(jdata) => {
     }
 );
 
+function callNextCard(cardId, level){
+    socket.emit('drawNextCard', cardId, level);
+}
 
 async function test(){
     while(true){
         socket.emit('drawInterventionBaseCard');
-        await(sleep(5000));
-        }
+        await sleep(10000);
+    }
 }
 
-export {test};
+export {test, callNextCard, newId};

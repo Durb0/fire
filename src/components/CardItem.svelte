@@ -92,7 +92,8 @@
             <img src="./assets/backCard.png" alt="">
         </div>
         <div class="card_front">
-            <h1>{card.title}{index}{card.id}</h1>        
+            <h1>{card.title}</h1>
+            <p>{card.description}</p>        
         </div>
     </div>
 </div>

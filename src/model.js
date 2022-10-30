@@ -1,11 +1,12 @@
+import {callNextCard, newId} from './card_service.js';
+
+
 export class Game{
     constructor(){
         this.days = 0.0;
         this.reputation = 50;
         this.cards = [];
         this.stock = new Stock();
-        
-        this.generateCards(10);
         this.generateStock(2,3,8);
     }
 
@@ -19,25 +20,23 @@ export class Game{
         function applyResult(card){
             //numero random entre 1 et 100
             var rand = Math.floor(Math.random() * 100) + 1;
-            console.log(rand);
-            console.log("max:", card.difficulty+card.interval);
-            console.log("min:", card.difficulty-card.interval);
-            var result = 0;
-            if(rand >= card.difficulty + card.interval){
-                result = 1;
-            }else if(rand >= card.difficulty - card.interval){
-                result = 0;
+            var result = "GOOD";
+            if(rand >= card.difficulty){
+                result = "GOOD";
             }else{
-                result = -1;
+                result = "BAD";
             }
-            console.log(result);
             return result;
         }
 
         const card = this.cards[0];
         this.cards.shift();
+        if(card.position == "END"){
+            return;
+        }
         setTimeout(function(){
             var result = applyResult(card);
+            callNextCard(card.id, result);
         },card.time);
     }
     generateStock(nbTrucks, nbChefs, nbFirefighters){
@@ -108,22 +107,26 @@ export class Bonus{
 }
 
 export class Card{
-    constructor(id,title,description,type,position){
+    constructor(id,title,description,position){
+        this.entry_id = newId();
         this.id = id;
         this.title = title;
         this.description = description;
-        this.type = type;
         this.position = position;
     }
 }
 
 export class InterventionCard extends Card{
-    constructor(title,description,position,type,time,difficulty,interval){
-        super(title,description,"intervention",position);
-        this.type = type;
+    constructor(id,title,description,position,time,difficulty){
+        super(id,title,description,position);
         this.time = time;
         this.difficulty = difficulty;
-        this.interval = interval;
     }
 }
 
+export class InfoCard extends Card{
+    constructor(id,title,description,position,gain_popularity){
+        super(id,title,description,position);
+        this.gain_popularity = gain_popularity;
+    }
+}
