@@ -1,17 +1,10 @@
 import { InterventionCard, InfoCard } from './model.js';
-import socket from './socket.js';
-import {sleep} from './time.js';
-import { game } from './main.js';
-import { w_cards, w_id } from './store.js';
+import socket from '../utils/socket.js';
+import {sleep} from '../utils/time.js';
+import { game } from '../main.js';
+import { w_cards, w_id } from '../utils/store.js';
 
-function newId(){
-    var id= 0;
-    w_id.subscribe((value) => {
-        id = value;
-    });
-    w_id.update((value) => value + 1);
-    return id;
-}
+
 
 socket.on('InfoCard', function(jdata) {
     const data = JSON.parse(jdata);

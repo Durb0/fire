@@ -2,16 +2,24 @@
     import ItemChef from "./ItemChef.svelte";
     import ItemFirefighter from "./ItemFirefighter.svelte";
     import ItemTruck from "./ItemTruck.svelte";
-    import {game} from "./main.js";
+    import {w_game} from "../utils/store.js";
 
     export let type;
+
+    let ressource;
+
+    w_game.subscribe(value => {
+        ressource = value.ressource;
+    });
+
+
 </script>
 
 
 <div class="list">
     <div class="list_inner">
         {#if type=='truck'}
-            {#await game.stock.trucks}
+            {#await ressource.trucks}
                 <div>loading...</div>
             {:then trucks}
                 {#each trucks as truck}
@@ -23,7 +31,7 @@
         {/if}
 
         {#if type=='chef'}
-            {#await game.stock.chefs}
+            {#await ressource.chefs}
                 <div>loading...</div>
             {:then chefs}
                 {#each chefs as chef}
@@ -35,7 +43,7 @@
         {/if}
 
         {#if type=='firefighter'}
-            {#await game.stock.firefighters}
+            {#await ressource.crewmans}
                 <div>loading...</div>
             {:then firefighters}
             {(console.log({ firefighters }), '')}
@@ -51,22 +59,23 @@
 
 <style>
 .list {
-    background-color: white;
-    border-radius: 20px;
+    background: rgb(41,41,41);
+    background: linear-gradient(0deg, rgba(41,41,41,1) 0%, rgba(0,0,0,1) 100%);
     text-align: center;
-    height: 100%;
+    border-radius: 10px 10px 0 0;
+    box-sizing: border-box;
     padding: 10px;
-    width: calc(100% - 20px);
+    height: inherit;
 }
-
 .list_inner{
     display: flex;
     flex-direction: row;
-    height: 100%;
+    box-sizing: border-box;
     gap: 10px;
     padding: 0px 10px;
     overflow-x: scroll;
     border-radius: 10px;
-    max-width:auto;
+    flex-wrap: wrap;
+    overflow: auto;
 }
 </style>

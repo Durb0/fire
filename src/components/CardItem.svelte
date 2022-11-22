@@ -1,12 +1,16 @@
 <script>
-    import {pan} from 'svelte-hammer';
-    import { w_cards } from './store.js';
+    import { pan } from 'svelte-hammer';
+    import { w_cards } from '../utils/store.js';
     import { onMount } from 'svelte';
-    import { initCards} from './func.js';
-    import { game } from './main.js';
+    import { w_game } from '../utils/store.js';
 
     let el;
     let c;
+    let game;
+
+    w_game.subscribe(value => {
+        game = value;
+    });
 
     export let card;
     export let index;

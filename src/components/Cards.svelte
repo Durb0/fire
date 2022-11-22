@@ -1,7 +1,7 @@
 <script>    
     import CardItem from "./CardItem.svelte";
-    import {initCards} from "./func.js";
-    import {w_cards} from "./store.js";
+    import {initCards} from "../utils/func.js";
+    import {w_cards} from "../utils/store.js";
 
     let el;
 

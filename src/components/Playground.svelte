@@ -1,5 +1,4 @@
 <script>
-  import { construct_svelte_component } from "svelte/internal";
     import Cards from "./Cards.svelte";
 
     let width, height;
@@ -36,11 +35,11 @@
 </div>
 
 <style>
-.playground{
-  background-color: orange;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  }
+    .playground{
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: -webkit-fill-available;
+    }
 </style>

@@ -1,7 +1,5 @@
 <script>
 
-
-    export let chef;
     export let el
     let height;
 

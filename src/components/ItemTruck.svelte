@@ -1,7 +1,5 @@
 <script>
 
-
-    export let truck;
     export let el
     let height;
 
