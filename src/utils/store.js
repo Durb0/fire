@@ -1,7 +1,7 @@
 import { writable } from "svelte/store";
 import { Game } from "../models/Game";
 
-export let w_cards = writable([]);
+
 export let w_idCard = writable(0);
 export let w_idFireFighter = writable(0);
 export let w_idTruck = writable(0);

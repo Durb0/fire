@@ -1,19 +1,15 @@
 <script>    
     import CardItem from "./CardItem.svelte";
     import {initCards} from "../utils/func.js";
-    import {w_cards} from "../utils/store.js";
+    import {w_game} from "../utils/store.js";
 
     let el;
 
     let list_of_cards;
 
-    w_cards.subscribe(value => {
-        list_of_cards = value;
+    w_game.subscribe(value => {
+        list_of_cards = value.deck;
         initCards();
-    });
-
-    window.addEventListener("remove_first_card", function(){
-        $w_cards.slice(1);
     });
 </script>
 

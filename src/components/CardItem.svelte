@@ -1,6 +1,5 @@
 <script>
     import { pan } from 'svelte-hammer';
-    import { w_cards } from '../utils/store.js';
     import { onMount } from 'svelte';
     import { w_game } from '../utils/store.js';
 
@@ -74,8 +73,7 @@
             event.target.style.transform = 'translate(' + toX + 'px, ' + (toY + event.detail.deltaY) + 'px) rotate(' + rotate + 'deg)';
             //wait 0.5s
             setTimeout(function(){;
-                game.removeFirstCard();
-                w_cards.update(cards => cards.slice(1));
+                game.removeFirstCard(); //TODO: ici tu dois appeller ta fonction qui swipe ta carte
             }, 500);
         }
     }

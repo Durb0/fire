@@ -17,44 +17,42 @@
 
 
 <div class="list">
-    <div class="list_inner">
-        {#if type=='truck'}
-            {#await ressource.trucks}
-                <div>loading...</div>
-            {:then trucks}
-                {#each trucks as truck}
-                    <ItemTruck truck={truck}/>
-                {/each}
-            {:catch error}
-                <div>error</div>
-            {/await}
-        {/if}
+    {#if type=='truck'}
+        {#await ressource.trucks}
+            <div>loading...</div>
+        {:then trucks}
+            {#each trucks as truck}
+                <ItemTruck truck={truck}/>
+            {/each}
+        {:catch error}
+            <div>error</div>
+        {/await}
+    {/if}
 
-        {#if type=='chef'}
-            {#await ressource.chefs}
-                <div>loading...</div>
-            {:then chefs}
-                {#each chefs as chef}
-                    <ItemChef chef={chef}/>
-                {/each}
-            {:catch error}
-                <div>error</div>
-            {/await}
-        {/if}
+    {#if type=='chef'}
+        {#await ressource.chefs}
+            <div>loading...</div>
+        {:then chefs}
+            {#each chefs as chef}
+                <ItemChef chef={chef}/>
+            {/each}
+        {:catch error}
+            <div>error</div>
+        {/await}
+    {/if}
 
-        {#if type=='firefighter'}
-            {#await ressource.crewmans}
-                <div>loading...</div>
-            {:then firefighters}
-            {(console.log({ firefighters }), '')}
-                {#each firefighters as firefighter}
-                    <ItemFirefighter firefighter={firefighter}/>
-                {/each}
-            {:catch error}
-                <div>error</div>
-            {/await}
-        {/if}
-    </div>
+    {#if type=='firefighter'}
+        {#await ressource.crewmans}
+            <div>loading...</div>
+        {:then firefighters}
+        {(console.log({ firefighters }), '')}
+            {#each firefighters as firefighter}
+                <ItemFirefighter firefighter={firefighter}/>
+            {/each}
+        {:catch error}
+            <div>error</div>
+        {/await}
+    {/if}
 </div>
 
 <style>
@@ -66,16 +64,11 @@
     box-sizing: border-box;
     padding: 10px;
     height: inherit;
-}
-.list_inner{
     display: flex;
     flex-direction: row;
-    box-sizing: border-box;
-    gap: 10px;
-    padding: 0px 10px;
-    overflow-x: scroll;
-    border-radius: 10px;
+    gap:10px;
     flex-wrap: wrap;
-    overflow: auto;
+    overflow-y: scroll;
+    justify-content: space-evenly;
 }
 </style>
