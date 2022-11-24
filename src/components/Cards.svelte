@@ -7,8 +7,9 @@
 
     let list_of_cards;
 
-    w_game.subscribe(value => {
-        list_of_cards = value.deck;
+    w_game.subscribe(game => {
+        list_of_cards = game.deck;
+        console.log("maj deck",list_of_cards);
         initCards();
     });
 </script>

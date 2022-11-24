@@ -3,10 +3,7 @@
 
     let width, height;
     let element;
-    window.addEventListener("load", function(){
-        element = document.getElementsByClassName("playground")[0];
-        resizeCard();
-    });
+    
 
     window.addEventListener('resize', function() {
         resizeCard();
@@ -30,7 +27,7 @@
 </script>
 
 
-<div class="playground">
+<div class="playground" bind:this={element}>
     <Cards/>
 </div>
 

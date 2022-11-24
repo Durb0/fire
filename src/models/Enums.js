@@ -1,8 +1,8 @@
 export var PositionType = {
-    BASE: 0,
-    MID: 1,
-    END: 2,
-    BRIEF: 3
+    BASE: "BASE",
+    MID: "MID",
+    END: "END",
+    BRIEF: "BRIEF"
 };
 
 export var OperationType = {

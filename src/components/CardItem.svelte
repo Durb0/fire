@@ -25,8 +25,8 @@
     });
 
     //check if card is the first card
-
-    function handlePanStart(event) {
+    //TODO: check si la carte est en haut de la liste 
+    function handlePanStart(event) { 
         event.target.classList.add("moving");
         event.target.style.transition = "none";
     }
@@ -60,7 +60,7 @@
 
         event.target.classList.toggle("removed", !keep);
 
-        if(keep){
+        if(keep || (card.constructor.name == "InterventionCard" && !card.means_move.isValideForIntervention())){
             event.target.style.transform = '';
         } else {
             var endX = Math.max(Math.abs(event.detail.velocityX) * moveOutWidth, moveOutWidth);
@@ -71,10 +71,8 @@
             var yMulti = event.detail.deltaY / 80;
             var rotate = xMulti * yMulti;
             event.target.style.transform = 'translate(' + toX + 'px, ' + (toY + event.detail.deltaY) + 'px) rotate(' + rotate + 'deg)';
-            //wait 0.5s
-            setTimeout(function(){;
-                game.removeFirstCard(); //TODO: ici tu dois appeller ta fonction qui swipe ta carte
-            }, 500);
+
+            card.swipeCard(game);
         }
     }
 </script>
