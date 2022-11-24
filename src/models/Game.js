@@ -1,6 +1,7 @@
 import { Ressource } from "./Ressource";
 import { Crewman } from "./FireFighter";
 import { InterventionCard } from "./Card";
+import { OperationType } from "./Enums";
 
 export class Game{
 
@@ -13,9 +14,9 @@ export class Game{
         this.operations_in_progress = [];
         this.operations_closed = [];
         this.ressource = new Ressource([],[
-            new Crewman(1,'Thomas',40,50),
-            new Crewman(2,'Pierre',80,20),
-            new Crewman(3,'Amandine',60,90)
+            new Crewman(),
+            new Crewman(),
+            new Crewman()
         ]);
         //TODO: call game_service to initialize ressource
     }

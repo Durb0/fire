@@ -1,18 +1,18 @@
-var PositionType = {
+export var PositionType = {
     BASE: 0,
     MID: 1,
     END: 2,
     BRIEF: 3
 };
 
-var OperationType = {
-    FIRE : 0,
-    ROAD_ACCIDENT : 1,
-    SOCIAL: 2,
-    PERSON_ASSISTANCE: 3
+export var OperationType = {
+    FIRE : "FIRE",
+    ROAD_ACCIDENT : "ROAD_ACCIDENT",
+    SOCIAL: "SOCIAL",
+    PERSON_ASSISTANCE: "PERSON_ASSISTANCE",
 }
 
-var RelationLevel = {
+export var RelationLevel = {
     CRITICAL_SUCCESS : 20,
     SUCCESS : 10,
     FAILURE : -10,

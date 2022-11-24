@@ -43,7 +43,7 @@
 
 		@font-face {
 			font-family: "F!RE";
-			src: local("/assets/font/F!RE.ttf");
+			src: url("/assets/font/FIRE.ttf");
 		}
 
 		body{

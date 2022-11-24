@@ -61,14 +61,13 @@
     background: linear-gradient(0deg, rgba(41,41,41,1) 0%, rgba(0,0,0,1) 100%);
     text-align: center;
     border-radius: 10px 10px 0 0;
-    box-sizing: border-box;
-    padding: 10px;
-    height: inherit;
+    height: calc(100% - 20px);
     display: flex;
     flex-direction: row;
-    gap:10px;
     flex-wrap: wrap;
     overflow-y: scroll;
     justify-content: space-evenly;
+    padding: 10px;
+    gap:10px;
 }
 </style>

@@ -52,14 +52,13 @@
   gap: 10px;
   box-sizing: border-box;
   width: 100%;
-  height: -webkit-fill-available;
 
 }
 
 .tab__container{
   box-sizing: border-box;
   width: 100%;
-  height: 100%;
+  height: 300px;
   padding: 20px;
   padding-bottom: 0;
   padding-top: 40px;
