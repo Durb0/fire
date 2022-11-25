@@ -11,9 +11,9 @@ export var OperationType = {
     SOCIAL: {name: "SOCIAL", icon: null, color: null, is_gain: true},
     PERSONNAL_ASSISTANCE: {name: "PERSONNAL_ASSISTANCE", icon: null, color: null, is_gain: true},
     MULTI_PURPOSE: {name: "MULTI_PURPOSE", icon: null, color: null, is_gain: true},
-    SPEED: {name: "SPEED", icon: null, color: null, is_gain: true},
-    WATER: {name: "WATER", icon: null, color: null, is_gain: true},
-    HIGH: {name: "HIGH", icon: null, color: null, is_gain: true}
+    SPEED: {name: "SPEED", icon: null, color: null, is_gain: false},
+    WATER: {name: "WATER", icon: null, color: null, is_gain: false},
+    HIGH: {name: "HIGH", icon: null, color: null, is_gain: false}
 }
 
 export var RelationLevel = {
