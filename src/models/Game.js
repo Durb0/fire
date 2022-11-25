@@ -4,7 +4,7 @@ import { InformationCard, InterventionCard } from "./Card";
 import { Action } from "./Action";
 import { w_game } from "../utils/store";
 import { Truck } from "./Truck";
-import { PositionType } from "./Enums";
+import { PositionType, OperationType } from "./Enums";
 
 export class Game{
 
@@ -12,25 +12,15 @@ export class Game{
         
         let first_mean = new Ressource(
             [
-                new Chef(1,"Julienne"),
-                new Chef(2,"Joséphine")
+                new Chef("Julienne"),
+                new Chef("Joséphine")
             ],
             [
-                new Crewman(),
-                new Crewman(),
-                new Crewman(),
-                new Crewman(),
-                new Crewman(),
-                new Crewman(),
-                new Crewman(),
-                new Crewman(),
-                new Crewman(),
-                new Crewman(),
-                new Crewman(),
-                new Crewman(),
-                new Crewman(),
-                new Crewman(),
-                new Crewman()
+                new Crewman("Carole"),
+                new Crewman("Afrodille"),
+                new Crewman("Roland"),
+                new Crewman("Rosemarie"),
+                new Crewman("Gabriel")
             ],
             [
                 new Truck(1,undefined,"VSAV", 3, 4),
@@ -39,7 +29,7 @@ export class Game{
         );
 
         this.deck = [
-            new InterventionCard("First_Inter","Description",0, PositionType.BASE, 0, 0, 0, 0, [], first_mean),
+            new InterventionCard("First_Inter","Description",0, PositionType.BASE, 50, 30, 30, 0, [OperationType.PERSONNAL_ASSISTANCE, OperationType.SPEED], first_mean),
             new InterventionCard("Seconde_Inter","Description",0, PositionType.BASE, 0, 0, 0, 40, []),
             new InformationCard("Titre", "decription",0, "END", new Action())
         ];

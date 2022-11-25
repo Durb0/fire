@@ -5,7 +5,7 @@ import { getName } from '../services/name_service.js';
 export class FireFighter{
 
     constructor(name = undefined, moral = 100, fatigue = 100){
-        this.id = newIdFireFighter(); //TODO: generate id by service/store 
+        this.id = newIdFireFighter(); 
         this.moral = moral;
         this.fatigue = fatigue;
         this.name = name;

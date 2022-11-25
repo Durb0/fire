@@ -10,4 +10,5 @@ export var categories = [
 ];
 
 
-export var chefPower = 5;
+export const VALUE_BONUS_CHEF = 5;
+export const VALUE_BONUS_FIREFIGHTER = 5;
