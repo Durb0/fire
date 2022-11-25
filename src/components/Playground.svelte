@@ -1,8 +1,21 @@
 <script>
-    import Cards from "./Cards.svelte";
+    import { w_game } from '../utils/store.js';
+    import { initCards } from '../utils/func';
+    import CardItem from './CardItem.svelte';
 
-    let width, height;
     let element;
+
+    let list_of_cards;
+
+    w_game.subscribe(game => {
+        list_of_cards = game.deck;
+        console.log("maj deck",list_of_cards);
+        initCards();
+    });
+
+    window.addEventListener('load', () => {
+        resizeCard();
+    });
     
 
     window.addEventListener('resize', function() {
@@ -12,8 +25,8 @@
     function resizeCard(){
         var size = 0;
         
-        width = element.clientWidth;
-        height = element.clientHeight;
+        var width = element.clientWidth;
+        var height = element.clientHeight;
         if(width > height){
             //height size
             size = height*0.7;
@@ -26,12 +39,15 @@
 
 </script>
 
-
-<div class="playground" bind:this={element}>
-    <Cards/>
+<div class="playground" bind:this={element} >
+    {#each list_of_cards as card,index (card.entry_id)}
+        <CardItem card={card} index={index}/>
+    {/each}
 </div>
 
+
 <style>
+
     .playground{
         text-align: center;
         display: flex;

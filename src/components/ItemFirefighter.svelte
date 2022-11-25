@@ -9,7 +9,7 @@
     export let firefighter;
     let el;
 
-
+    //TODO: fonction onclick qui prend en compte l'etat actuel du pompier, si il reste de la place dans les camions,...
 
     let avatar = createAvatar(style,{
         seed: firefighter.id.toString() + firefighter.name,
@@ -28,9 +28,7 @@
     <span>{firefighter.name}</span>
     <div class="experience">
         {#each firefighter.experience as exp}
-            <div class="exp">
                 <IconOperationType type={exp}/>
-            </div>
         {/each}
     </div>
     <!--image from https://avatars.dicebear.com/api/personas/.svg-->
@@ -63,7 +61,7 @@
     }
     .item {
         padding:10px;
-        background-color: white;
+        background-color: ghostwhite;
         border-radius: 5px;
         text-align: center;
         display: flex;

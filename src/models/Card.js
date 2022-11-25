@@ -28,9 +28,9 @@ export class InterventionCard extends Card{
     {
         super(title, description, time_before_trigger, position);
         this.ratio_success = ratio_success;
-        this.ratio_critic_success = ratio_critic_success;
-        this.ratio_critic_failure = ratio_critic_failure;
-        this.ratio_critic_refusal = ratio_critic_refusal;
+        this.ratio_critical_success = ratio_critic_success;
+        this.ratio_critical_failure = ratio_critic_failure;
+        this.ratio_critical_refusal = ratio_critic_refusal;
         this.categories = categories;
         this.means_move = means_move;
     }

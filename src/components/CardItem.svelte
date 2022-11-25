@@ -100,14 +100,14 @@
 
 <style>
     :root{
-        --card_size : 300px;
+        --card_size : 70%;
         --card_radius: 8px;
     }
 
     .card{
         position: absolute;
         width: var(--card_size);
-        height: var(--card_size);
+        aspect-ratio: 1/1;
         transition: all 0.3s ease-in-out;
         cursor: -webkit-grab;
         cursor: -moz-grab;

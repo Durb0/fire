@@ -3,31 +3,12 @@
 	import Footer from "./Footer.svelte";
 	import Header from "./Header.svelte";
 
-
-	var width =0;
-	var height =0;
-
 	let playground, footer;
 
 	window.addEventListener("load", function(){
 		playground = document.getElementsByClassName("playground")[0];
 		footer = document.getElementsByClassName("footer")[0];
-
-		calculateGridLayout();
 	});
-
-	window.addEventListener('resize', function() {
-			calculateGridLayout();
-	});
-	
-	function calculateGridLayout(){
-		width = window.innerWidth;
-		height = window.innerHeight;
-		if (!playground || !footer){
-			console.log("header not found");
-			return;
-		}
-	}
 
 </script>
 

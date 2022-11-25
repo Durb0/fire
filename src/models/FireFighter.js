@@ -1,6 +1,6 @@
 import { newIdFireFighter } from '../utils/store';
-import { OperationType } from './Enums';
-import { getName } from '../services/name_service';
+import { categories} from '../utils/globals';
+import { getName } from '../services/name_service.js';
 
 export class FireFighter{
 
@@ -10,18 +10,9 @@ export class FireFighter{
         this.fatigue = fatigue;
         this.name = name;
         if (name == undefined){
-            console.log("name is undefined");
-            this.defineName();
+            this.name = getName();
         }
 
-    }
-
-    async defineName(){
-        await getName().then((name) => {
-            this.name = name;
-            console.log("name: " + this.name);
-        }
-    );
     }
 }
 
@@ -36,8 +27,8 @@ export class Crewman extends FireFighter{
         var list = [];
         var number = Math.floor(Math.random() * 5);
         for(var i = 0; i < number; i++){
-            var rand = Math.floor(Math.random() * Object.keys(OperationType).length);
-            list.push(OperationType[Object.keys(OperationType)[rand]]);
+            var rand = Math.floor(Math.random() * categories.length);
+            list.push(categories[rand]);
         }
         return list;
     }

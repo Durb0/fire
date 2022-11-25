@@ -1,5 +1,6 @@
 <script>
   import { sleep } from "../utils/time";
+  import { w_game } from "../utils/store";
 
 
   
@@ -11,21 +12,16 @@
     100: "#0E99DA"
   }
 
-  var value = 0;
-  var color = colors[0];
+  w_game.subscribe(game => {
+    value = game.popularity;
+    updateColor();
+  });
 
-  updateColor();
-  testi();
+  var value = 100;
+  var color = colors[100];
 
-  //creer une fonction asynchrone qui va incrementer value toute les secondes
-  async function testi() {
-    while (true) {
-      await sleep(2000);
-      //change value for random number between 0 and 100
-      value = Math.floor(Math.random() * 100);
-      updateColor();
-    }
-  }
+  
+
 
   function updateColor(){
     //get the keys of the colors object
