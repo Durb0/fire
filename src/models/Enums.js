@@ -4,16 +4,16 @@ export var PositionType = {
     END: "END",
     BRIEF: "BRIEF"
 };
-
+//TODO: icon
 export var OperationType = {
-    FIRE : "FIRE",
-    ROAD_ACCIDENT : "ROAD_ACCIDENT",
-    SOCIAL: "SOCIAL",
-    PERSONNAL_ASSISTANCE: "PERSONNAL_ASSISTANCE",
-    MULTI_PURPOSE: "MULTI_PURPOSE",
-    SPEED: "SPEED",
-    WATER: "WATER",
-    HIGH: "HIGH"
+    FIRE : {name: "FIRE", icon: null, color: null, is_gain: true},
+    ROAD_ACCIDENT : {name: "ROAD_ACCIDENT", icon: null, color: null, is_gain: true},
+    SOCIAL: {name: "SOCIAL", icon: null, color: null, is_gain: true},
+    PERSONNAL_ASSISTANCE: {name: "PERSONNAL_ASSISTANCE", icon: null, color: null, is_gain: true},
+    MULTI_PURPOSE: {name: "MULTI_PURPOSE", icon: null, color: null, is_gain: true},
+    SPEED: {name: "SPEED", icon: null, color: null, is_gain: true},
+    WATER: {name: "WATER", icon: null, color: null, is_gain: true},
+    HIGH: {name: "HIGH", icon: null, color: null, is_gain: true}
 }
 
 export var RelationLevel = {

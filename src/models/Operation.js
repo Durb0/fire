@@ -5,7 +5,7 @@ export class Operation{
         this.title = title;
         this.popularity_gain = popularity_gain;
         this.history = history;
-        this.ressource = ressource;
+        this.means_on_site = ressource;
     }
 
 }

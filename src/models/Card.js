@@ -75,19 +75,22 @@ export class InterventionCard extends Card{
                 //next_card( my_card, RelationLevel.REFUSAL ); //TODO: nextCard in the BDD
             }
         } else {
+            this.calculResult( my_op );
             //nextCard( my_card, this.calculResult( my_op ) ); //TODO: nextCard in the BDD
         }
     }
-    /*
+
     //return la relation de la carte suivante en fonction des ratios et des moyens envoyés dans l'opération.
     calculResult(my_op){
-
-	my_ratio_success = this.ratio_success;
-	my_ratio_critical_success = this.ratio_critic_success;
-	my_ratio_critical_failure = this.ratio_critic_failure;
+/*
+	var my_ratio_success = this.ratio_success;
+	var my_ratio_critical_success = this.ratio_critic_success;
+	var my_ratio_critical_failure = this.ratio_critic_failure;
 
 	// calcul des effets sur critical_failure
-	categoriesTruckOp = getCategoriesOfTrucks(my_op.means_on_site.truck);
+    console.log(my_op.means_on_site.trucks);
+    my_op.means_on_site.trucks.getCategoriesOfTrucks()
+	//categoriesTruckOp = my_op.means_on_site.trucks.getCategoriesOfTrucks();
 	if ( ### checkAllCategories(my_card.categories, categoriesTruckOp) ) {
 		ratio_C_failure = 0;
 
@@ -102,8 +105,8 @@ export class InterventionCard extends Card{
 		foreach(truck in my_op.means_on_site.truck){
 			min_seat += truck.nb_seat_min;
 		}
-
-	}*/
+        */
+	}
 
 }
 
