@@ -9,7 +9,11 @@ export var OperationType = {
     FIRE : "FIRE",
     ROAD_ACCIDENT : "ROAD_ACCIDENT",
     SOCIAL: "SOCIAL",
-    PERSON_ASSISTANCE: "PERSON_ASSISTANCE",
+    PERSONNAL_ASSISTANCE: "PERSONNAL_ASSISTANCE",
+    MULTI_PURPOSE: "MULTI_PURPOSE",
+    SPEED: "SPEED",
+    WATER: "WATER",
+    HIGH: "HIGH"
 }
 
 export var RelationLevel = {

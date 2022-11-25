@@ -75,16 +75,16 @@ export class InterventionCard extends Card{
                 //next_card( my_card, RelationLevel.REFUSAL ); //TODO: nextCard in the BDD
             }
         } else {
-            //nextCard( my_card, calculResult( my_op, my_card ) );
+            //nextCard( my_card, this.calculResult( my_op ) ); //TODO: nextCard in the BDD
         }
     }
-
+    /*
     //return la relation de la carte suivante en fonction des ratios et des moyens envoyés dans l'opération.
-    /*calculResult(my_op){
+    calculResult(my_op){
 
-	ratio_success = this.ratio_success;
-	ratio_critical_success = this.ratio_critic_success;
-	ratio_critical_failure = this.ratio_critic_failure;
+	my_ratio_success = this.ratio_success;
+	my_ratio_critical_success = this.ratio_critic_success;
+	my_ratio_critical_failure = this.ratio_critic_failure;
 
 	// calcul des effets sur critical_failure
 	categoriesTruckOp = getCategoriesOfTrucks(my_op.means_on_site.truck);
