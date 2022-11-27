@@ -32,7 +32,6 @@ export class Ressource{
     isValideForIntervention(){
         var nb_seat_min = 0;
         this.trucks.forEach(truck => nb_seat_min += truck.nb_seat_min);
-        console.log("nb_min_seat = " + nb_seat_min);
         return (nb_seat_min <= this.chefs.length + this.crewmans.length);
     }
 
@@ -43,13 +42,39 @@ export class Ressource{
         return size_max;
     }
 
-    getLenFireFighter(){
+    countFireFighters(){
         var len = this.chefs.length + this.crewmans.length;
         console.log("len_fireFighter",len);
         return len;
     }
-
+    /**
+     * 
+     * @returns un booleen qui dit si le nombre de pompier est égal au nombre max de place dans les camions
+     */
     isFull(){
-        return (this.getLenFireFighter() == this.getSizeMaxOfTrucks());
+        return (this.countFireFighters() == this.getSizeMaxOfTrucks());
+    }
+    getCategoriesOfTrucks(){
+        var categoriesTrucks = []
+        this.trucks.forEach(truck => categoriesTrucks = categoriesTrucks.concat(truck.categories));
+        return categoriesTrucks;
+    }
+
+    countMinSeatInTrucks(){
+        var min_seat = 0;
+        this.trucks.forEach(truck => {
+            min_seat += truck.nb_seat_min;
+        })
+        return min_seat;
+    }
+
+    /**
+     * @brief Ajoute tous les élements de la ressource passée en paramètre dans une autre.
+     * @param {Ressource} means 
+     */
+    addRessources(means){
+        means.trucks.forEach(truck => {this.trucks.push(truck)});
+        means.chefs.forEach(chef => {this.chefs.push(chef)});
+        means.crewmans.forEach(crewman => {this.crewmans.push(crewman)});
     }
 }

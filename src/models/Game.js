@@ -6,6 +6,7 @@ import { w_game } from "../utils/store";
 import { Truck } from "./Truck";
 import { PositionType } from "./Enums";
 import { getOptions } from "../services/game_service";
+import { getCategory } from "../utils/globals";
 
 export class Game{
 
@@ -13,20 +14,8 @@ export class Game{
 
         getOptions();
 
-        let first_mean = new Ressource(
-            [],
-            [],
-            [
-                //new Truck(1,undefined,"VSAV", 3, 4),
-                new Truck("VSAV", 2, 3),
-            ]
-        );
 
-        this.deck = [
-            new InterventionCard("First_Inter","Description",0, PositionType.BASE, 0, 0, 0, 0, [], first_mean),
-            new InterventionCard("Seconde_Inter","Description",0, PositionType.BASE, 0, 0, 0, 40, []),
-            new InformationCard("Titre", "decription",0, "END", new Action())
-        ];
+        this.deck = [];
         this.popularity = 100;
         this.operations_in_progress = [];
         this.operations_closed = [];
@@ -39,9 +28,26 @@ export class Game{
         w_game.update(game => this);
     }
 
+    /**
+     * @brief Retire la première carte du Deck.
+     */
     removeFirstCard(){
         this.deck.shift()
         w_game.update(game => this);
+    }
+
+    addOperationInProgress(my_op){
+        this.operations_in_progress.push(my_op);
+        w_game.update(game => this);
+    }
+
+    /**
+     * @brief Cherche l'opération en cours où le titre correspond au paramètre.
+     * @param {*} title 
+     * @returns 
+     */
+    findOperationInProgress(title){
+        return this.operations_in_progress.find(op => op.title == title);
     }
 
     //TODO: swipe_card function

@@ -61,6 +61,7 @@
         event.target.classList.toggle("removed", !keep);
 
         if(keep || (card.constructor.name == "InterventionCard" && !card.means_move.isValideForIntervention())){
+            console.log("Impossible d'envoyer ces moyens sur une intervention ou la carte est lachée sans vitesse.")
             event.target.style.transform = '';
         } else {
             var endX = Math.max(Math.abs(event.detail.velocityX) * moveOutWidth, moveOutWidth);
