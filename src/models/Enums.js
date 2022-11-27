@@ -14,3 +14,10 @@ export var RelationLevel = {
     REFUSAL : 0,
     CRITICAL_REFUSAL : -30
 }
+
+export var StateRessource = {
+    AVAILABLE : "AVAILABLE",
+    UNAVAILABLE : "UNAVAILABLE",
+    SELECTED : "SELECTED",
+    SICK: "SICK"
+}

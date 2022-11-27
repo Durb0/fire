@@ -7,6 +7,8 @@ export let w_idFireFighter = writable(0);
 export let w_idTruck = writable(0);
 export let w_game = writable(new Game());
 
+//TODO: w_idOperation
+
 export function newIdCard(){
     var id= 0;
     w_idCard.subscribe((value) => {

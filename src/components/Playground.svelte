@@ -9,7 +9,6 @@
 
     w_game.subscribe(game => {
         list_of_cards = game.deck;
-        console.log("maj deck",list_of_cards);
         initCards();
     });
 

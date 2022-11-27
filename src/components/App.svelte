@@ -2,6 +2,7 @@
 	import Playground from "./Playground.svelte";
 	import Footer from "./Footer.svelte";
 	import Header from "./Header.svelte";
+  import { rotate } from "svelte-hammer";
 
 	let playground, footer;
 
@@ -72,6 +73,12 @@
 			0%{background-position:0% 50%}
 			50%{background-position:100% 50%}
 			100%{background-position:0% 50%}
+		}
+
+
+		.item-SELECTED{
+			background-color: lightgreen !important;
+			transform: rotate(2deg);
 		}
 	</style>
 </svelte:head>

@@ -1,5 +1,4 @@
 <script>
-    import ItemChef from "./ItemChef.svelte";
     import ItemFirefighter from "./ItemFirefighter.svelte";
     import ItemTruck from "./ItemTruck.svelte";
     import {w_game} from "../utils/store.js";
@@ -34,7 +33,7 @@
             <div>loading...</div>
         {:then chefs}
             {#each chefs as chef}
-                <ItemChef chef={chef}/>
+                <ItemFirefighter firefighter={chef}/>
             {/each}
         {:catch error}
             <div>error</div>
@@ -45,7 +44,6 @@
         {#await ressource.crewmans}
             <div>loading...</div>
         {:then firefighters}
-        {(console.log({ firefighters }), '')}
             {#each firefighters as firefighter}
                 <ItemFirefighter firefighter={firefighter}/>
             {/each}
