@@ -9,6 +9,14 @@ export var categories = [
     {name: "HIGH",                  icon: "faLadder", color: "brown", is_gain: false}
 ];
 
+export function getCategory(name){
+    categories.forEach(category => {
+        if(name == category.name){
+            return category;
+        }
+    });
+}
+
 
 export const VALUE_BONUS_CHEF = 5;
 export const VALUE_BONUS_FIREFIGHTER = 5;

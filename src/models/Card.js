@@ -37,33 +37,42 @@ export class InterventionCard extends Card{
     }
 
 
-    // action swipe d'une carte intervention dans le deck
+    /**
+     * @brief Gestion du swipe d'une carte d'intervention
+     * @param {Game} game Données de la partie courante
+     * @param {String} direction Informe la direction du swipe (Gauche|Droite). 
+     */
     swipeCard(game,direction){
         console.log("=> swipe_card InterventionCard");
 
         switch ( this.position ) {
             case PositionType.BASE :
                 console.log("Première carte de l'opération.");
-                this.startOperation(game);
+                game.addOperationInProgress(this.startOperation(game));
                 break;
             case PositionType.MID :
                 console.log("En cours d'opération.");
-                //supportOperation(my_game, my_card);
+                game.addOperationInProgress(this.supportOperation(game));
                 break;
-            case PositionType.END :
-                console.log("Dernière carte de l'opération.");
-                //finishOperation(my_game, my_card);
+            case PositionType.END || PositionType.BRIEF :
+                console.warn("Les cartes interventions ne peuvent pas être de type 'END' ou 'BRIEF'.");
                 break;
             default :
-                console.log("Error - InterventionCard - swipeCard()");
+                console.error("Error - InterventionCard - swipeCard()");
         }
-        game.removeFirstCard();
+
+        game.removeFirstCard(); //Retire la première carte du Deck.
     }
 
-    // initialisation du début d'une intervention
+    /**
+     * @brief Gestion de la première carte intervention d'une opération.
+     * @param {Game} game 
+     * @returns Operation
+     */
     startOperation(game){
-        var my_op = new Operation(this.title,undefined,[this],this.means_move);
 
+        var my_op = new Operation(this.title,undefined,[this],this.means_move);
+        
         if ( this.means_move.isEmpty() ) { // Refus d'intervention
             console.log("Refus d'intervention.");
             var rand = Math.floor(Math.random() * 100);
@@ -78,12 +87,37 @@ export class InterventionCard extends Card{
             }
         } else {
             console.log("Moyens envoyés sur intervention.")
-            console.log(this.calculResult( my_op ));
+            var relation = this.calculResult( my_op );
+            my_op.popularity_gain += relation;
+            console.log("Valeur de la relation next_card : " + relation);
             //nextCard( my_card, this.calculResult( my_op ) ); //TODO: nextCard in the BDD
         }
+
+        return my_op;
     }
 
-    //return la relation de la carte suivante en fonction des ratios et des moyens envoyés dans l'opération.
+    /**
+     * @brief Traitement d'une carte d'intervention d'une opération en cours.
+     * @param {Game} game 
+     * @returns Operation
+     */
+    supportOperation(game){
+        var my_op = game.findOperationInProgress(this.title);
+        my_op.addIntervention(this);
+
+        console.log("Moyens envoyés sur intervention.")
+        var relation = this.calculResult( my_op );
+        my_op.popularity_gain += relation;
+        console.log("Valeur de la relation next_card : " + relation);
+
+        return my_op;
+    }
+
+    /**
+     * @brief Calcul le type de relation avec la carte suivante.
+     * @param {Operation} my_op 
+     * @returns RelationLevel
+     */
     calculResult(my_op){
 
         var my_ratio_success = this.ratio_success;
@@ -138,7 +172,11 @@ export class InterventionCard extends Card{
         }
     }
 
-    // revoir un boolean : Vrai si toutes les catégories de la carte sont représenté par les catégories passé en paramêtre sinon Faux.
+    /**
+     * @brief Check que les categories de la carte correspondent à la liste passée en paramètre.
+     * @param {Category[]} categoriesTrucksOp 
+     * @returns boolean
+     */
     checkAllCategories(categoriesTrucksOp){
         for ( var category of this.categories) {
             if (!categoriesTrucksOp.includes(category)) {

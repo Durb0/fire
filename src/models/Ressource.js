@@ -14,7 +14,6 @@ export class Ressource{
     isValideForIntervention(){
         var nb_seat_min = 0;
         this.trucks.forEach(truck => nb_seat_min += truck.nb_seat_min);
-        console.log("nb_min_seat = " + nb_seat_min);
         return (nb_seat_min <= this.chefs.length + this.crewmans.length);
     }
 
@@ -37,5 +36,15 @@ export class Ressource{
         this.chefs.forEach(chef => nb_firefighters += 1);
         this.crewmans.forEach(crewman => nb_firefighters += 1);
         return nb_firefighters;
+    }
+
+    /**
+     * @brief Ajoute tous les élements de la ressource passée en paramètre dans une autre.
+     * @param {Ressource} means 
+     */
+    addRessources(means){
+        means.trucks.forEach(truck => {this.trucks.push(truck)});
+        means.chefs.forEach(chef => {this.chefs.push(chef)});
+        means.crewmans.forEach(crewman => {this.crewmans.push(crewman)});
     }
 }

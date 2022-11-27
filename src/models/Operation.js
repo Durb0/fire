@@ -8,4 +8,13 @@ export class Operation{
         this.means_on_site = ressource;
     }
 
+    /**
+     * @brief Ajoute une intervention dans une opération ainsi que ses moyens.
+     * @param {Card} card 
+     */
+    addIntervention(card){
+        this.history.push(card);
+        this.means_on_site.addRessources(card.means_move);
+    }
+
 }
