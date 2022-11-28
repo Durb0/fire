@@ -7,13 +7,14 @@ import { Truck } from "./Truck";
 import { PositionType } from "./Enums";
 import { getOptions } from "../services/game_service";
 import { getCategory } from "../utils/globals";
+import { test } from "../services/card_service";
 
 export class Game{
 
     constructor(){
 
         getOptions();
-
+        test();
 
         this.deck = [];
         this.popularity = 100;

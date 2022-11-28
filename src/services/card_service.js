@@ -1,37 +1,28 @@
-import { InterventionCard, InfoCard } from './model.js';
+import { InterventionCard, InfoCard } from "../models/Card"
 import socket from '../utils/socket.js';
 import {sleep} from '../utils/time.js';
-import { game } from '../main.js';
-import { w_cards, w_id } from '../utils/store.js';
+import {w_game} from '../utils/store';
 
 
 
-socket.on('InfoCard', function(jdata) {
-    const data = JSON.parse(jdata);
-    var card = new InfoCard(
-        data.id,
-        data.title,
-        data.description,
-        data.position,
-        data.info.gain_popularity
-    );
-    game.cards.push(card);
-    w_cards.update(cards => [...cards, card]);
-    });
 
-socket.on('InterventionCard',(jdata) => {
-    const data = JSON.parse(jdata);
+socket.on('InterventionCard',(data) => {
     var card = new InterventionCard(
-        data.id,
         data.title,
         data.description,
+        data.time_before_trigger,
         data.position,
-        data.intervention.time,
-        data.intervention.difficulty
+        data.ratio_success,
+        data.ratio_critical_success,
+        data.ratio_critical_failure,
+        data.ratio_critical_refusal,
+        data.categories,
+        data.means_move
     );
-    //game.cards.push(card);
-    game.cards.push(card);
-    w_cards.update(cards => [...cards, card]);
+    w_game.update(game => {
+        game.deck.push(card);
+        return game;
+    });
     }
 );
 
@@ -40,10 +31,9 @@ function callNextCard(cardId, level){
 }
 
 async function test(){
-    while(true){
+    for (let i = 0; i < 5; i++) {
         socket.emit('drawInterventionBaseCard');
-        await sleep(10000);
     }
 }
 
-export {test, callNextCard, newId};
+export {test, callNextCard};
