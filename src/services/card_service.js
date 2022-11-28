@@ -1,12 +1,49 @@
-import { InterventionCard, InfoCard } from "../models/Card"
+import { InterventionCard, InformationCard, DilemmeCard } from "../models/Card"
 import socket from '../utils/socket.js';
 import {sleep} from '../utils/time.js';
 import {w_game} from '../utils/store';
 
+/**
+ * @brief action lorsque le joueur reçoit une carte de dilemme
+ */
+socket.on('DilemmeCard', async (data) => {
+    var card = new DilemmeCard(
+        data.name,
+        data.description,
+        data.time_before_trigger,
+        data.position,
+        undefined, //TODO: action_left
+        undefined //TODO: action_right
+    );
+    await sleep(card.time_before_trigger);
+    w_game.update(game => {
+        game.cards.push(card);
+        return game;
+    }
+    );
+})
 
+/**
+ * @brief action lorsque le joueur reçoit une carte d'information
+ */
+socket.on('InformationCard',async (data) => {
+    var card = new InformationCard(
+        data.name,
+        data.description,
+        data.time_before_trigger,
+        data.position,
+        undefined //TODO: action 
+    );
+    await sleep(card.time_before_trigger);
+    w_game.update((game) => {
+        game.cards.push(card);
+    });
+})
 
-
-socket.on('InterventionCard',(data) => {
+/**
+ * @brief action lorsque le joueur reçoit une carte d'intervention
+ */
+socket.on('InterventionCard',async (data) => {
     var card = new InterventionCard(
         data.title,
         data.description,
@@ -19,6 +56,7 @@ socket.on('InterventionCard',(data) => {
         data.categories,
         data.means_move
     );
+    await sleep(card.time_before_trigger);
     w_game.update(game => {
         game.deck.push(card);
         return game;
@@ -26,10 +64,20 @@ socket.on('InterventionCard',(data) => {
     }
 );
 
+
+/**
+ * 
+ * @param {int} cardId l'id de la carte d'avant 
+ * @param {RelationLevel} level le niveau de la relation
+ */
 function callNextCard(cardId, level){
     socket.emit('drawNextCard', cardId, level);
 }
 
+/**
+ * @brief fonction temporaire qui appelle 5 cartes d'intervention
+ * @comment cette fonction est appelée par le constructeur de Game
+ */
 async function test(){
     for (let i = 0; i < 5; i++) {
         socket.emit('drawInterventionBaseCard');

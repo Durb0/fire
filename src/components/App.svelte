@@ -3,6 +3,7 @@
 	import Footer from "./Footer.svelte";
 	import Header from "./Header.svelte";
   import { rotate } from "svelte-hammer";
+  import { faBorderStyle } from "@fortawesome/free-solid-svg-icons";
 
 	let playground, footer;
 
@@ -28,6 +29,10 @@
 			src: url("/assets/font/FIRE.ttf");
 		}
 
+		body, html{
+			overflow: hidden;
+		}
+
 		body{
 			display: flex;
 			flex-direction:column;
@@ -36,13 +41,13 @@
 			justify-content: space-between;
     		align-content: stretch;
     		align-items: stretch;
-			overflow: hidden;
 			/*set font*/
 			font-family: 'F!RE';
 		}
 
 
 		.daynight{
+			
 			background: linear-gradient(90deg, #546c8c, #1b3059, #091026);
 			background-size: 1200% 1200%;
 

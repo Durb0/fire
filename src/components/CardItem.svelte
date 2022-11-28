@@ -1,5 +1,5 @@
 <script>
-    import { pan } from 'svelte-hammer';
+    import { Hammer,pan } from 'svelte-hammer';
     import { onMount } from 'svelte';
     import { w_game } from '../utils/store.js';
 
@@ -82,7 +82,7 @@
 
 <div 
     class="card"
-    use:pan
+    use:pan={{ direction : Hammer.DIRECTION_ALL}}
     on:panstart = {handlePanStart}
     on:panmove = {handlePanMove}
     on:panend = {handlePanEnd}
