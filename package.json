@@ -20,6 +20,9 @@
   },
   "dependencies": {
     "@capacitor/android": "^4.5.0",
+    "@capacitor/cli": "^4.5.0",
+    "@capacitor/core": "^4.5.0",
+    "@capacitor/ios": "^4.5.0",
     "@dicebear/avatars": "^4.10.5",
     "@dicebear/personas": "^4.10.5",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
