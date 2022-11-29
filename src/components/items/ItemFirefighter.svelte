@@ -3,10 +3,11 @@
     import * as style from '@dicebear/personas';
     //import enums from personas
     import { onMount } from 'svelte';
-    import { StateRessource } from '../models/Enums';
-    import { Crewman, Chef } from '../models/FireFighter';
-    import IconOperationType from './IconOperationType.svelte';
-    import { w_game } from '../utils/store.js';
+    import { StateRessource } from '../../models/Enums';
+    import { Crewman, Chef } from '../../models/FireFighter';
+    import IconOperationType from '../core/IconOperationType.svelte';
+    import { w_game } from '../../utils/store.js';
+    import ProgressBar from '../core/ProgressBar.svelte';
 
     export let firefighter;
     let el;
@@ -74,12 +75,8 @@
     <!--<img src="https://avatars.dicebear.com/api/personas/{firefighter.id}{firefighter.name}.svg" alt="">-->
     <div class="avatar"></div>
     <div class="bars">
-        <div class="fatigue_bar bar">
-            <div class="fatigue_bar_inner bar_inner" style="width: {firefighter.fatigue}%;"></div>
-        </div>
-        <div class="moral_bar bar">
-            <div class="moral_bar_inner bar_inner" style="width: {firefighter.moral}%"></div>
-        </div>
+        <ProgressBar color={firefighter.state == StateRessource.SICK? '#61D902' : '#0E99DA'} thickness=10 value={firefighter.fatigue}/>
+        <ProgressBar color="#ff1744" thickness=10 value={firefighter.moral}/>
     </div>
 </div>
 

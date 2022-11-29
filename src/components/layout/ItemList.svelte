@@ -1,7 +1,7 @@
 <script>
-    import ItemFirefighter from "./ItemFirefighter.svelte";
-    import ItemTruck from "./ItemTruck.svelte";
-    import {w_game} from "../utils/store.js";
+    import ItemFirefighter from "../items/ItemFirefighter.svelte";
+    import ItemTruck from "../items/ItemTruck.svelte";
+    import {w_game} from "../../utils/store.js";
 
     export let type;
 

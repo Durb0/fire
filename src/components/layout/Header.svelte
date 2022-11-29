@@ -1,6 +1,7 @@
 <script>
-  import { sleep } from "../utils/time";
-  import { w_game } from "../utils/store";
+  import { sleep } from "../../utils/time";
+  import { w_game } from "../../utils/store";
+  import ProgressBar from "../core/ProgressBar.svelte";
 
 
   
@@ -36,31 +37,13 @@
 
 
 <div class="header">
-  <div class="popularity__bar">
-    <div class="popularity__bar__value" style="width: {value}%; background-color:{color};"></div>
-  </div>
+  <ProgressBar color={color} thickness=25 value={value} margin="20" />
+
 </div>
 
 <style>
   .header {
     text-align: center;
     display: flex;
-  }
-
-  .popularity__bar{
-    height: 25px;
-    margin: 20px;
-    box-sizing: border-box;
-    border-radius: 50px;
-    width: -webkit-fill-available;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .popularity__bar__value{
-    height: 100%;
-    border-radius: 50px;
-    max-width: 100%;
-    transition: background 1s ease-in-out, width 1s ease-in-out;
   }
 </style>

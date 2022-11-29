@@ -1,7 +1,7 @@
 <script>
-	import Playground from "./Playground.svelte";
-	import Footer from "./Footer.svelte";
-	import Header from "./Header.svelte";
+	import Playground from "./layout/Playground.svelte";
+	import Footer from "./layout/Footer.svelte";
+	import Header from "./layout/Header.svelte";
 	import { w_screen} from "../utils/store.js";
 
 	let playground, footer;

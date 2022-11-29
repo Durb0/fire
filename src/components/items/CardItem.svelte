@@ -1,7 +1,7 @@
 <script>
     import { Hammer,pan } from 'svelte-hammer';
     import { onMount } from 'svelte';
-    import { w_game } from '../utils/store.js';
+    import { w_game } from '../../utils/store.js';
 
     let el;
     let c;

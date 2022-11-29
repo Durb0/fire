@@ -1,6 +1,6 @@
 <script>
   import ItemList from "./ItemList.svelte";
-  import { Tabs, TabList, Tab, TabPanel} from './tabs/tabs.js';
+  import { Tabs, TabList, Tab, TabPanel} from '../tabs/tabs.js';
   import { faTruck, faPortrait, faIdBadge } from '@fortawesome/free-solid-svg-icons';
   
   import Fa from 'svelte-fa'
