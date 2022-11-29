@@ -56,7 +56,7 @@
         event.target.style.transition = "all 0.3s ease-in-out";
 
         var moveOutWidth = document.body.clientWidth;
-        var keep = Math.abs(event.detail.deltaX) < 80 || Math.abs(event.detail.velocityX) < 0.5;
+        var keep = (Math.abs(event.detail.deltaX) < 80 && Math.abs(event.detail.deltaY) < 80) || (Math.abs(event.detail.velocityX) < 0.5 && Math.abs(event.detail.velocityY) < 0.5) ;
 
         event.target.classList.toggle("removed", !keep);
 

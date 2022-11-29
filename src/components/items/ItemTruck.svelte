@@ -10,11 +10,12 @@
 
 <style>
 .item {
-    background-color: red;
-    border-radius: 20px;
+    background-color: ghostwhite;
+    border-radius: 10px;
     text-align: center;
     display: flex;
     flex-direction: row;
-    height: 100%;
+    height: 100px;
+    width: 300px;
 }
 </style>
