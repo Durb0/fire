@@ -7,7 +7,7 @@
     
 
     .tab-list{
-        --gap: 5px;
+        --gap: 10px;
         display:flex;
         height: 50px;
         flex-direction: row;

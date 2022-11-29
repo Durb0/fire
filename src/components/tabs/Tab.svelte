@@ -18,7 +18,7 @@
         border-radius: 10px 10px 0 0;
         text-transform: uppercase;
         width: 100px;
-        min-width: 50px;
+        min-width: 20px;
         display: flex;
         flex-direction: column;
         justify-content: center;

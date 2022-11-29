@@ -1,25 +1,10 @@
 <script>
 
-    export let el
-    let height;
-
-    window.addEventListener("load", function(){
-        defineWidth();
-    });
-
-    window.addEventListener('resize', function() {
-        defineWidth();
-    });
-
-    function defineWidth(){
-        height = el.clientHeight;
-        el.style.minWidth = height * 0.7 + "px";
-    }
 
 </script>
     
 
-<div bind:this={el} class="item">
+<div class="item">
 
 </div>
 

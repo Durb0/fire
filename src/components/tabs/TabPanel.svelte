@@ -11,3 +11,9 @@
 {#if $selectedPanel === panel}
 	<slot></slot>
 {/if}
+
+<style>
+	:host {
+		height: -webkit-fill-available;
+	}
+</style>

@@ -2,23 +2,45 @@
 	import Playground from "./Playground.svelte";
 	import Footer from "./Footer.svelte";
 	import Header from "./Header.svelte";
-  import { rotate } from "svelte-hammer";
-  import { faBorderStyle } from "@fortawesome/free-solid-svg-icons";
+	import { w_screen} from "../utils/store.js";
 
 	let playground, footer;
+	export let play_zone;
 
 	window.addEventListener("load", function(){
 		playground = document.getElementsByClassName("playground")[0];
 		footer = document.getElementsByClassName("footer")[0];
+		defineGrid();
 	});
+
+	window.addEventListener("resize", function(){
+		defineGrid();
+	});
+
+
+	function defineGrid(){
+		let width = window.innerWidth;
+		let height = window.innerHeight;
+		if(width > height){
+			play_zone.classList.add("landscape");
+			w_screen.update(n => n = "landscape");
+		}
+		else{
+			play_zone.classList.remove("landscape");
+			w_screen.update(n => n = "portrait");
+		}
+	}
 
 </script>
 
 <svelte:body class="body daynight"/>
 
 <Header />
-<Playground />
-<Footer />
+<div class="play_zone" bind:this={play_zone}>
+	<Playground />
+	<Footer />
+</div>
+
 
 <svelte:head>
 	<style>
@@ -34,15 +56,24 @@
 		}
 
 		body{
-			display: flex;
-			flex-direction:column;
+			display: grid;
+			grid-template-rows: 65px 1fr;
 			width : 100vw;
 			height: 100vh;
-			justify-content: space-between;
-    		align-content: stretch;
-    		align-items: stretch;
 			/*set font*/
 			font-family: 'F!RE';
+		}
+
+		.play_zone{
+			display: grid;
+			grid-template-columns: 100%;
+			grid-template-rows: 50% 50%;
+			height: -webkit-fill-available;
+		}
+
+		.landscape{
+			grid-template-columns: 50% 50%;
+			grid-template-rows: 1fr;
 		}
 
 
@@ -84,6 +115,10 @@
 		.item-SELECTED{
 			background-color: lightgreen !important;
 			transform: rotate(2deg);
+		}
+
+		.tabs-landscape{
+			height: calc(100vh - 65px);
 		}
 	</style>
 </svelte:head>

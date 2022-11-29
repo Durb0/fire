@@ -59,11 +59,12 @@
     background: linear-gradient(0deg, rgba(41,41,41,1) 0%, rgba(0,0,0,1) 100%);
     text-align: center;
     border-radius: 10px 10px 0 0;
-    height: calc(100% - 20px);
     display: flex;
+    height: -webkit-fill-available;
     flex-direction: row;
     flex-wrap: wrap;
-    overflow-y: scroll;
+    overflow-y: auto;
+    align-content: flex-start;
     justify-content: space-evenly;
     padding: 10px;
     gap:10px;

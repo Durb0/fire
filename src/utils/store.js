@@ -6,6 +6,7 @@ export let w_idCard = writable(0);
 export let w_idFireFighter = writable(0);
 export let w_idTruck = writable(0);
 export let w_game = writable(new Game());
+export let w_screen = writable("portrait");
 
 //TODO: w_idOperation
 

@@ -1,4 +1,21 @@
 <script context="module">
+	import { w_screen } from '../../utils/store';
+
+	export let el;
+
+	window.addEventListener('load', function(){
+		w_screen.subscribe(value => {
+		console.log(value);
+		console.log(el);
+		if (value == 'landscape') {
+			el.classList.add('tabs-landscape');
+		} else {
+			el.classList.remove('tabs-landscape');
+		}
+	});
+	})
+	
+
 	export const TABS = {};
 </script>
 
@@ -45,18 +62,19 @@
 	});
 </script>
 
-<div class="tabs">
+<div class="tabs" bind:this={el}>
 	<slot></slot>
 </div>
 
 
 <style>
 
+	
+
     .tabs{
-        height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
+        justify-content: space-between;
         align-items: stretch;
         align-content: stretch;
     }

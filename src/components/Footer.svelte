@@ -14,12 +14,6 @@
 </script>
 
 
-<div class="footer">
-  <!--
-  <ItemList type={typeItem.Truck}/>
-  <ItemList type={typeItem.Chef}/>
-  <ItemList type={typeItem.Firefighter}/>
-  -->
 
   <Tabs>
     <TabList>
@@ -42,26 +36,19 @@
       </TabPanel>
     </div>
   </Tabs>
-</div>
 
 <style>
-.footer {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  box-sizing: border-box;
-  width: 100%;
-
-}
 
 .tab__container{
   box-sizing: border-box;
   width: 100%;
-  height: 300px;
+  display: flex;
+  flex-direction: column-reverse;
+  height : calc(100% - 50px);
   padding: 20px;
   padding-bottom: 0;
   padding-top: 40px;
   background-color: #E9D0B5;
+  border-radius: 10px 10px 0 0;
 }
 </style>
