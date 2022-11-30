@@ -1,4 +1,5 @@
 import { newIdTruck } from "../utils/store";
+import { StateRessource } from "./Enums";
 
 export class Truck{
     constructor(name,nb_seat_min,nb_seat_max, categories = []){
@@ -8,5 +9,7 @@ export class Truck{
         this.nb_seat_min = nb_seat_min;
         this.nb_seat_max = nb_seat_max;
         this.categories = categories;
+        this.state = StateRessource.AVAILABLE;
+        //image
     }
 }
