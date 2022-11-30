@@ -1,6 +1,8 @@
 import socket from "../utils/socket";
 import { setCategories } from "../utils/globals";
 import { Crewman, Chef } from "../models/FireFighter";
+import { Truck } from "../models/Truck";
+
 import { w_game } from "../utils/store";
 
 socket.on('Options', function(data) {
@@ -29,7 +31,11 @@ function createChefs(nbChef){
 }
 
 function createTrucks(trucks){
-    w_game.update(game => { game.ressource.trucks = trucks; return game;});
+    var trucksList = [];
+    for(var i = 0; i < trucks.length; i++){
+        trucksList.push(new Truck(trucks[i].name, trucks[i].nb_seat_min, trucks[i].nb_seat_max, trucks[i].categories));
+    }
+    w_game.update(game => { game.ressource.trucks = trucksList; return game;});
 }
 
 

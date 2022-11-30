@@ -25,6 +25,15 @@ export class Ressource{
         console.log("remove fireFighter",this);
     }
 
+    addTruck(truck){
+        this.trucks.push(truck);
+        console.log("add truck",this);
+    }
+    removeTruck(truck){
+        this.trucks = this.trucks.filter(el => el.id != truck.id);
+        console.log("remove truck",this);
+    }
+
     isEmpty(){
         return (this.chefs.length == 0 && this.crewmans.length == 0 && this.trucks.length == 0);
     }
