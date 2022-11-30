@@ -1,5 +1,5 @@
 {
-  "name": "svelte-app",
+  "name": "fire",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -25,6 +25,7 @@
     "@capacitor/cli": "^4.5.0",
     "@capacitor/core": "^4.5.0",
     "@capacitor/ios": "^4.5.0",
+    "@capacitor/splash-screen": "^4.1.2",
     "@dicebear/avatars": "^4.10.5",
     "@dicebear/personas": "^4.10.5",
     "@fortawesome/free-solid-svg-icons": "^6.2.1",

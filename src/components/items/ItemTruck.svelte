@@ -16,6 +16,6 @@
     display: flex;
     flex-direction: row;
     height: 100px;
-    width: 300px;
+    width: 250px;
 }
 </style>
