@@ -51,13 +51,10 @@
 </script>
     
 <div bind:this={el} class="item item_truck" on:click={handleClickItem} on:keypress={handleClickItem} >
-    <div class="item_panel">
-        <p>{truck.name}</p>
-        <img src="{url}/truck/{truck.name}.svg" alt="{truck.name}" />
-    </div>
-    <div class="item_panel">
+        <span>{truck.name}</span>
+        <img src="{url}/truck/{truck.name}.svg" alt="{truck.name}" width="100%" height=50 />
 
-    </div>
+
 </div>
 <Snackbar class="flex-column" bind:active={snackbar} bottom center timeout={2000}>
     <h5>Impossible de retirer le véhicule</h5>
@@ -77,19 +74,10 @@
 
 
 <style>
-
-.item_panel{
+.item_truck{
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.item_truck{
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 100%;
-    width: 250px;
-    height: 100px;
+    width: 150px;
+    height: fit-content;
 }
 </style>

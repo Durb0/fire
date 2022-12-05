@@ -93,7 +93,7 @@
             <img src="./assets/backCard.png" alt="">
         </div>
         <div class="card_front">
-            <h1>{card.title}</h1>
+            <p>{card.title}</p>
             <p>{card.description}</p>        
         </div>
     </div>

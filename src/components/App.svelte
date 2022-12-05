@@ -45,6 +45,17 @@
 <svelte:head>
 	<style>
 
+	.item {
+		background-color: ghostwhite;
+		border-radius: 5px;
+		text-align: center;
+		display: flex;
+		cursor: pointer;
+		padding:10px;
+		text-transform: uppercase;
+		transition: background 0.2s, transform 0.2s;
+	}
+
 
 		@font-face {
 			font-family: "F!RE";

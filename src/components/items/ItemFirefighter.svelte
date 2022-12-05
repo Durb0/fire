@@ -58,7 +58,7 @@
 </script>
     
 
-<div bind:this={el} class="item" on:click={handleClickItem} on:keypress={handleClickItem}>
+<div bind:this={el} class="item item_firefighter" on:click={handleClickItem} on:keypress={handleClickItem}>
 
     <span>{firefighter.name}</span>
     <div class="experience">
@@ -95,19 +95,11 @@
         flex-direction: column;
         gap: 5px;
     }
-    .item {
-        padding:10px;
-        background-color: ghostwhite;
-        border-radius: 5px;
-        text-align: center;
-        display: flex;
+
+    .item_firefighter{
         flex-direction: column;
-        height: 100%;
-        text-transform: uppercase;
-        width:65px;
         height: fit-content;
-        cursor: pointer;
-        transition: background 0.2s, transform 0.2s;
+        width: 80px;
     }
     .icon_bar{
         display: flex;
