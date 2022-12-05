@@ -4,6 +4,8 @@
     import { onMount } from 'svelte';
     import { Snackbar, Button, MaterialApp } from 'svelte-materialify';
     import { url } from "../../utils/socket.js";
+    import IconList from '../core/IconList.svelte';
+    import ProgressBar from '../core/ProgressBar.svelte';
 
     export let truck;
     let el;
@@ -21,13 +23,13 @@
     });
 
     /**
-     * Fonction qui change le style selon l'etat du pompier
+     * Fonction qui change le style selon l'etat du truck
      */
     function setStyleItem(){
         //remove all class with item-
-        el.classList.remove(...el.classList.value.split(' ').filter(c => c.startsWith('item-')));
+        el.classList.remove(...el.classList.value.split(' ').filter(c => c.startsWith('item--')));
         //add class item-<etat>
-        el.classList.add('item-'+truck.state);
+        el.classList.add('item--'+truck.state);
     }
 
     function handleClickItem(){
@@ -50,9 +52,21 @@
 
 </script>
     
-<div bind:this={el} class="item item_truck" on:click={handleClickItem} on:keypress={handleClickItem} >
+<div bind:this={el} class="item item-truck" on:click={handleClickItem} on:keypress={handleClickItem} >
+    <div class="item-truck__head">
         <span>{truck.name}</span>
-        <img src="{url}/truck/{truck.name}.svg" alt="{truck.name}" width="100%" height=50 />
+        <IconList categories={truck.categories}/>
+    </div>
+    <img src="{url}/truck/{truck.name}.svg" alt="{truck.name}" width="100%" height=50 />
+    <div class="item-truck__seats">
+        {#each Array(truck.nb_seat_min) as _}
+            <div class="item-truck__seat seat--min"></div>
+	    {/each}
+        {#each Array(truck.nb_seat_max - truck.nb_seat_min) as _}
+            <div class="item-truck__seat seat--bonus"></div>
+	    {/each}
+    </div>
+    <ProgressBar color="#ff1744" value={truck.wear}/>
 
 
 </div>
@@ -74,10 +88,35 @@
 
 
 <style>
-.item_truck{
-    display: flex;
-    flex-direction: column;
-    width: 150px;
-    height: fit-content;
-}
+    .item-truck{
+        display: flex;
+        flex-direction: column;
+        width: 100px;
+        height: fit-content;
+        gap: 5px;
+    }
+    .item-truck__head{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+    .item-truck__seats{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 5px;
+    }
+    .item-truck__seat{
+        border-radius: 50%;
+        width: 8px;
+        aspect-ratio: 1/1;
+    }
+    .seat--min{
+        background-color: black;
+    }
+    .seat--bonus{
+        background-color: white;
+        border: 1px solid black;
+    }
 </style>

@@ -8,6 +8,7 @@
     import IconOperationType from '../core/IconOperationType.svelte';
     import { w_game } from '../../utils/store.js';
     import ProgressBar from '../core/ProgressBar.svelte';
+    import IconList from '../core/IconList.svelte';
 
     export let firefighter;
     let el;
@@ -35,9 +36,9 @@
      */
     function setStyleItem(){
         //remove all class with item-
-        el.classList.remove(...el.classList.value.split(' ').filter(c => c.startsWith('item-')));
+        el.classList.remove(...el.classList.value.split(' ').filter(c => c.startsWith('item--')));
         //add class item-<etat>
-        el.classList.add('item-'+firefighter.state);
+        el.classList.add('item--'+firefighter.state);
     }
 
     function handleClickItem(){
@@ -58,19 +59,17 @@
 </script>
     
 
-<div bind:this={el} class="item item_firefighter" on:click={handleClickItem} on:keypress={handleClickItem}>
+<div bind:this={el} class="item item-firefighter" on:click={handleClickItem} on:keypress={handleClickItem}>
 
     <span>{firefighter.name}</span>
-    <div class="experience">
-        {#if firefighter instanceof Crewman}
-            {#each firefighter.experience as exp}
-                    <IconOperationType type={exp}/>
-            {/each}
-        {:else}
+    {#if firefighter instanceof Crewman}
+        <IconList categories={firefighter.experience}/>
+    {:else}
+        <div class="chef-experience">
             <span>{firefighter.power}</span>
             <IconOperationType type={firefighter.speciality}/>
-        {/if}
-    </div>
+        </div>
+    {/if}
     <!--image from https://avatars.dicebear.com/api/personas/.svg-->
     <!--<img src="https://avatars.dicebear.com/api/personas/{firefighter.id}{firefighter.name}.svg" alt="">-->
     <div class="avatar"></div>
@@ -82,12 +81,12 @@
 
 <style>
 
-    .experience{
+    .chef-experience{
         display: flex;
-        flex-direction: row;
-        gap: 5px;
-        height:18px;
+        align-content: stretch;
         justify-content: center;
+        align-items: baseline;
+        gap: 5px;
     }
 
     .bars{
@@ -96,7 +95,7 @@
         gap: 5px;
     }
 
-    .item_firefighter{
+    .item-firefighter{
         flex-direction: column;
         height: fit-content;
         width: 80px;
