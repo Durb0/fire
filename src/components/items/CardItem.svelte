@@ -2,17 +2,23 @@
     import { Hammer,pan } from 'svelte-hammer';
     import { onMount } from 'svelte';
     import { w_game } from '../../utils/store.js';
+    import { InterventionCard } from '../../models/Card.js';
+    import Fa from 'svelte-fa'
+    import { faTruck } from '@fortawesome/free-solid-svg-icons';
+    import IconOperationType from '../core/IconOperationType.svelte';
 
     let el;
     let c;
     let game;
 
+    export let card;
+    export let index;
+
     w_game.subscribe(value => {
         game = value;
     });
 
-    export let card;
-    export let index;
+    
 
     onMount(() => {
         if(index==0){
@@ -22,6 +28,7 @@
         }else{
             c.style.zIndex = "0";
         }
+        
     });
 
     //check if card is the first card
@@ -88,13 +95,37 @@
     on:panend = {handlePanEnd}
     bind:this={c}
 >
-    <div class="card_inner" bind:this={el}>
-        <div class="card_back">
+    <div class="card__inner" bind:this={el}>
+        <div class="card__back">
             <img src="./assets/backCard.png" alt="">
         </div>
-        <div class="card_front">
-            <p>{card.title}</p>
-            <p>{card.description}</p>        
+        <div class="card__front">
+            <div class="front__text">
+                <p class="text__title">{card.title}</p>
+                <p>{card.description}</p>
+            </div>
+            {#if card instanceof InterventionCard}
+                <div class="front__bottom front__bottom--intervention">
+                    <div class="intervention__trucks">
+                        <Fa icon={faTruck} color="black"/>
+                        <div class="trucks__categories">
+
+                            {#each card.means_move.getNumbersOfCategoriesOfTrucks() as dictCategory}
+                            {print(card.means_move.getNumbersOfCategoriesOfTrucks())}
+                            <span>{dictCategory.number}</span>
+                            <IconOperationType type={dictCategory.category}/>
+                        {/each}
+                        </div>
+                        
+                    </div>
+                    <div class="intervention__firefighters">
+
+                    </div>
+                    <div class="intervention__seats">
+
+                    </div>
+                </div>
+            {/if}    
         </div>
     </div>
 </div>
@@ -117,7 +148,7 @@
         background-color: transparent;
     }
 
-    .card_inner{
+    .card__inner{
         position: relative;
         width: 100%;
         height: 100%;
@@ -133,7 +164,7 @@
         border-radius: var(--card_radius);
     }
 
-    .card_front, .card_back{
+    .card__front, .card__back{
         position: absolute;
         width: 100%;
         height: 100%;
@@ -142,13 +173,46 @@
         border-radius: var(--card_radius);
     }
 
-    .card_front{
+    .card__front{
         background-color: white;
         transform: rotateY(180deg);
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 66% 34%;
+    }
+
+    .text__title{
+        text-align: left;
+        padding-left: 5px;
+    }
+    .front__bottom{
+        background-color: aqua;
+    }
+    .front__bottom--intervention{
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 66% 34%;
+    }
+    .intervention__trucks{
+        padding: 10px;
+    }
+    .trucks__categories{
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 5px;
+    }
+    .intervention__firefighters{
+        background-color: brown;
+    }
+    .intervention__seats{
+        background-color: chartreuse;
+        grid-column: 1 / 3;
     }
 
     .flipped{
         transform :rotateY(180deg);
     }
+    
 
 </style>

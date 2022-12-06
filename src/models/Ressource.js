@@ -68,6 +68,30 @@ export class Ressource{
         this.trucks.forEach(truck => categoriesTrucks = categoriesTrucks.concat(truck.categories));
         return categoriesTrucks;
     }
+    getNumbersOfCategoriesOfTrucks(){
+        var categoriesTrucks = [];
+        var catFound;
+        var newCat;
+        this.trucks.forEach(truck => {
+            truck.categories.forEach(cat => {
+                catFound = categoriesTrucks.findIndex(el => el.category.name == cat.name);
+               // console.log(catFound)
+                //console.log(categoriesTrucks)
+                if(catFound == -1){
+                    newCat = new Object();
+                    newCat = {category:cat,number:1};
+                    categoriesTrucks.push(newCat);
+                } else {
+                   // console.log("avant",categoriesTrucks[catFound].number);
+                    //console.log("catFound" ,catFound);
+                    categoriesTrucks[catFound].number += 1; 
+                   // console.log("apres",categoriesTrucks[catFound].number);
+                }
+            })
+        })
+        console.log("categoriesTruck", categoriesTrucks);
+        return categoriesTrucks;
+    }
 
     countMinSeatInTrucks(){
         var min_seat = 0;

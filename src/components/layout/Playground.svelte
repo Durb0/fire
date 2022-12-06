@@ -28,10 +28,10 @@
         var height = element.clientHeight;
         if(width > height){
             //height size
-            size = height*0.7;
+            size = height*0.9;
         }else{
             //width size
-            size = width*0.7;
+            size = width*0.9;
         }
         document.body.style.setProperty('--card_size', size+'px');
     }
