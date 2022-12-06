@@ -4,8 +4,9 @@
     import { w_game } from '../../utils/store.js';
     import { InterventionCard } from '../../models/Card.js';
     import Fa from 'svelte-fa'
-    import { faTruck } from '@fortawesome/free-solid-svg-icons';
+    import { faTruck, faUser } from '@fortawesome/free-solid-svg-icons';
     import IconOperationType from '../core/IconOperationType.svelte';
+    import { Divider } from 'svelte-materialify';
 
     let el;
     let c;
@@ -32,10 +33,11 @@
     });
 
     //check if card is the first card
-    //TODO: check si la carte est en haut de la liste 
-    function handlePanStart(event) { 
-        event.target.classList.add("moving");
-        event.target.style.transition = "none";
+    function handlePanStart(event) {
+        if(index == 0){
+            event.target.classList.add("moving");
+            event.target.style.transition = "none";
+        }
     }
 
     function handlePanMove(event) {
@@ -104,21 +106,22 @@
                 <p class="text__title">{card.title}</p>
                 <p>{card.description}</p>
             </div>
+            
             {#if card instanceof InterventionCard}
                 <div class="front__bottom front__bottom--intervention">
-                    <div class="intervention__trucks">
+                    <div class="intervention intervention__trucks">
                         <Fa icon={faTruck} color="black"/>
                         <div class="trucks__categories">
-
                             {#each card.means_move.getNumbersOfCategoriesOfTrucks() as dictCategory}
-                            {print(card.means_move.getNumbersOfCategoriesOfTrucks())}
-                            <span>{dictCategory.number}</span>
-                            <IconOperationType type={dictCategory.category}/>
+                                <span>{dictCategory.number}</span>
+                                <IconOperationType type={dictCategory.category}/>
                         {/each}
                         </div>
                         
                     </div>
-                    <div class="intervention__firefighters">
+                    <div class="intervention intervention__firefighters">
+                        <Fa icon={faUser} color="black"/>
+
 
                     </div>
                     <div class="intervention__seats">
@@ -186,15 +189,15 @@
         padding-left: 5px;
     }
     .front__bottom{
-        background-color: aqua;
     }
     .front__bottom--intervention{
         display: grid;
         grid-template-columns: 50% 50%;
         grid-template-rows: 66% 34%;
     }
-    .intervention__trucks{
+    .intervention{
         padding: 10px;
+        background-color: lightgrey;
     }
     .trucks__categories{
         display: flex;
@@ -203,10 +206,8 @@
         gap: 5px;
     }
     .intervention__firefighters{
-        background-color: brown;
     }
     .intervention__seats{
-        background-color: chartreuse;
         grid-column: 1 / 3;
     }
 

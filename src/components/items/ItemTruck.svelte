@@ -113,10 +113,9 @@
         aspect-ratio: 1/1;
     }
     .seat--min{
-        background-color: black;
+        background-color: grey;
     }
     .seat--bonus{
-        background-color: white;
-        border: 1px solid black;
+        background-color: lightgrey;
     }
 </style>

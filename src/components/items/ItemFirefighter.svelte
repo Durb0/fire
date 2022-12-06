@@ -19,8 +19,6 @@
         game = value;
     });
 
-    //TODO: fonction onclick qui prend en compte l'etat actuel du pompier, si il reste de la place dans les camions,...
-
     let avatar = createAvatar(style,{
         seed: firefighter.id.toString() + firefighter.name,
         body: firefighter instanceof Chef? ['squared'] : ['small'],

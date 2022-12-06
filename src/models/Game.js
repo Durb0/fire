@@ -21,12 +21,6 @@ export class Game{
         this.operations_in_progress = [];
         this.operations_closed = [];
         this.ressource = new Ressource();
-        //TODO: call game_service to initialize ressource
-    }
-
-    testpop(){
-        this.popularity = 50;
-        w_game.update(game => this);
     }
 
     /**
@@ -52,4 +46,7 @@ export class Game{
     }
 
     //TODO: swipe_card function
+    swipe_card(){
+        console.log("TODO: swipe_card function")
+    }
 }
