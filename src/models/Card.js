@@ -1,12 +1,12 @@
 import { Ressource } from "./Ressource";
-import { newIdCard } from "../utils/store";
+import { newId, w_idCard } from "../utils/store";
 import { Operation } from "./Operation";
 import { PositionType, RelationLevel } from "./Enums";
 import { VALUE_BONUS_CHEF, VALUE_BONUS_FIREFIGHTER } from "../utils/globals.js";
 
 export class Card {
     constructor(title, description, time_before_trigger, position) {
-        this.entry_id = newIdCard();
+        this.entry_id = newId(w_idCard);
         this.title = title;
         this.description = description;
         this.time_before_trigger = time_before_trigger;

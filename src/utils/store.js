@@ -5,34 +5,16 @@ import { Game } from "../models/Game";
 export let w_idCard = writable(0);
 export let w_idFireFighter = writable(0);
 export let w_idTruck = writable(0);
+export let w_idOperation = writable(0);
 export let w_game = writable(new Game());
 export let w_screen = writable("portrait");
 
-//TODO: w_idOperation
 
-export function newIdCard(){
+export function newId(writable){
     var id= 0;
-    w_idCard.subscribe((value) => {
+    writable.subscribe((value) => {
         id = value;
     });
-    w_idCard.update((value) => value + 1);
-    return id;
-}
-
-export function newIdFireFighter(){
-    var id= 0;
-    w_idFireFighter.subscribe((value) => {
-        id = value;
-    });
-    w_idFireFighter.update((value) => value + 1);
-    return id;
-}
-
-export function newIdTruck(){
-    var id= 0;
-    w_idTruck.subscribe((value) => {
-        id = value;
-    });
-    w_idTruck.update((value) => value + 1);
+    writable.update((value) => value + 1);
     return id;
 }

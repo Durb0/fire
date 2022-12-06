@@ -27,13 +27,17 @@ export class Game{
      * @brief Retire la première carte du Deck.
      */
     removeFirstCard(){
-        this.deck.shift()
-        w_game.update(game => this);
+        w_game.update(game => {
+            game.deck.shift();
+            return game;
+        });
     }
 
     addOperationInProgress(my_op){
-        this.operations_in_progress.push(my_op);
-        w_game.update(game => this);
+        w_game.update(game => {
+            game.operations_in_progress.push(my_op);
+            return game;
+        });
     }
 
     /**
@@ -43,10 +47,5 @@ export class Game{
      */
     findOperationInProgress(title){
         return this.operations_in_progress.find(op => op.title == title);
-    }
-
-    //TODO: swipe_card function
-    swipe_card(){
-        console.log("TODO: swipe_card function")
     }
 }

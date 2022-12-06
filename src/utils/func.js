@@ -25,7 +25,6 @@ function flipFirstCard(){
 function flipCard(card){
     if (card) {
         card.classList.toggle('flipped');
-        //TODO: Mettre ça dans l'item
         var cardInner = card.querySelector('.card__inner');
         cardInner.style.transform = 'rotateY(180deg)';
     }

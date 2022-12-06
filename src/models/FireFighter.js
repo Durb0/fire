@@ -1,4 +1,4 @@
-import { newIdFireFighter } from '../utils/store';
+import { newId, w_idFireFighter} from '../utils/store';
 import { categories } from '../utils/globals';
 import { getName } from '../services/name_service.js';
 import { StateRessource } from './Enums';
@@ -6,7 +6,7 @@ import { StateRessource } from './Enums';
 export class FireFighter{
 
     constructor(name = undefined, moral = 100, fatigue = 100){
-        this.id = newIdFireFighter(); 
+        this.id = newId(w_idFireFighter);
         this.moral = moral;
         this.fatigue = fatigue;
         this.name = name;
