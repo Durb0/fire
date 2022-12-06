@@ -19,19 +19,6 @@
         game = value;
     });
 
-    
-
-    onMount(() => {
-        if(index==0){
-        //add class flipped to first card
-        el.style.transform = "rotateY(180deg)";
-        c.style.zIndex = "1";
-        }else{
-            c.style.zIndex = "0";
-        }
-        
-    });
-
     //check if card is the first card
     function handlePanStart(event) {
         if(index == 0){
@@ -96,14 +83,18 @@
     on:panmove = {handlePanMove}
     on:panend = {handlePanEnd}
     bind:this={c}
+    class:card--flipped={index == 0}
 >
-    <div class="card__inner" bind:this={el}>
+    <div class="card__inner"
+    bind:this={el}
+    class:card__inner--flipped={index == 0}
+    >
         <div class="card__back">
             <img src="./assets/backCard.png" alt="">
         </div>
         <div class="card__front">
             <div class="front__text">
-                <p class="text__title">{card.title}</p>
+                <p class="text__title">{card.title} {index}</p>
                 <p>{card.description}</p>
             </div>
             
@@ -211,8 +202,22 @@
         grid-column: 1 / 3;
     }
 
-    .flipped{
-        transform :rotateY(180deg);
+    .card--flipped{
+        z-index: 1;
+    }
+
+    .card__inner--flipped{
+        animation: rotateCard 0.3s ease-in-out;
+        transform: rotateY(180deg);
+    }
+
+    @keyframes rotateCard{
+        0%{
+            transform: rotateY(0deg);
+        }
+        100%{
+            transform: rotateY(180deg);
+        }
     }
     
 

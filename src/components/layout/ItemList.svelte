@@ -67,6 +67,7 @@
     align-content: flex-start;
     justify-content: space-evenly;
     padding: 10px;
+    padding-top: 20px;
     gap:10px;
 }
 </style>

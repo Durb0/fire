@@ -1,6 +1,5 @@
 <script>
     import { w_game } from '../../utils/store.js';
-    import { initCards } from '../../utils/func';
     import CardItem from '../items/CardItem.svelte';
 
     let element;
@@ -9,7 +8,6 @@
 
     w_game.subscribe(game => {
         list_of_cards = game.deck;
-        initCards();
     });
 
     window.addEventListener('load', () => {

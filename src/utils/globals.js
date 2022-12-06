@@ -10,7 +10,6 @@ export function getCategory(name){
 
 export function setCategories(list){
     categories = list;
-    console.log('categories',categories);
 }
 
 export const VALUE_BONUS_CHEF = 5;

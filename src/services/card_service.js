@@ -8,6 +8,7 @@ import {w_game} from '../utils/store';
  */
 socket.on('DilemmeCard', async (data) => {
     var card = new DilemmeCard(
+        data.id,
         data.name,
         data.description,
         data.time_before_trigger,
@@ -17,7 +18,7 @@ socket.on('DilemmeCard', async (data) => {
     );
     await sleep(card.time_before_trigger);
     w_game.update(game => {
-        game.cards.push(card);
+        game.deck.push(card);
         return game;
     }
     );
@@ -28,15 +29,17 @@ socket.on('DilemmeCard', async (data) => {
  */
 socket.on('InformationCard',async (data) => {
     var card = new InformationCard(
+        data.id,
         data.name,
         data.description,
         data.time_before_trigger,
         data.position,
         undefined //TODO: action 
     );
-    await sleep(card.time_before_trigger);
+    //await sleep(card.time_before_trigger);
     w_game.update((game) => {
-        game.cards.push(card);
+        game.deck.push(card);
+        return game;
     });
 })
 
@@ -45,6 +48,7 @@ socket.on('InformationCard',async (data) => {
  */
 socket.on('InterventionCard',async (data) => {
     var card = new InterventionCard(
+        data.id,
         data.title,
         data.description,
         data.time_before_trigger,
@@ -79,9 +83,9 @@ function callNextCard(cardId, level){
  * @comment cette fonction est appelée par le constructeur de Game
  */
 async function test(){
-    for (let i = 0; i < 5; i++) {
         socket.emit('drawInterventionBaseCard');
-    }
+        socket.emit('drawInterventionBaseCard');
+        socket.emit('drawInterventionBaseCard');
 }
 
 export {test, callNextCard};

@@ -1,5 +1,4 @@
 <script>
-  import { sleep } from "../../utils/time";
   import { w_game } from "../../utils/store";
   import ProgressBar from "../core/ProgressBar.svelte";
 
@@ -13,15 +12,13 @@
     100: "#0E99DA"
   }
 
+  var value = 0;
+  var color = colors[100];
+
   w_game.subscribe(game => {
     value = game.popularity;
     updateColor();
   });
-
-  var value = 100;
-  var color = colors[100];
-
-  
 
 
   function updateColor(){
@@ -33,8 +30,6 @@
     color =  colors[index];
   }
 </script>
-
-
 
 <div class="header">
   <ProgressBar color={color} thickness=25 value={value} margin="20" />

@@ -3,10 +3,12 @@ import { newId, w_idCard } from "../utils/store";
 import { Operation } from "./Operation";
 import { PositionType, RelationLevel } from "./Enums";
 import { VALUE_BONUS_CHEF, VALUE_BONUS_FIREFIGHTER } from "../utils/globals.js";
+import { callNextCard } from "../services/card_service.js";
 
 export class Card {
-    constructor(title, description, time_before_trigger, position) {
+    constructor(id, title, description, time_before_trigger, position) {
         this.entry_id = newId(w_idCard);
+        this.id = id
         this.title = title;
         this.description = description;
         this.time_before_trigger = time_before_trigger;
@@ -23,11 +25,11 @@ export class Card {
 
 export class InterventionCard extends Card{
 
-    constructor(title, description, time_before_trigger, position, 
+    constructor(id, title, description, time_before_trigger, position, 
         ratio_success, ratio_critical_success, ratio_critical_failure, ratio_critical_refusal, 
         categories = [], means_move = new Ressource())
     {
-        super(title, description, time_before_trigger, position);
+        super(id, title, description, time_before_trigger, position);
         this.ratio_success = ratio_success;
         this.ratio_critical_success = ratio_critical_success;
         this.ratio_critical_failure = ratio_critical_failure;
@@ -79,18 +81,18 @@ export class InterventionCard extends Card{
             if ( rand < this.ratio_critical_refusal ) {
                 console.log("Critical refusal.");
                 my_op.popularity_gain += RelationLevel.CRITICAL_REFUSAL;
-                //nextCard( my_card, RelationLevel.CRITICAL_REFUSAL ); //TODO: nextCard in the BDD
+                callNextCard( this.id, RelationLevel.CRITICAL_REFUSAL );
             } else {
                 console.log("Simple refusal.");
                 my_op.popularity_gain += RelationLevel.REFUSAL;
-                //next_card( my_card, RelationLevel.REFUSAL ); //TODO: nextCard in the BDD
+                callNextCard( this.id, RelationLevel.REFUSAL );
             }
         } else {
             console.log("Moyens envoyés sur intervention.")
             var relation = this.calculResult( my_op );
             my_op.popularity_gain += relation;
             console.log("Valeur de la relation next_card : " + relation);
-            //nextCard( my_card, this.calculResult( my_op ) ); //TODO: nextCard in the BDD
+            callNextCard( this.id , relation );
         }
 
         return my_op;
@@ -109,7 +111,6 @@ export class InterventionCard extends Card{
         var relation = this.calculResult( my_op );
         my_op.popularity_gain += relation;
         console.log("Valeur de la relation next_card : " + relation);
-
         return my_op;
     }
 
@@ -191,8 +192,8 @@ export class InterventionCard extends Card{
 
 export class InformationCard extends Card{
 
-    constructor(title, description, time_before_trigger, position, actions){
-        super(title, description, time_before_trigger, position);
+    constructor(id, title, description, time_before_trigger, position, actions){
+        super(id, title, description, time_before_trigger, position);
         this.actions = actions;
     }
 
@@ -204,8 +205,8 @@ export class InformationCard extends Card{
 
 export class DilemmeCard extends Card{
     
-    constructor(title, description, time_before_trigger, position, actions_left,actions_right){
-        super(title, description, time_before_trigger, position);
+    constructor(id, title, description, time_before_trigger, position, actions_left,actions_right){
+        super(id, title, description, time_before_trigger, position);
         this.actions_left = actions_left;
         this.actions_right = actions_right;
     }

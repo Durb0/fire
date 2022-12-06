@@ -5,8 +5,6 @@
 
 	window.addEventListener('load', function(){
 		w_screen.subscribe(value => {
-		console.log(value);
-		console.log(el);
 		if (value == 'landscape') {
 			el.classList.add('tabs-landscape');
 		} else {

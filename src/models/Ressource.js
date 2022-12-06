@@ -41,6 +41,7 @@ export class Ressource{
     isValideForIntervention(){
         var nb_seat_min = 0;
         this.trucks.forEach(truck => nb_seat_min += truck.nb_seat_min);
+        console.log("nb_seat_min",nb_seat_min);
         return (nb_seat_min <= this.chefs.length + this.crewmans.length);
     }
 
@@ -89,7 +90,6 @@ export class Ressource{
                 }
             })
         })
-        console.log("categoriesTruck", categoriesTrucks);
         return categoriesTrucks;
     }
 
