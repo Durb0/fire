@@ -151,7 +151,8 @@ export class InterventionCard extends Card{
             my_ratio_success +=(nb_firefighters - min_seat) * VALUE_BONUS_FIREFIGHTER ;
             
         } else {
-            console.log("Pas de bonus sur les ratios de l'intervention.");
+            console.log("Les moyens ne correspondent pas à la carte : Pas de succès critique.");
+            my_ratio_critical_success = 0;
         }
 
         //nombres aléatoires appliqués aux ratios modifiés.
