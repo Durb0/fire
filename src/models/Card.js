@@ -1,7 +1,7 @@
 import { Ressource } from "./Ressource";
 import { newId, w_idCard } from "../utils/store";
 import { Operation } from "./Operation";
-import { PositionType, RelationLevel } from "./Enums";
+import { PositionType, RelationLevel, StateRessource } from "./Enums";
 import { VALUE_BONUS_CHEF, VALUE_BONUS_FIREFIGHTER } from "../utils/globals.js";
 import { callNextCard } from "../services/card_service.js";
 
@@ -62,7 +62,7 @@ export class InterventionCard extends Card{
             default :
                 console.error("Error - InterventionCard - swipeCard()");
         }
-
+        game.ressource.switchStates(StateRessource.SELECTED,StateRessource.UNAVAILABLE);
         game.removeFirstCard(); //Retire la première carte du Deck.
     }
 
@@ -198,7 +198,10 @@ export class InformationCard extends Card{
     }
 
     swipeCard(game,direction){
-        console.log("TODO : swipe_card InformationCard");
+        switch(this.position){
+            case PositionType.END:
+                game.returnRessourcesOfOperation(this.title);
+        }
         game.removeFirstCard();
     }
 }

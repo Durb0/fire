@@ -16,8 +16,8 @@ export var RelationLevel = {
 }
 
 export var StateRessource = {
-    AVAILABLE : "AVAILABLE",
-    UNAVAILABLE : "UNAVAILABLE",
     SELECTED : "SELECTED",
-    SICK: "SICK"
+    AVAILABLE : "AVAILABLE",
+    SICK: "SICK",
+    UNAVAILABLE : "UNAVAILABLE"
 }

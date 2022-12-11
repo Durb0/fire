@@ -2,6 +2,7 @@
     import ItemFirefighter from "../items/ItemFirefighter.svelte";
     import ItemTruck from "../items/ItemTruck.svelte";
     import {w_game} from "../../utils/store.js";
+    import { StateRessource } from "../../models/Enums";
 
     export let type;
 
@@ -11,13 +12,26 @@
         ressource = value.ressource;
     });
 
+    function sorted(list){
+        return list.sort((a,b) => {
+            if (!((
+                a.state == StateRessource.AVAILABLE && 
+                b.state == StateRessource.SELECTED) || 
+                (a.state == StateRessource.SELECTED && 
+                b.state == StateRessource.AVAILABLE))){
+                    return statesOrder.indexOf(a.state) - statesOrder.indexOf(b.state)
+            }
+        })
+    }
+
+    const statesOrder = Object.values(StateRessource);
 
 </script>
 
 
 <div class="list">
     {#if type=='truck'}
-        {#await ressource.trucks}
+        {#await sorted(ressource.trucks)}
             <div>loading...</div>
         {:then trucks}
             {#each trucks as truck}
@@ -29,7 +43,7 @@
     {/if}
 
     {#if type=='chef'}
-        {#await ressource.chefs}
+        {#await sorted(ressource.chefs)}
             <div>loading...</div>
         {:then chefs}
             {#each chefs as chef}
@@ -41,7 +55,7 @@
     {/if}
 
     {#if type=='firefighter'}
-        {#await ressource.crewmans}
+        {#await sorted(ressource.crewmans)}
             <div>loading...</div>
         {:then firefighters}
             {#each firefighters as firefighter}

@@ -110,12 +110,6 @@
 			100%{background-position:0% 50%}
 		}
 
-
-		.item--SELECTED{
-			background-color: lightgreen !important;
-			transform: rotate(2deg);
-		}
-
 		.tabs-landscape{
 			height: calc(100vh - 65px);
 		}

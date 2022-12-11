@@ -203,7 +203,7 @@
     }
 
     .card--flipped{
-        z-index: 1;
+        z-index: 3;
     }
 
     .card__inner--flipped{

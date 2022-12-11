@@ -6,7 +6,8 @@
     import { url } from "../../utils/socket.js";
     import IconList from '../core/IconList.svelte';
     import ProgressBar from '../core/ProgressBar.svelte';
-  import Item from './Item.svelte';
+    import Item from './Item.svelte';
+    import { InterventionCard } from '../../models/Card.js';
 
     export let truck;
 
@@ -19,7 +20,8 @@
     });
 
     function handleClickItem(){
-        if(truck.state == StateRessource.AVAILABLE){
+        if(game.deck[0] instanceof InterventionCard){
+            if(truck.state == StateRessource.AVAILABLE){
                 truck.state = StateRessource.SELECTED;
                 game.deck[0].means_move.addTruck(truck);
         }else{
@@ -31,6 +33,7 @@
             }
         }
         w_game.update(game => game);
+        }
     }
 
 </script>

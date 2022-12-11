@@ -30,7 +30,7 @@ socket.on('DilemmeCard', async (data) => {
 socket.on('InformationCard',async (data) => {
     var card = new InformationCard(
         data.id,
-        data.name,
+        data.title,
         data.description,
         data.time_before_trigger,
         data.position,
@@ -83,8 +83,6 @@ function callNextCard(cardId, level){
  * @comment cette fonction est appelée par le constructeur de Game
  */
 async function test(){
-        socket.emit('drawInterventionBaseCard');
-        socket.emit('drawInterventionBaseCard');
         socket.emit('drawInterventionBaseCard');
 }
 

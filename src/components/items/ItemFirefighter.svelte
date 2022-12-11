@@ -80,38 +80,4 @@
         flex-direction: column;
         gap: 5px;
     }
-
-    .item-firefighter{
-        flex-direction: column;
-        height: fit-content;
-        width: 80px;
-    }
-    .icon_bar{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 5px;
-        align-items: center;
-    }
-
-    .bar{
-        width: 100%;
-        height: 10px;
-        background-color: #e0e0e0;
-        border-radius: 5px;
-    }
-
-    .moral_bar_inner{
-        background-color: #ff1744;
-    }
-
-    .fatigue_bar_inner{
-        /* blue light */
-        background-color: #2979ff; ;
-    }
-
-    .bar_inner{
-        height: 100%;
-        border-radius: 5px;
-    }
 </style>

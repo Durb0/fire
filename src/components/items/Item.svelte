@@ -7,10 +7,11 @@
 <div class="item"
 style="width: {width}px;">
     <div class="item__front"
-    class:AVAILABLE={state == StateRessource.AVAILABLE}
-    class:SELECTED={state == StateRessource.SELECTED}
+    class:item--AVAILABLE={state == StateRessource.AVAILABLE}
+    class:item--SELECTED={state == StateRessource.SELECTED}
+    class:item--UNAVAILABLE={state == StateRessource.UNAVAILABLE}
     >
-        <slot></slot>
+        <slot></slot>      
     </div>
     <div class="item__back">
 
@@ -26,14 +27,18 @@ style="width: {width}px;">
 		transition: background 0.2s, transform 0.2s;
     }
 
-    .AVAILABLE{
+    .item--AVAILABLE{
         transform: translateY(-10px);
     }
 
 
-    .SELECTED{
+    .item--SELECTED{
         background-color: rgb(205, 252, 177) !important;
-        transform: translateY(0px);
+    }
+
+    .item--UNAVAILABLE{
+        background-color: rgb(252, 177, 177) !important;
+        mix-blend-mode: luminosity;
     }
 
     .item__front{

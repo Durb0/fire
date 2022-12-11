@@ -2,6 +2,7 @@ import { Ressource } from "./Ressource";
 import { w_game } from "../utils/store";
 import { getOptions } from "../services/game_service";
 import { test } from "../services/card_service";
+import { StateRessource } from "./Enums";
 
 export class Game{
 
@@ -41,5 +42,24 @@ export class Game{
      */
     findOperationInProgress(title){
         return this.operations_in_progress.find(op => op.title == title);
+    }
+
+
+    returnRessourcesOfOperation(title){
+        
+        w_game.update(game => {
+            var my_op = game.findOperationInProgress(title);
+            console.log("opes",game.operations_in_progress);
+            my_op.means_on_site.trucks.forEach(truck => {
+                truck.state = StateRessource.AVAILABLE;
+                });
+            my_op.means_on_site.chefs.forEach(chef => {
+                chef.state = StateRessource.AVAILABLE;
+                });
+            my_op.means_on_site.crewmans.forEach(crewman => {
+                crewman.state = StateRessource.AVAILABLE;
+                });
+            return game;
+        });
     }
 }

@@ -93,6 +93,24 @@ export class Ressource{
         return categoriesTrucks;
     }
 
+    switchStates(from,to){
+        this.trucks.forEach(truck => {
+            if(truck.state == from){
+                truck.state = to;
+            }
+        });
+        this.crewmans.forEach(fireFighter => {
+            if(fireFighter.state == from){
+                fireFighter.state = to;
+            }
+        });
+        this.chefs.forEach(chef => {
+            if(chef.state == from){
+                chef.state = to;
+            }
+        });
+    }
+
     countMinSeatInTrucks(){
         var min_seat = 0;
         this.trucks.forEach(truck => {
