@@ -69,28 +69,42 @@ export class Ressource{
         this.trucks.forEach(truck => categoriesTrucks = categoriesTrucks.concat(truck.categories));
         return categoriesTrucks;
     }
-    getNumbersOfCategoriesOfTrucks(){
-        var categoriesTrucks = [];
+    getNumbersOfCategories(type){
+        console.log("Ici alors");
+        var categoriesWithNumber = [];
         var catFound;
         var newCat;
-        this.trucks.forEach(truck => {
-            truck.categories.forEach(cat => {
-                catFound = categoriesTrucks.findIndex(el => el.category.name == cat.name);
-               // console.log(catFound)
-                //console.log(categoriesTrucks)
+        
+        if(type=="truck"){
+            this.trucks.forEach(truck => {
+                truck.categories.forEach(cat => {
+                    catFound = categoriesWithNumber.findIndex(el => el.category.name == cat.name);
+                    if(catFound == -1){
+                        newCat = new Object();
+                        newCat = {category:cat,number:1};
+                        categoriesWithNumber.push(newCat);
+                    } else {
+                        categoriesWithNumber[catFound].number += 1; 
+                    }
+                })
+            })
+        } else if (type=="chef"){
+            console.log("Ici");
+            this.chefs.forEach(chef => {
+                catFound = categoriesWithNumber.findIndex(el => el.category.name == chef.speciality.name);
                 if(catFound == -1){
                     newCat = new Object();
-                    newCat = {category:cat,number:1};
-                    categoriesTrucks.push(newCat);
+                    newCat = {category:chef.speciality,number:1};
+                    categoriesWithNumber.push(newCat);
                 } else {
-                   // console.log("avant",categoriesTrucks[catFound].number);
-                    //console.log("catFound" ,catFound);
-                    categoriesTrucks[catFound].number += 1; 
-                   // console.log("apres",categoriesTrucks[catFound].number);
+                    categoriesWithNumber[catFound].number += 1; 
                 }
             })
-        })
-        return categoriesTrucks;
+        } else {
+            console.error("error - Ressource.js - getNumbersOfCategories(type) type is not correct");
+        }
+        
+        return categoriesWithNumber;
     }
 
     switchStates(from,to){
@@ -116,6 +130,7 @@ export class Ressource{
         this.trucks.forEach(truck => {
             min_seat += truck.nb_seat_min;
         })
+        console.log("size Min", min_seat);
         return min_seat;
     }
 
@@ -128,4 +143,19 @@ export class Ressource{
         means.chefs.forEach(chef => {this.chefs.push(chef)});
         means.crewmans.forEach(crewman => {this.crewmans.push(crewman)});
     }
+
+    ratioSeatsMinMax(){
+        let min_seats = this.countMinSeatInTrucks();
+        let max_seats = this.getSizeMaxOfTrucks();
+
+        return (max_seats == 0 ? 0 : min_seats*100/max_seats); 
+    }
+
+    ratioSeatsSelectedMax(){
+        let selected_seats = this.countFireFighters();
+        let max_seats = this.getSizeMaxOfTrucks();
+
+        return (max_seats == 0 ? 0 : selected_seats*100/max_seats); 
+    }
+    
 }

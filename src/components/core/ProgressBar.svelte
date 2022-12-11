@@ -6,7 +6,7 @@
     export let margin = 0;
 </script>
 
-<div class="progress-bar" style="height:{thickness}px; background: {background}; border-radius: {thickness}px; margin:{margin}px;">
+<div class="{$$restProps.class || ''}" style="width:100%; height:{thickness}px; background: {background}; border-radius: {thickness}px; margin:{margin}px;">
     <div class="progress-bar__bar" style="width: {value}%; background-color: {color}; border-radius: {thickness}px;"></div>
 </div>
 

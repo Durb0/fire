@@ -6,6 +6,7 @@
     import Fa from 'svelte-fa'
     import { faTruck, faUser } from '@fortawesome/free-solid-svg-icons';
     import IconOperationType from '../core/IconOperationType.svelte';
+    import ProgressBar from '../core/ProgressBar.svelte';
     import { Divider } from 'svelte-materialify';
 
     let el;
@@ -102,21 +103,27 @@
                 <div class="front__bottom front__bottom--intervention">
                     <div class="intervention intervention__trucks">
                         <Fa icon={faTruck} color="black"/>
-                        <div class="trucks__categories">
-                            {#each card.means_move.getNumbersOfCategoriesOfTrucks() as dictCategory}
+                        <div class="categories">
+                            {#each card.means_move.getNumbersOfCategories("truck") as dictCategory}
                                 <span>{dictCategory.number}</span>
                                 <IconOperationType type={dictCategory.category}/>
-                        {/each}
+                            {/each}
                         </div>
-                        
                     </div>
-                    <div class="intervention intervention__firefighters">
+                    <div class="intervention intervention__chefs">
                         <Fa icon={faUser} color="black"/>
-
-
+                        <div class="categories">
+                            {#each card.means_move.getNumbersOfCategories("chef") as dictCategory}
+                                <span>{dictCategory.number}</span>
+                                <IconOperationType type={dictCategory.category}/>
+                            {/each}
+                        </div>
                     </div>
                     <div class="intervention__seats">
-
+                        <div class="seats__container--bars">
+                            <ProgressBar class="progress_bar--grid" color="#ffcf40" background="lightgrey" value="{card.means_move.ratioSeatsMinMax()}" thickness=20/>
+                            <ProgressBar class="progress_bar--grid" color="lightgreen" value="{card.means_move.ratioSeatsSelectedMax()}" thickness=20/>
+                        </div>
                     </div>
                 </div>
             {/if}    
@@ -173,13 +180,12 @@
         display: grid;
         grid-template-columns: 100%;
         grid-template-rows: 66% 34%;
+        padding: 10px;
     }
 
     .text__title{
         text-align: left;
         padding-left: 5px;
-    }
-    .front__bottom{
     }
     .front__bottom--intervention{
         display: grid;
@@ -190,13 +196,11 @@
         padding: 10px;
         background-color: lightgrey;
     }
-    .trucks__categories{
+    .categories{
         display: flex;
         align-items: baseline;
         justify-content: center;
         gap: 5px;
-    }
-    .intervention__firefighters{
     }
     .intervention__seats{
         grid-column: 1 / 3;
@@ -219,6 +223,16 @@
             transform: rotateY(180deg);
         }
     }
+
+    .seats__container--bars{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+    }  
     
+    .seats__container--bars :global(.progress_bar--grid){
+        grid-row: 1;
+        grid-column: 1;
+    }
 
 </style>
