@@ -3,6 +3,7 @@
 	import Footer from "./layout/Footer.svelte";
 	import Header from "./layout/Header.svelte";
 	import { w_screen} from "../utils/store.js";
+    import MainPage from "./layout/MainPage.svelte";
 
 	let playground, footer;
 	export let play_zone;
@@ -35,11 +36,12 @@
 
 <svelte:body class="body daynight"/>
 
-<Header />
-<div class="play_zone" bind:this={play_zone}>
+<!--<Header />-->
+<MainPage/>
+<!--<div class="play_zone" bind:this={play_zone}>
 	<Playground />
 	<Footer />
-</div>
+</div>-->
 
 
 <svelte:head>
