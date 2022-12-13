@@ -6,6 +6,7 @@
 
   export let url = "";
 
+
   function defineScreen(){
     let width = window.innerWidth;
     let height = window.innerHeight;
@@ -23,7 +24,7 @@
 
 	window.addEventListener("resize", function(){
 		defineScreen();
-	});
+  });
 
 </script>
 

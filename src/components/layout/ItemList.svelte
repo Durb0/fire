@@ -69,7 +69,7 @@
     {/if}
 </div>
 <div class="door"
-class:door--closed={!(first_card instanceof InterventionCard)}></div>
+class:door--closed={!(first_card instanceof InterventionCard) && (first_card != null)}></div>
 
 <style>
 .list {
@@ -94,12 +94,13 @@ class:door--closed={!(first_card instanceof InterventionCard)}></div>
 .door{
     width: inherit;
     z-index: 3;
-    background: gray;
+    background: repeating-linear-gradient(
+        gray, gray 40px, darkgray 40px,darkgray 50px);
     height: 0%;
     grid-row: 1;
     grid-column: 1;
     border-radius:10px 10px 0 0;
-    transition: height 0.5s;
+    transition: height 0.5s ease-out;
 }
 
 .door--closed{

@@ -2,7 +2,7 @@
     import { w_game } from '../../utils/store.js';
     import CardItem from '../items/CardItem.svelte';
 
-    let element;
+    let playground;
 
     let list_of_cards;
 
@@ -11,19 +11,23 @@
     });
 
     window.addEventListener('load', () => {
-        resizeCard();
+        updateCardSize();
     });
     
 
     window.addEventListener('resize', function() {
-        resizeCard();
+        updateCardSize();
     });
 
-    function resizeCard(){
+    function updateCardSize(){
         var size = 0;
-        
-        var width = element.clientWidth;
-        var height = element.clientHeight;
+
+        if (playground == null){
+            return;
+        }
+
+        var width = playground.offsetWidth;
+        var height = playground.offsetHeight;
         if(width > height){
             //height size
             size = height*0.9;
@@ -36,7 +40,7 @@
 
 </script>
 
-<div class="playground" bind:this={element} >
+<div class="playground" bind:this={playground} >
     {#each list_of_cards as card,index (card.entry_id)}
         <CardItem card={card} index={index}/>
     {/each}
