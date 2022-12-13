@@ -40,7 +40,6 @@ export class Game{
         while(this.popularity>0){
             
             if(Math.floor(Math.random() * 100) <= luck){
-                console.log("ici");
                 callInterventionBaseCard(this.getBlackList());
             }
             w_game.update(game => game = this);
@@ -50,7 +49,6 @@ export class Game{
 
     getBlackList(){
         let blackList = [];
-        console.log("blaclist",blackList)
         this.operations_in_progress.forEach(op => blackList.push(op.title));
         this.deck.forEach(card =>{
             if(card.position == PositionType.BASE && card instanceof InterventionCard){
