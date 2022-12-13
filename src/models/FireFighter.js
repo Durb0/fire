@@ -16,6 +16,14 @@ export class FireFighter{
         }
 
     }
+
+    /**
+     * @brief additionne un nombre au moral du pompier. Gestion des erreurs et appel une carte pompier si le moral tombe à 0.  
+     * @param {*} nbMoral 
+     */
+    updateMoral(nbMoral){
+        
+    }
 }
 
 export class Crewman extends FireFighter{

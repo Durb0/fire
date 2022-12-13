@@ -160,12 +160,12 @@ export class Ressource{
     updateMoralOfFirefightersAvailable(nbMoral){
         this.chefs.forEach(chef => {
             if(chef.state == StateRessource.AVAILABLE){
-                chef.moral += nbMoral;
+                chef.updateMoral(nbMoral);
             }
         });
         this.crewmans.forEach(crewman => {
             if(crewman.state == StateRessource.AVAILABLE){
-                crewman.moral += nbMoral;
+                crewman.updateMoral(nbMoral);
             }
         });
     }
