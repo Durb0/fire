@@ -30,7 +30,7 @@
 
 
 <Router url="{url}">
-      <Route path="GamePage"><GamePage/></Route>
+      <Route path="game"><GamePage/></Route>
       <Route path="/"><MainPage /></Route>
 </Router>
 
