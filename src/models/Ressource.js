@@ -14,7 +14,6 @@ export class Ressource{
         }else if(fireFighter instanceof Crewman){
             this.crewmans.push(fireFighter);
         }
-        console.log("add fireFighter",this);
     }
 
     removeFireFighter(fireFighter){
@@ -23,16 +22,13 @@ export class Ressource{
         }else if(fireFighter instanceof Crewman){
             this.crewmans = this.crewmans.filter(crewman => crewman.id != fireFighter.id);
         }
-        console.log("remove fireFighter",this);
     }
 
     addTruck(truck){
         this.trucks.push(truck);
-        console.log("add truck",this);
     }
     removeTruck(truck){
         this.trucks = this.trucks.filter(el => el.id != truck.id);
-        console.log("remove truck",this);
     }
 
     isEmpty(){
@@ -42,20 +38,17 @@ export class Ressource{
     isValideForIntervention(){
         var nb_seat_min = 0;
         this.trucks.forEach(truck => nb_seat_min += truck.nb_seat_min);
-        console.log("nb_seat_min",nb_seat_min);
         return (nb_seat_min <= this.chefs.length + this.crewmans.length);
     }
 
     getSizeMaxOfTrucks(){
         var size_max = 0;
         this.trucks.forEach(truck => size_max += truck.nb_seat_max);
-        console.log("size_max_trucks",size_max);
         return size_max;
     }
 
     countFireFighters(){
         var len = this.chefs.length + this.crewmans.length;
-        console.log("len_fireFighter",len);
         return len;
     }
     /**
@@ -71,7 +64,6 @@ export class Ressource{
         return categoriesTrucks;
     }
     getNumbersOfCategories(type){
-        console.log("Ici alors");
         var categoriesWithNumber = [];
         var catFound;
         var newCat;
@@ -90,7 +82,6 @@ export class Ressource{
                 })
             })
         } else if (type=="chef"){
-            console.log("Ici");
             this.chefs.forEach(chef => {
                 catFound = categoriesWithNumber.findIndex(el => el.category.name == chef.speciality.name);
                 if(catFound == -1){
@@ -131,7 +122,6 @@ export class Ressource{
         this.trucks.forEach(truck => {
             min_seat += truck.nb_seat_min;
         })
-        console.log("size Min", min_seat);
         return min_seat;
     }
 
