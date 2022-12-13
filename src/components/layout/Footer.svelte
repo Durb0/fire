@@ -44,7 +44,6 @@
   width: 100%;
   display: flex;
   flex-direction: column-reverse;
-  height : calc(100% - 50px);
   padding: 20px;
   padding-bottom: 0;
   padding-top: 40px;
