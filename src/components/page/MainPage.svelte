@@ -4,10 +4,16 @@
     import {Link} from "svelte-routing";
 
     import {start_game_event} from "../../utils/event";
+    import { w_game, w_screen } from '../../utils/store';
 
     export let title;
-    //while url is not changed, this function will be called
-    let inter = setInterval(changeTitle, 150);
+    let screen;
+
+    let effectFireTitle = setInterval(changeTitle, 150);
+
+    w_screen.subscribe(value=>{
+        screen = value;
+    })
 
     function startGame(){
         window.dispatchEvent(start_game_event);
@@ -20,28 +26,44 @@
             title.style.textShadow = "red "+randx+"px "+randy+"px 3px";
         }
         else{
-            clearInterval(inter);
+            clearInterval(effectFireTitle);
         }
     }
 </script>
 
-<div class="main-page">
+<div class="main-page" class:main-page--landscape={screen == "landscape"}>
     <span class="main-page__title" bind:this={title}>F!RE</span>
-    <Link to="game" on:click={startGame}>
-        <Fa class="icon" icon={icons["faPlay"]} size="8x" color={"ghostwhite"} style="text-shadow:lightgray 0px 10px 0px;"/>
-    </Link>
+    <div class="main-page__btn-play">
+        <Link to="game" on:click={startGame}>
+            <Fa class="icon" icon={icons["faPlay"]} size="8x" color={"ghostwhite"} style="text-shadow:lightgray 0px 10px 0px;"/>
+        </Link>
+    </div>
 </div>
 
 <style>
     .main-page{
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-rows: 33% 67%;
+        grid-template-columns: 100%;
+        height: inherit;
         align-items: center;
+        justify-content: center;
+        align-items: baseline;
     }
 
     .main-page__title{
         font-size: 200px;
         color: darkorange;
         transition: text-shadow 0.15s ease-in-out;
+        margin: auto;
+    }
+
+    .main-page__btn-play{
+        margin: auto;
+    }
+    .main-page--landscape{
+        grid-template-columns: 60% 40%;
+        grid-template-rows: 100%;
+
     }
 </style>

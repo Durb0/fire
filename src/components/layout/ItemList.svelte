@@ -101,6 +101,7 @@ class:door--closed={!(first_card instanceof InterventionCard) && (first_card != 
     grid-column: 1;
     border-radius:10px 10px 0 0;
     transition: height 0.5s ease-out;
+    opacity: 0.9;
 }
 
 .door--closed{
