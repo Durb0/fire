@@ -34,7 +34,7 @@
 
 	.landscape{
 		grid-template-columns: 50% 50%;
-		grid-template-rows: 1fr;
+		grid-template-rows: calc(100vh - 65px);
 	}
 </style>
 
