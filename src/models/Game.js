@@ -10,11 +10,6 @@ import { sleep } from "../utils/time";
 export class Game{
 
     constructor(){
-
-
-        getOptions();
-        callInterventionBaseCard();
-
         this.deck = [];
         this.popularity = 100;
         this.operations_in_progress = [];
@@ -26,6 +21,7 @@ export class Game{
      * @brief départ d'une partie
      */
     start(){
+            getOptions();
             this.luckToDrawNewOperation(100,1);
             this.updateMoralFirefighter(-1,5);
     }
