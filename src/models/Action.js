@@ -1,3 +1,8 @@
+import {w_game} from "../utils/store"
+import { Chef } from "./FireFighter"
+
+
+
 export class Action{
     constructor(){
     }
@@ -14,14 +19,24 @@ export class UpgradeChefAction extends Action{
     }
 
     do(){
-        console.log("TOTO : do UpgradeChefAction");
+        let chef = new Chef();
+        chef.updateCrewman(this.crewman);
+        w_game.update((value) => {
+            //remove crewman from ressource
+            value.ressource.crewmans = value.ressource.crewmans.filter((crewman) => {
+                return crewman.name != this.crewman.name;
+            }
+            );
+            //add chef to ressource
+            value.ressource.chefs.push(chef);
+            return value;
+        });
     }
 }
 
-export class RessourceAction extends Action{
-    constructor(type, ressource){
+export class AddRessourceAction extends Action{
+    constructor(ressource){
         super();
-        this.type = type;
         this.ressource = ressource;
     }
 
@@ -30,17 +45,6 @@ export class RessourceAction extends Action{
     }
 }
 
-export class TruckStatsAction extends Action{
-    constructor(truck, wear){
-        super();
-        this.truck = truck;
-        this.wear = wear;
-    }
-
-    do(){
-        console.log("TOTO : do TruckStatsAction");
-    }
-}
 
 export class PopularityAction extends Action{
     constructor(value){

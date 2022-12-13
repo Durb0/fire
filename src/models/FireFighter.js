@@ -34,13 +34,59 @@ export class Crewman extends FireFighter{
         }
         return list;
     }
+
+    expToListOfDict(){
+        var list = [];
+        this.experience.forEach(exp => {
+            for(var i = 0; i < list.length; i++){
+                if (list[i].category == exp){
+                    list[i].nb++;
+                    return;
+                }
+            }
+            list.push({category: exp, nb: 1});
+        });
+        console.log("list of categories of firefighter",list);
+        return list;
+    }
+
+    getBestExperience(){
+        return this.expToListOfDict().sort((a, b) => {
+            if (a.nb > b.nb){
+                return -1;
+            }
+            if (a.nb < b.nb){
+                return 1;
+            }
+            return 0;
+        })[0];
+    }
+
+    canUpdateToChef(){
+        return this.experience.length >= 5;
+    }
+
+    addExperience(category){
+        this.experience.push(category);
+    }
 }
 
 export class Chef extends FireFighter{
-    constructor(name = undefined, moral = 100, fatigue = 100, speciality = getRandomCategory(), power = Math.floor(Math.random() * 6 + 1)){
+    constructor(name = undefined, moral = 100, fatigue = 100, speciality = getRandomCategory(), power = Math.floor(Math.random() * 5 + 1)){
         super(name, moral, fatigue);
         this.speciality = speciality;
         this.power = power;
+    }
+
+    updateCrewman(crewman){
+        this.id = crewman.id;
+        this.name = crewman.name;
+        this.moral = crewman.moral;
+        this.fatigue = crewman.fatigue;
+        this.state = crewman.state;
+        let power = crewman.getBestExperience();
+        this.speciality = power.category;
+        this.power = power.nb;
     }
 }
 

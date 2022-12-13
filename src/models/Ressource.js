@@ -134,6 +134,10 @@ export class Ressource{
         return min_seat;
     }
 
+    getUpdatableCrewmans(){
+        return this.crewmans.filter(crewman => crewman.canUpdateToChef() );
+    }
+
     /**
      * @brief Ajoute tous les élements de la ressource passée en paramètre dans une autre.
      * @param {Ressource} means 

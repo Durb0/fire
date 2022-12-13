@@ -34,7 +34,7 @@ socket.on('InformationCard',async (data) => {
         data.description,
         data.time_before_trigger,
         data.position,
-        undefined //TODO: action 
+        []//TODO: action 
     );
     //await sleep(card.time_before_trigger);
     w_game.update((game) => {

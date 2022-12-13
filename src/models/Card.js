@@ -50,7 +50,7 @@ export class InterventionCard extends Card{
         switch ( this.position ) {
             case PositionType.BASE :
                 console.log("Première carte de l'opération.");
-                game.addOperationInProgress(this.startOperation(game));
+                game.addOperationInProgress(this.startOperation());
                 break;
             case PositionType.MID :
                 console.log("En cours d'opération.");
@@ -71,7 +71,7 @@ export class InterventionCard extends Card{
      * @param {Game} game 
      * @returns Operation
      */
-    startOperation(game){
+    startOperation(){
 
         var my_op = new Operation(this.title,undefined,[this],this.means_move);
         
@@ -201,8 +201,11 @@ export class InformationCard extends Card{
     swipeCard(game,direction){
         switch(this.position){
             case PositionType.END:
-                game.returnRessourcesOfOperation(this.title);
+                game.endOperation(this.title);
         }
+        this.actions.forEach(action => {
+            action.do()
+        });
         game.removeFirstCard();
     }
 }
