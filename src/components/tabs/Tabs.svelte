@@ -1,18 +1,12 @@
 <script context="module">
 	import { w_screen } from '../../utils/store';
 
+	let screen;
 	export let el;
-
-	window.addEventListener('load', function(){
-		w_screen.subscribe(value => {
-		if (value == 'landscape') {
-			el.classList.add('tabs-landscape');
-		} else {
-			el.classList.remove('tabs-landscape');
-		}
-	});
-	})
 	
+	w_screen.subscribe(value=>{
+		screen = value;
+	})
 
 	export const TABS = {};
 </script>
@@ -60,7 +54,8 @@
 	});
 </script>
 
-<div class="tabs" bind:this={el}>
+<div class="tabs" bind:this={el}
+class:tabs--landscape={screen=="landscape"}>
 	<slot></slot>
 </div>
 
@@ -76,4 +71,10 @@
         align-items: stretch;
         align-content: stretch;
     }
+
+	
+
+	.tabs--landscape{
+		height: calc(100vh - 65px);
+	}
 </style>
