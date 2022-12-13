@@ -67,6 +67,7 @@ class:tabs--landscape={screen=="landscape"}>
     .tabs{
         display: grid;
 		grid-template-rows : 50px calc(100% - 50px);
+		grid-template-columns: 100%;
         justify-content: space-between;
         align-items: stretch;
         align-content: stretch;

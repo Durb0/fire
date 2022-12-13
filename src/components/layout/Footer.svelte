@@ -42,9 +42,9 @@
 .tab__container{
   box-sizing: border-box;
   width: 100%;
-  display: flex;
-  flex-direction: column-reverse;
-  height : calc(100% - 50px);
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 100%;
   padding: 20px;
   padding-bottom: 0;
   padding-top: 40px;
