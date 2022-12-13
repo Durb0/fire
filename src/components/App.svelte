@@ -1,120 +1,94 @@
 <script>
-	import Playground from "./layout/Playground.svelte";
-	import Footer from "./layout/Footer.svelte";
-	import Header from "./layout/Header.svelte";
-	import { w_screen} from "../utils/store.js";
-    import MainPage from "./layout/MainPage.svelte";
+  import { Router, Route } from "svelte-routing";
+  import MainPage from "./page/MainPage.svelte";
+  import GamePage from "./page/GamePage.svelte";
+  import { w_screen} from "../utils/store.js";
 
-	let playground, footer;
-	export let play_zone;
+  export let url = "";
 
-	window.addEventListener("load", function(){
-		playground = document.getElementsByClassName("playground")[0];
-		footer = document.getElementsByClassName("footer")[0];
-		defineGrid();
+  function defineScreen(){
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    if(width > height){
+      w_screen.update(n => n = "landscape");
+    }
+    else{
+      w_screen.update(n => n = "portrait");
+    }
+  }
+
+  window.addEventListener("load", function(){
+		defineScreen();
 	});
 
 	window.addEventListener("resize", function(){
-		defineGrid();
+		defineScreen();
 	});
-
-
-	function defineGrid(){
-		let width = window.innerWidth;
-		let height = window.innerHeight;
-		if(width > height){
-			play_zone.classList.add("landscape");
-			w_screen.update(n => n = "landscape");
-		}
-		else{
-			play_zone.classList.remove("landscape");
-			w_screen.update(n => n = "portrait");
-		}
-	}
 
 </script>
 
+
+
+<Router url="{url}">
+      <Route path="GamePage"><GamePage/></Route>
+      <Route path="/"><MainPage /></Route>
+</Router>
+
 <svelte:body class="body daynight"/>
 
-<!--<Header />-->
-<MainPage/>
-<!--<div class="play_zone" bind:this={play_zone}>
-	<Playground />
-	<Footer />
-</div>-->
-
-
 <svelte:head>
-	<style>
+  <style>
 
-		@font-face {
-			font-family: "F!RE";
-			src: url("/assets/font/FIRE.ttf");
-		}
+    @font-face {
+        font-family: "F!RE";
+        src: url("/assets/font/FIRE.ttf");
+      }
 
-		body, html{
-			overflow: hidden;
-		}
+    body, html{
+        overflow: hidden;
+      }
 
-		body{
-			display: grid;
-			grid-template-rows: 65px 1fr;
-			width : 100vw;
-			height: 100vh;
-			/*set font*/
-			font-family: 'F!RE';
-		}
+    body{
+      display: grid;
+      grid-template-rows: 65px 1fr;
+      width : 100vw;
+      height: 100vh;
+      /*set font*/
+      font-family: 'F!RE';
+    }
 
-		.play_zone{
-			display: grid;
-			grid-template-columns: 100%;
-			grid-template-rows: 50% 50%;
-			height: -webkit-fill-available;
-		}
+    .daynight{
+      
+      background: linear-gradient(90deg, #546c8c, #1b3059, #091026);
+      background-size: 1200% 1200%;
 
-		.landscape{
-			grid-template-columns: 50% 50%;
-			grid-template-rows: 1fr;
-		}
+      --time-anim: 120s;
 
+      -webkit-animation: daynight_cycle var(--time-anim) ease infinite;
+      -moz-animation: daynight_cycle var(--time-anim) ease infinite;
+      -o-animation: daynight_cycle var(--time-anim) ease infinite;
+      animation: daynight_cycle var(--time-anim) ease infinite;
+	  }
 
-		.daynight{
-			
-			background: linear-gradient(90deg, #546c8c, #1b3059, #091026);
-			background-size: 1200% 1200%;
-
-			--time-anim: 120s;
-
-			-webkit-animation: daynight_cycle var(--time-anim) ease infinite;
-			-moz-animation: daynight_cycle var(--time-anim) ease infinite;
-			-o-animation: daynight_cycle var(--time-anim) ease infinite;
-			animation: daynight_cycle var(--time-anim) ease infinite;
-		}
-
-		@-webkit-keyframes daynight_cycle {
-			0%{background-position:0% 50%}
-			50%{background-position:100% 50%}
-			100%{background-position:0% 50%}
-		}
-		@-moz-keyframes daynight_cycle {
-			0%{background-position:0% 50%}
-			50%{background-position:100% 50%}
-			100%{background-position:0% 50%}
-		}
-		@-o-keyframes daynight_cycle {
-			0%{background-position:0% 50%}
-			50%{background-position:100% 50%}
-			100%{background-position:0% 50%}
-		}
-		@keyframes daynight_cycle {
-			0%{background-position:0% 50%}
-			50%{background-position:100% 50%}
-			100%{background-position:0% 50%}
-		}
-
-		.tabs-landscape{
-			height: calc(100vh - 65px);
-		}
-	</style>
+    @-webkit-keyframes daynight_cycle {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    @-moz-keyframes daynight_cycle {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    @-o-keyframes daynight_cycle {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    @keyframes daynight_cycle {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+  </style>
 </svelte:head>
-

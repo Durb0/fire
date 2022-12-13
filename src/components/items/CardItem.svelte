@@ -95,7 +95,7 @@
         </div>
         <div class="card__front">
             <div class="front__text">
-                <p class="text__title">{card.title} {index}</p>
+                <p class="text__title">{card.title}</p>
                 <p>{card.description}</p>
             </div>
             
