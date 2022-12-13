@@ -189,11 +189,14 @@
     }
     .front__bottom--intervention{
         display: grid;
+        grid-gap:5px;
+        justify-content: center;
         grid-template-columns: 50% 50%;
         grid-template-rows: 66% 34%;
     }
     .intervention{
         padding: 10px;
+        border-radius: 10px;
         background-color: lightgrey;
     }
     .categories{

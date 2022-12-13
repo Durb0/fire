@@ -93,7 +93,7 @@ class:door--closed={!(first_card instanceof InterventionCard) && (first_card != 
 
 .door{
     width: inherit;
-    z-index: 3;
+    z-index: 2;
     background: repeating-linear-gradient(
         gray, gray 40px, darkgray 40px,darkgray 50px);
     height: 0%;
