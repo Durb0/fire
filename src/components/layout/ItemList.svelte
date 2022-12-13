@@ -3,13 +3,15 @@
     import ItemTruck from "../items/ItemTruck.svelte";
     import {w_game} from "../../utils/store.js";
     import { StateRessource } from "../../models/Enums";
+  import { InterventionCard } from "../../models/Card";
 
     export let type;
 
-    let ressource;
+    let ressource, first_card;
 
     w_game.subscribe(value => {
         ressource = value.ressource;
+        first_card = value.deck[0];
     });
 
     function sorted(list){
@@ -66,6 +68,8 @@
         {/await}
     {/if}
 </div>
+<div class="door"
+class:door--closed={!(first_card instanceof InterventionCard)}></div>
 
 <style>
 .list {
@@ -73,6 +77,8 @@
     background: linear-gradient(0deg, rgba(41,41,41,1) 0%, rgba(0,0,0,1) 100%);
     text-align: center;
     border-radius: 10px 10px 0 0;
+    grid-row: 1;
+    grid-column: 1;
     display: flex;
     height: -webkit-fill-available;
     flex-direction: row;
@@ -83,5 +89,20 @@
     padding: 10px;
     padding-top: 20px;
     gap:10px;
+}
+
+.door{
+    width: inherit;
+    z-index: 3;
+    background: gray;
+    height: 0%;
+    grid-row: 1;
+    grid-column: 1;
+    border-radius:10px 10px 0 0;
+    transition: height 0.5s;
+}
+
+.door--closed{
+    height: 100%;
 }
 </style>
