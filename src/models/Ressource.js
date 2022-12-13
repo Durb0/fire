@@ -1,4 +1,5 @@
 import {Chef , Crewman} from './FireFighter';
+import { StateRessource } from './Enums';
 
 export class Ressource{
     constructor(chefs = [], crewmans = [], trucks = []){
@@ -160,6 +161,23 @@ export class Ressource{
         let max_seats = this.getSizeMaxOfTrucks();
 
         return (max_seats == 0 ? 0 : selected_seats*100/max_seats); 
+    }
+
+    /**
+     * @brief modifie le moral de tous les pompiers valables de notre ressource
+     * @param {integer} nbMoral 
+     */
+    updateMoralOfFirefightersAvailable(nbMoral){
+        this.chefs.forEach(chef => {
+            if(chef.state == StateRessource.AVAILABLE){
+                chef.moral += nbMoral;
+            }
+        });
+        this.crewmans.forEach(crewman => {
+            if(crewman.state == StateRessource.AVAILABLE){
+                crewman.moral += nbMoral;
+            }
+        });
     }
     
 }

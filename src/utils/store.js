@@ -18,3 +18,10 @@ export function newId(writable){
     writable.update((value) => value + 1);
     return id;
 }
+
+window.addEventListener("start_game", function(){
+    w_game.update(game => {
+        game.start();
+        return game;
+    })
+});

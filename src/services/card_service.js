@@ -82,8 +82,8 @@ function callNextCard(cardId, level){
  * @brief fonction temporaire qui appelle 5 cartes d'intervention
  * @comment cette fonction est appelée par le constructeur de Game
  */
-async function test(){
-        socket.emit('drawInterventionBaseCard');
+async function callInterventionBaseCard(blackList = []){
+        socket.emit('drawInterventionBaseCard',blackList);
 }
 
-export {test, callNextCard};
+export {callInterventionBaseCard, callNextCard};

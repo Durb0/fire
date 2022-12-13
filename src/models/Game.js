@@ -1,24 +1,62 @@
 import { Ressource } from "./Ressource";
 import { w_game } from "../utils/store";
 import { getOptions } from "../services/game_service";
-import { test } from "../services/card_service";
-import { StateRessource } from "./Enums";
+import { callInterventionBaseCard } from "../services/card_service";
 import { InformationCard } from "./Card";
 import { UpgradeChefAction } from "./Action";
 import { PositionType } from "./Enums";
+import { sleep } from "../utils/time";
 
 export class Game{
 
     constructor(){
 
+
         getOptions();
-        test();
+        callInterventionBaseCard();
 
         this.deck = [];
         this.popularity = 100;
         this.operations_in_progress = [];
         this.operations_closed = [];
         this.ressource = new Ressource();
+    }
+
+    /**
+     * @brief départ d'une partie
+     */
+    start(){
+            this.luckToDrawNewOperation(20,1);
+            this.updateMoralFirefighter(-1,5);
+    }
+
+    /**
+     * @brief Pioche une nouveau carte en fonction d'un taux de chance dans le temps
+     * 
+     * @param {integer} luck pourcentage de chance de piocher une nouvelle carte
+     * @param {integer} time temps d'attendre entre chaque essai de pioche
+     */
+    async luckToDrawNewOperation(luck,time){
+        while(this.popularity>0){
+            if(Math.floor(Math.random() * 100) < luck){
+                callInterventionBaseCard(this.operations_in_progress);
+            }
+            await sleep(time);
+            w_game.update(game => game = this);
+        }
+    }
+
+    /**
+     * @brief modifie le morale de tout les pompiers du joueur qui se trouve en caserne dans le temps 
+     * @param {integer} nb_moral taux de moral à modifier
+     * @param {integer} time temps d'attente entre chaque modification
+     */
+    async updateMoralFirefighter(nb_moral,time){
+        while(this.popularity>0){
+            this.ressource.updateMoralOfFirefightersAvailable(nb_moral);
+            await sleep(time);
+            w_game.update(game => game = this);
+        }
     }
 
     /**

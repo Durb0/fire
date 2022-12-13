@@ -10,7 +10,6 @@
     import ProgressBar from '../core/ProgressBar.svelte';
     import IconList from '../core/IconList.svelte';
     import Item from './Item.svelte';
-    import { writable } from 'svelte/store';
 
     export let firefighter;
     let el_avatar;
