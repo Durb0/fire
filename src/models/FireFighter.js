@@ -1,7 +1,8 @@
 import { newId, w_idFireFighter} from '../utils/store';
 import { categories } from '../utils/globals';
 import { getName } from '../services/name_service.js';
-import { StateRessource } from './Enums';
+import { StateRessource, TitleInformationCard } from './Enums';
+import { callInformationCard } from '../services/card_service.js';
 
 export class FireFighter{
 
@@ -18,11 +19,25 @@ export class FireFighter{
     }
 
     /**
-     * @brief additionne un nombre au moral du pompier. Gestion des erreurs et appel une carte pompier si le moral tombe à 0.  
-     * @param {*} nbMoral 
+     * @brief Demande une carte de départ du pompier.
      */
-    updateMoral(nbMoral){
-        
+    outFirefighter(){ }
+
+    /**
+     * @brief additionne un nombre au moral du pompier. Gestion des erreurs et appel une carte pompier si le moral tombe à 0.  
+     * @param {integer} nbMoral 
+     */
+    updateMoral(nb_moral){
+        console.log("updateMoral");
+        let my_moral = this.moral + nb_moral;
+        if(my_moral <= 0){
+            this.moral = 0;
+            this.outFirefighter();   
+        } else if(my_moral > 100){
+            this.moral = 100;
+        } else {
+            this.moral = my_moral;
+        }
     }
 }
 
@@ -30,7 +45,11 @@ export class Crewman extends FireFighter{
     constructor(name = undefined, moral = 100, fatigue = 100, experience = []){
         super(name, moral, fatigue);
         this.experience = this.testExperience();
-}
+    }
+
+    outFirefighter(){
+        callInformationCard(TitleInformationCard.DEPART_CHEF);
+    }
 
     testExperience(){
         //create a random list between 0 and 5 of OperationType
@@ -85,6 +104,11 @@ export class Chef extends FireFighter{
         this.speciality = speciality;
         this.power = power;
     }
+
+    outFirefighter(){
+        callInformationCard(TitleInformationCard.DEPART_EQUIPIER);
+    }
+    
 
     updateCrewman(crewman){
         this.id = crewman.id;
