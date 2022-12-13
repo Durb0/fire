@@ -14,17 +14,22 @@
 </script>
 
 
-
-<Header />
-<div class="play_zone" bind:this={play_zone} 
-	class:landscape={screen == "landscape"}>
-	<Playground />
-	<Footer />
+<div class="game-page">
+	<Header />
+	<div class="play_zone" bind:this={play_zone} 
+		class:landscape={screen == "landscape"}>
+		<Playground />
+		<Footer />
+	</div>
 </div>
 
 
 
 <style>
+	.game-page{
+		display: grid;
+      	grid-template-rows: 65px 1fr;
+	}
 	.play_zone{
 		display: grid;
 		grid-template-columns: 100%;

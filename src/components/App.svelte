@@ -49,8 +49,6 @@
       }
 
     body{
-      display: grid;
-      grid-template-rows: 65px 1fr;
       width : 100vw;
       height: 100vh;
       /*set font*/

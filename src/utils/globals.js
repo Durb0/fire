@@ -13,4 +13,4 @@ export function setCategories(list){
 }
 
 export const VALUE_BONUS_CHEF = 5;
-export const VALUE_BONUS_FIREFIGHTER = 5;
+export const VALUE_BONUS_FIREFIGHTER = 10;
