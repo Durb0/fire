@@ -2,6 +2,7 @@ import { InterventionCard, InformationCard, DilemmeCard } from "../models/Card"
 import socket from '../utils/socket.js';
 import {sleep} from '../utils/time.js';
 import {w_game} from '../utils/store';
+import { TitleInformationCard } from "../models/Enums";
 
 /**
  * @brief action lorsque le joueur reçoit une carte de dilemme
@@ -86,4 +87,12 @@ async function callInterventionBaseCard(blackList = []){
         socket.emit('drawInterventionBaseCard',blackList);
 }
 
-export {callInterventionBaseCard, callNextCard};
+/**
+ * @brief fonction qui appelle une carte information dont le titre correspond à la demande.
+ * @param {TitleInformationCard} title titre de la carte cherché  
+ */
+async function callInformationCard(title){
+    socket.emit('drawInformationCard',title);
+}
+
+export {callInterventionBaseCard, callNextCard, callInformationCard};
