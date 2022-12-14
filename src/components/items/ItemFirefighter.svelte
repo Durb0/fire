@@ -29,16 +29,17 @@
     });
 
     function handleClickItem(){
-        console.log("click",firefighter.state);
+        var firstCard = game.firstCard();
+        if(firstCard == null) return;
         if(firefighter.state == StateRessource.AVAILABLE){
-            if(!game.deck[0].means_move.isFull()){
+            if(!firstCard.means_move.isFull()){
                 firefighter.state = StateRessource.SELECTED;
-                game.deck[0].means_move.addFireFighter(firefighter);
+                firstCard.means_move.addFireFighter(firefighter);
             }
             
         }else{
             firefighter.state = StateRessource.AVAILABLE;
-            game.deck[0].means_move.removeFireFighter(firefighter);
+            firstCard.means_move.removeFireFighter(firefighter);
         }
         w_game.update(game => game);
     }
