@@ -48,7 +48,16 @@ export class Crewman extends FireFighter{
     }
 
     outFirefighter(){
-        callInformationCard(TitleInformationCard.DEPART_CHEF);
+        this.deck.push(new InformationCard(
+            0,
+            "Départ d'un chef",
+            "Après de longue année de sacrifice, "+this.name+" fait le choix de quitter la caserne",
+            0,
+            PositionType.BRIEF,
+            [new OutFirefighterAction(this)]
+        ))
+        //TODO: call BDD
+        //callInformationCard(TitleInformationCard.DEPART_CREWMAN);
     }
 
     testExperience(){
@@ -106,7 +115,16 @@ export class Chef extends FireFighter{
     }
 
     outFirefighter(){
-        callInformationCard(TitleInformationCard.DEPART_EQUIPIER);
+        this.deck.push(new InformationCard(
+            0,
+            "Départ d'un équipier",
+            "Après de beau moment partagé, "+this.name+" se retire de son poste",
+            0,
+            PositionType.BRIEF,
+            [new OutFirefighterAction(crew)]
+        ))
+        //TODO: call BDD
+        //callInformationCard(TitleInformationCard.DEPART_CHEF);
     }
     
 
