@@ -1,7 +1,7 @@
 import { Ressource } from "./Ressource";
 import { w_game } from "../utils/store";
 import { getOptions } from "../services/game_service";
-import { callInterventionBaseCard } from "../services/card_service";
+import { callInterventionBaseCard, c } from "../services/card_service";
 import { InformationCard, InterventionCard } from "./Card";
 import { UpgradeChefAction } from "./Action";
 import { PositionType } from "./Enums";
@@ -108,10 +108,10 @@ export class Game{
             if(op){
                 op.end();
                 let crews = op.means_on_site.getUpdatableCrewmans();
-                game = createCardsInformationsNewChef(crews);
+                game.createCardsInformationsNewChef(crews);
                 game.archiveOperation(op);
                 
-                game.updatePopularity(op.gainPopularity());
+                game.updatePopularity(op.getPopularity());
             }
             return game;
         });
@@ -133,9 +133,9 @@ export class Game{
         }
     }
 
-    createCardsInformationsNewChef(game,crews){
+    createCardsInformationsNewChef(crews){
         crews.forEach(crew => {
-            game.deck.push(new InformationCard(
+            this.deck.push(new InformationCard(
                 crew.id,
                 "nouveau chef",
                 "Après de longues années d'altruisme, "+crew.name+" monte en grade",
@@ -144,6 +144,5 @@ export class Game{
                 [new UpgradeChefAction(crew)]
             ))
         });
-        return game;
     }
 }

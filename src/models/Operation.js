@@ -50,4 +50,8 @@ export class Operation{
         this.addExperienceToCrewmans();
     }
 
+
+    getPopularity(){
+        return this.popularity_gain;
+    }
 }
