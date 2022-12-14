@@ -8,6 +8,7 @@
     import IconOperationType from '../core/IconOperationType.svelte';
     import ProgressBar from '../core/ProgressBar.svelte';
     import { Divider } from 'svelte-materialify';
+    import { PositionType } from '../../models/Enums.js';
 
     let el;
     let c;
@@ -98,7 +99,12 @@
         class:front--information={card instanceof InformationCard}
         class:front--dilemme={card instanceof DilemmeCard}>
             <div class="front__text">
-                <p class="text__title">{card.title}</p>
+                <div class="front__text--header">
+                    <p class="text__title">{card.title}</p>
+                    {#if card instanceof InterventionCard && card.position == PositionType.BASE}
+                        <p class="text__new">new</p>
+                    {/if}
+                </div>
                 <p class="text__description">{card.description}</p>
             </div>
             
@@ -186,9 +192,18 @@
         padding: 10px;
     }
 
+    .front__text--header{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
     .text__title{
         text-align: left;
         padding-left: 5px;
+    }
+    .text__new{
+        color: red;
     }
 
     .text__description{
