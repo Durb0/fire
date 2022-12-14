@@ -41,9 +41,15 @@
 </script>
 
 <div class="playground" bind:this={playground} >
-    {#each list_of_cards as card,index (card.entry_id)}
-        <CardItem card={card} index={index}/>
-    {/each}
+    {#if list_of_cards.length == 0}
+        <span class="playground__wait">
+            En attente d'intervention
+        </span>
+    {:else}
+        {#each list_of_cards as card,index (card.entry_id)}
+            <CardItem card={card} index={index}/>
+        {/each}
+    {/if}
 </div>
 
 
@@ -55,5 +61,11 @@
         justify-content: center;
         align-items: center;
         height: -webkit-fill-available;
+    }
+
+    .playground__wait{
+        font-size: 2em;
+        font-weight: bold;
+        color: #0E99DA;
     }
 </style>
