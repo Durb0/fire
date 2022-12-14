@@ -22,7 +22,8 @@ export class Game{
      */
     start(){
             getOptions();
-            this.luckToDrawNewOperation(50,1);
+            callInterventionBaseCard(this.getBlackList()); //première carte
+            this.luckToDrawNewOperation(10,1);
             this.updateMoralFirefighter(-1,5);
     }
 
