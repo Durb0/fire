@@ -25,7 +25,7 @@
                 truck.state = StateRessource.SELECTED;
                 game.deck[0].means_move.addTruck(truck);
         }else{
-            if(game.deck[0].means_move.countFireFighters() <= (game.deck[0].means_move.getSizeMaxOfTrucks() - truck.nb_seat_max)){
+            if(game.deck[0].means_move.countFirefighters() <= (game.deck[0].means_move.getSizeMaxOfTrucks() - truck.nb_seat_max)){
                 truck.state = StateRessource.AVAILABLE;
                 game.deck[0].means_move.removeTruck(truck);
             } else {
