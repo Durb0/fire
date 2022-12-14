@@ -34,6 +34,28 @@ export class UpgradeChefAction extends Action{
     }
 }
 
+export class OutFirefighterAction extends Action{
+    constructor(firefighter){
+        super();
+        this.firefighter = firefighter;
+    }
+
+    do(){
+        w_game.update((value) => {
+            //remove firefighter from ressource
+            value.ressource.crewmans = value.ressource.crewmans.filter((firefighter) => {
+                return firefighter.id != this.firefighter.id;
+            }
+            );
+            value.ressource.chefs = value.ressource.chefs.filter((firefighter) => {
+                return firefighter.id != this.firefighter.id;
+            }
+            );
+            return value;
+        });
+    }
+}
+
 export class AddRessourceAction extends Action{
     constructor(ressource){
         super();
