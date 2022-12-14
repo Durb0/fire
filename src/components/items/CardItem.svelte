@@ -99,7 +99,7 @@
         class:front--dilemme={card instanceof DilemmeCard}>
             <div class="front__text">
                 <p class="text__title">{card.title}</p>
-                <p>{card.description}</p>
+                <p class="text__description">{card.description}</p>
             </div>
             
             {#if card instanceof InterventionCard}
@@ -189,6 +189,10 @@
     .text__title{
         text-align: left;
         padding-left: 5px;
+    }
+
+    .text__description{
+        font-size: larger;
     }
 
     .front--information{
