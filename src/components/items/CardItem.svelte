@@ -95,7 +95,7 @@
         </div>
         <div class="card__front" 
         class:front--intervention={card instanceof InterventionCard}
-        class:front--informatique={card instanceof InformationCard}
+        class:front--information={card instanceof InformationCard}
         class:front--dilemme={card instanceof DilemmeCard}>
             <div class="front__text">
                 <p class="text__title">{card.title}</p>
@@ -137,7 +137,7 @@
 <style>
     :root{
         --card_size : 70%;
-        --card_radius: 8px;
+        --card_radius: 20px;
     }
 
     .card{
@@ -191,14 +191,14 @@
         padding-left: 5px;
     }
 
-    .front--intervention{
-        background-color:   #B5F2FA;
+    .front--information{
+        border: 5px solid #B5F2FA;
     }
-    .front--informatique{
-        background-color: #F5CB77;
+    .front--intervention{
+        border: 5px solid #F5CB77;
     }
     .front--dilemme{
-        background-color: #D5A5F8;
+        border: 5px solid #D5A5F8;
     }
     .front__bottom--intervention{
         display: grid;
