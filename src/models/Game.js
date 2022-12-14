@@ -22,7 +22,7 @@ export class Game{
      */
     start(){
             getOptions();
-            this.luckToDrawNewOperation(10,1);
+            this.luckToDrawNewOperation(50,1);
             this.updateMoralFirefighter(-1,5);
     }
 

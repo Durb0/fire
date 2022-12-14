@@ -47,7 +47,7 @@ export class Ressource{
         return size_max;
     }
 
-    countFireFighters(){
+    countFirefighters(){
         var len = this.chefs.length + this.crewmans.length;
         return len;
     }
@@ -56,7 +56,7 @@ export class Ressource{
      * @returns un booleen qui dit si le nombre de pompier est égal au nombre max de place dans les camions
      */
     isFull(){
-        return (this.countFireFighters() == this.getSizeMaxOfTrucks());
+        return (this.countFirefighters() == this.getSizeMaxOfTrucks());
     }
     getCategoriesOfTrucks(){
         var categoriesTrucks = []
@@ -147,7 +147,7 @@ export class Ressource{
     }
 
     ratioSeatsSelectedMax(){
-        let selected_seats = this.countFireFighters();
+        let selected_seats = this.countFirefighters();
         let max_seats = this.getSizeMaxOfTrucks();
 
         return (max_seats == 0 ? 0 : selected_seats*100/max_seats); 
