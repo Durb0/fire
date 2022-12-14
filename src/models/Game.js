@@ -108,20 +108,42 @@ export class Game{
             if(op){
                 op.end();
                 let crews = op.means_on_site.getUpdatableCrewmans();
-                crews.forEach(crew => {
-                    game.deck.push(new InformationCard(
-                        crew.id,
-                        "nouveau chef",
-                        "Après de longues années d'altruisme, "+crew.name+" monte en grade",
-                        0,
-                        PositionType.BRIEF,
-                        [new UpgradeChefAction(crew)]
-                    ))
-                });
+                game = createCardsInformationsNewChef(crews);
                 game.archiveOperation(op);
-
+                
+                game.updatePopularity(op.gainPopularity());
             }
             return game;
         });
+    }
+
+    /**
+     * @brief modifie la popularité de la game.
+     * @param {integer} nb_popularity nombre de popularité a modifier
+     */
+    updatePopularity(nb_popularity){
+        let my_pop = this.popularity + nb_popularity;
+        if(my_pop <= 0){
+            this.popularity = 0;
+            //TODO: Fin de la partie 
+        } else if(my_pop > 100){
+            this.popularity = 100;
+        } else {
+            this.popularity = my_pop;
+        }
+    }
+
+    createCardsInformationsNewChef(game,crews){
+        crews.forEach(crew => {
+            game.deck.push(new InformationCard(
+                crew.id,
+                "nouveau chef",
+                "Après de longues années d'altruisme, "+crew.name+" monte en grade",
+                0,
+                PositionType.BRIEF,
+                [new UpgradeChefAction(crew)]
+            ))
+        });
+        return game;
     }
 }

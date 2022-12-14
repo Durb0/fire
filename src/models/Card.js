@@ -199,14 +199,33 @@ export class InformationCard extends Card{
     }
 
     swipeCard(game,direction){
-        switch(this.position){
-            case PositionType.END:
+        switch ( this.position ) {
+            case PositionType.BASE :
+                //TODO: Commencement d'une opération par une carte information
+                console.log("TODO");
+                break;
+            case PositionType.MID :
+                console.log("TODO");
+                //TODO: Commencement d'une opération par une carte information
+                break;
+            case PositionType.END :
                 game.endOperation(this.title);
+                this.doActions();
+                game.removeFirstCard();
+            break;
+            case PositionType.BRIEF :
+                //TODO: Commencement d'une opération par une carte information
+                console.log("TODO");
+            break;
+            default :
+                console.error("Error - InformationCard - swipeCard()");
         }
-        this.actions.forEach(action => {
-            action.do()
+    }
+
+    doActions(){
+        this.actions.forEach(action=>{
+            action.do();
         });
-        game.removeFirstCard();
     }
 }
 

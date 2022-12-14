@@ -2,7 +2,7 @@
     import { Hammer,pan } from 'svelte-hammer';
     import { onMount } from 'svelte';
     import { w_game } from '../../utils/store.js';
-    import { InterventionCard } from '../../models/Card.js';
+    import { DilemmeCard, InformationCard, InterventionCard } from '../../models/Card.js';
     import Fa from 'svelte-fa'
     import { faTruck, faUser } from '@fortawesome/free-solid-svg-icons';
     import IconOperationType from '../core/IconOperationType.svelte';
@@ -93,7 +93,10 @@
         <div class="card__back">
             <img src="./assets/backCard.png" alt="">
         </div>
-        <div class="card__front">
+        <div class="card__front" 
+        class:front--intervention={card instanceof InterventionCard}
+        class:front--informatique={card instanceof InformationCard}
+        class:front--dilemme={card instanceof DilemmeCard}>
             <div class="front__text">
                 <p class="text__title">{card.title}</p>
                 <p>{card.description}</p>
@@ -186,6 +189,16 @@
     .text__title{
         text-align: left;
         padding-left: 5px;
+    }
+
+    .front--intervention{
+        background-color:   #B5F2FA;
+    }
+    .front--informatique{
+        background-color: #F5CB77;
+    }
+    .front--dilemme{
+        background-color: #D5A5F8;
     }
     .front__bottom--intervention{
         display: grid;
