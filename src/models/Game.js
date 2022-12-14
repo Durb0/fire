@@ -78,6 +78,13 @@ export class Game{
         });
     }
 
+    firstCard(){
+        if (this.deck.length > 0){
+            return this.deck[0];
+        }
+        return null;
+    }
+
     addOperationInProgress(my_op){
         w_game.update(game => {
             game.operations_in_progress.push(my_op);
