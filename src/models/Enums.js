@@ -23,9 +23,9 @@ export var StateRessource = {
 }
 
 export var TitleInformationCard = {
-    DEPART_EQUIPIER : "Départ d'un équipier",
+    DEPART_CREWMAN : "Départ d'un équipier",
     DEPART_CHEF : "Départ d'un chef",
     NOUVEAU_CHEF : "Nouveau chef",
-    NOUVEAU_EQUIPIER : "Nouveau équipier",
+    NOUVEAU_CREWMAN : "Nouveau équipier",
     NOUVEAU_MOYEN : "Nouveau moyen"
 }
