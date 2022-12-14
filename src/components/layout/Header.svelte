@@ -13,10 +13,13 @@
   }
 
   var value = 0;
+  var score = 0;
   var color = colors[100];
 
   w_game.subscribe(game => {
     value = game.popularity;
+    //get len of operation closed
+    score = game.operations_closed.length;
     updateColor();
   });
 
@@ -32,6 +35,7 @@
 </script>
 
 <div class="header">
+  <span class="header__score">{score}</span>
   <ProgressBar color={color} thickness=25 value={value} margin="20" />
 
 </div>
@@ -40,5 +44,13 @@
   .header {
     text-align: center;
     display: flex;
+    align-items: center;
+  }
+
+  .header__score{
+    font-size: 2em;
+    font-weight: bold;
+    margin-left: 20px;
+    color: #0E99DA;
   }
 </style>
