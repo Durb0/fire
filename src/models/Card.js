@@ -111,6 +111,7 @@ export class InterventionCard extends Card{
         var relation = this.calculResult( my_op );
         my_op.popularity_gain += relation;
         console.log("Valeur de la relation next_card : " + relation);
+        callNextCard( this.id , relation );
         return my_op;
     }
 
