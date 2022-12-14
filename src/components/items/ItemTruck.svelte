@@ -58,20 +58,9 @@
     </div>
 </Item>    
 
-<Snackbar class="flex-column" bind:active={snackbar} bottom center timeout={2000}>
+<Snackbar class="flex-column" style="border-radius:10px; background-color: rgb(255, 207, 64); color: black;" bind:active={snackbar} bottom center timeout={5000}>
     <h5>Impossible de retirer le véhicule</h5>
-    <p>Trop de Sapeurs-pompiers sur l'opération par rapport au nombre de places dans les véhicules</p>
-    <div class="mt-1">
-        <Button text class="success-text">Accept</Button>
-        <Button
-        class="red-text"
-        text
-        on:click={() => {
-            snackbar = false;
-        }}>
-        Dismiss
-        </Button>
-    </div>
+    <p>Retirez les pompiers necessaires avant de retirer votre vehicule</p>
 </Snackbar>
 
 
