@@ -11,7 +11,7 @@ export var RelationLevel = {
     SUCCESS : 10,
     FAILURE : -10,
     CRITICAL_FAILURE : -20,
-    REFUSAL : 0,
+    REFUSAL : -15,
     CRITICAL_REFUSAL : -30
 }
 

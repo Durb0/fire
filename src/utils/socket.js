@@ -3,7 +3,7 @@ import {io} from 'socket.io-client';
 const host = 'http://146.59.158.131';
 const lhost = 'http://localhost';
 const port = '5000';
-export const url = `${host}:${port}`;
+export const url = `${lhost}:${port}`;
 
 
 
