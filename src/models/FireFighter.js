@@ -1,8 +1,10 @@
-import { newId, w_idFireFighter} from '../utils/store';
+import { newId, w_idFireFighter, w_game} from '../utils/store';
 import { categories } from '../utils/globals';
 import { getName } from '../services/name_service.js';
 import { StateRessource, TitleInformationCard } from './Enums';
-import { callInformationCard } from '../services/card_service.js';
+import { InformationCard } from './Card';
+import { PositionType } from './Enums';
+import { OutFirefighterAction } from './Action';
 
 export class FireFighter{
 
@@ -48,14 +50,19 @@ export class Crewman extends FireFighter{
     }
 
     outFirefighter(){
-        this.deck.push(new InformationCard(
-            0,
-            "Départ d'un chef",
-            "Après de longue année de sacrifice, "+this.name+" fait le choix de quitter la caserne",
-            0,
-            PositionType.BRIEF,
-            [new OutFirefighterAction(this)]
-        ))
+        this.state = StateRessource.UNAVAILABLE;
+        w_game.update(game => {
+            game.deck.push(new InformationCard(
+                0,
+                "Départ d'un equipier",
+                "Après de beau moment partagé, "+this.name+" se retire de son poste",
+                0,
+                PositionType.BRIEF,
+                [new OutFirefighterAction(this)]
+            ));
+            return game;
+        })
+        
         //TODO: call BDD
         //callInformationCard(TitleInformationCard.DEPART_CREWMAN);
     }
@@ -115,14 +122,19 @@ export class Chef extends FireFighter{
     }
 
     outFirefighter(){
-        this.deck.push(new InformationCard(
-            0,
-            "Départ d'un équipier",
-            "Après de beau moment partagé, "+this.name+" se retire de son poste",
-            0,
-            PositionType.BRIEF,
-            [new OutFirefighterAction(crew)]
-        ))
+        this.state = StateRessource.UNAVAILABLE;
+        w_game.update(game => {
+            game.deck.push(new InformationCard(
+                0,
+                "Départ d'un chef",
+                "Après de longue année de sacrifice, "+this.name+" fait le choix de quitter la caserne",
+                0,
+                PositionType.BRIEF,
+                [new OutFirefighterAction(this)]
+            ));
+            return game;
+            }
+            );
         //TODO: call BDD
         //callInformationCard(TitleInformationCard.DEPART_CHEF);
     }

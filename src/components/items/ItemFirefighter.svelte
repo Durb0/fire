@@ -59,8 +59,8 @@
         {/if}
         <div class="avatar" bind:this={el_avatar}></div>
         <div class="bars">
-            <ProgressBar color={firefighter.state == StateRessource.SICK? '#61D902' : '#0E99DA'} thickness=10 value={firefighter.fatigue}/>
-            <ProgressBar color="#ff1744" thickness=10 value={firefighter.moral}/>
+            <!--<ProgressBar color={firefighter.state == StateRessource.SICK? '#61D902' : '#0E99DA'} thickness=10 value={firefighter.fatigue}/>-->
+            <ProgressBar color="#0E99DA" thickness=10 value={firefighter.moral}/>
         </div>
     </div>
 </Item>

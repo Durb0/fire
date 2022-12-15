@@ -41,17 +41,18 @@ export class OutFirefighterAction extends Action{
     }
 
     do(){
-        w_game.update((value) => {
+        w_game.update(game => {
             //remove firefighter from ressource
-            value.ressource.crewmans = value.ressource.crewmans.filter((firefighter) => {
+            game.ressource.crewmans = game.ressource.crewmans.filter((firefighter) => {
+                console.log("firefighter.id",firefighter.id);
                 return firefighter.id != this.firefighter.id;
             }
             );
-            value.ressource.chefs = value.ressource.chefs.filter((firefighter) => {
+            game.ressource.chefs = game.ressource.chefs.filter((firefighter) => {
                 return firefighter.id != this.firefighter.id;
             }
             );
-            return value;
+            return game;
         });
     }
 }

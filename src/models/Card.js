@@ -216,7 +216,8 @@ export class InformationCard extends Card{
             break;
             case PositionType.BRIEF :
                 //TODO: Commencement d'une opération par une carte information
-                console.log("TODO");
+                this.doActions();
+                game.removeFirstCard();
             break;
             default :
                 console.error("Error - InformationCard - swipeCard()");

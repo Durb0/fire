@@ -23,8 +23,8 @@ export class Game{
     start(){
             getOptions();
             callInterventionBaseCard(this.getBlackList()); //première carte
-            this.luckToDrawNewOperation(10,1);
-            this.updateMoralFirefighter(-10,5);
+            this.luckToDrawNewOperation(10);
+            this.updateMoralFirefighter(-20);
     }
 
     /**
@@ -33,14 +33,14 @@ export class Game{
      * @param {integer} luck pourcentage de chance de piocher une nouvelle carte
      * @param {integer} time temps d'attendre entre chaque essai de pioche
      */
-    async luckToDrawNewOperation(luck,time){
+    async luckToDrawNewOperation(luck){
         while(this.popularity>0){
             
             if(Math.floor(Math.random() * 100) <= luck){
                 callInterventionBaseCard(this.getBlackList());
             }
             w_game.update(game => game = this);
-            await sleep(time);
+            await sleep(1);
         }
     }
 
@@ -60,11 +60,11 @@ export class Game{
      * @param {integer} nb_moral taux de moral à modifier
      * @param {integer} time temps d'attente entre chaque modification
      */
-    async updateMoralFirefighter(nb_moral,time){
+    async updateMoralFirefighter(nb_moral){
         while(this.popularity>0){
             this.ressource.updateMoralOfFirefightersAvailable(nb_moral);
             w_game.update(game => game = this);
-            await sleep(time);
+            await sleep(1);
         }
     }
 
