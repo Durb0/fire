@@ -158,7 +158,6 @@ export class Ressource{
      * @param {integer} nbMoral 
      */
     updateMoralOfFirefightersAvailable(nbMoral){
-        console.log("updateMoralOfFirefightersAvailable");
         this.chefs.forEach(chef => {
             if(chef.state != StateRessource.UNAVAILABLE){
                 chef.updateMoral(nbMoral);

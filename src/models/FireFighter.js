@@ -30,7 +30,6 @@ export class FireFighter{
      * @param {integer} nbMoral 
      */
     updateMoral(nb_moral){
-        console.log("updateMoral");
         let my_moral = this.moral + nb_moral;
         if(my_moral <= 0){
             this.moral = 0;
