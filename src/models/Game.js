@@ -118,7 +118,7 @@ export class Game{
                 let crews = op.means_on_site.getUpdatableCrewmans();
                 game.createCardsInformationsNewChef(crews);
                 game.archiveOperation(op);
-                
+                op.means_on_site.maxMoralFirefighters();
                 game.updatePopularity(op.getPopularity());
             }
             return game;

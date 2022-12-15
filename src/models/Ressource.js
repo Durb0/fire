@@ -170,5 +170,17 @@ export class Ressource{
             }
         });
     }
+
+    /**
+     * @brief Met à 100% le moral des sapeurs pompiers de la ressources.
+     */
+    maxMoralFirefighters(){
+        this.chefs.forEach(chef => {
+                chef.moral = 100;
+        });
+        this.crewmans.forEach(crewman => {
+                crewman.moral = 100;
+        });
+    }
     
 }
