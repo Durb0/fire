@@ -23,7 +23,7 @@ export class Game{
     start(){
             getOptions();
             callInterventionBaseCard(this.getBlackList()); //première carte
-            this.luckToDrawNewOperation(10);
+            this.luckToDrawNewOperation(50);
             this.updateMoralFirefighter(-1);
     }
 
@@ -133,7 +133,7 @@ export class Game{
         let my_pop = this.popularity + nb_popularity;
         if(my_pop <= 0){
             this.popularity = 0;
-            //TODO: Fin de la partie 
+            this.endGame();
         } else if(my_pop > 100){
             this.popularity = 100;
         } else {
@@ -152,5 +152,10 @@ export class Game{
                 [new UpgradeChefAction(crew)]
             ))
         });
+    }
+
+    endGame(){
+        window.location.href = window.location.origin;
+        w_game.set(new Game());
     }
 }
