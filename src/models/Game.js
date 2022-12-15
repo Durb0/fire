@@ -24,7 +24,7 @@ export class Game{
             getOptions();
             callInterventionBaseCard(this.getBlackList()); //première carte
             this.luckToDrawNewOperation(10,1);
-            this.updateMoralFirefighter(-1,5);
+            this.updateMoralFirefighter(-10,5);
     }
 
     /**
@@ -118,7 +118,7 @@ export class Game{
                 let crews = op.means_on_site.getUpdatableCrewmans();
                 game.createCardsInformationsNewChef(crews);
                 game.archiveOperation(op);
-                
+                op.means_on_site.maxMoralFirefighters();
                 game.updatePopularity(op.getPopularity());
             }
             return game;
