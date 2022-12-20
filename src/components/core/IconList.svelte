@@ -1,5 +1,16 @@
+<!--
+    @component
+    
+    Affiche une liste d'icônes d'opération
+-->
+
+
 <script>
     import IconOperationType from "./IconOperationType.svelte";
+
+    /**
+     * @param {Category[]} categories - La liste des catégories
+     */
     export let categories;
 </script>
 

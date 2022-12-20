@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Names data
+ * 
+ * C'est pas beau, mais c'est pas grave. Ca évite d'utiliser une librairie, un service externe ou une base de données.
+ */
 export const names = [
     "Aaren"
     ,

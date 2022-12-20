@@ -1,19 +1,39 @@
+<!--
+    @component
+    
+    Affiche une liste d'item
+-->
+
 <script>
+    // import des composants
     import ItemFirefighter from "../items/ItemFirefighter.svelte";
     import ItemTruck from "../items/ItemTruck.svelte";
-    import {w_game} from "../../utils/store.js";
-    import { StateRessource } from "../../models/Enums";
-  import { InterventionCard } from "../../models/Card";
 
+    // import du store
+    import {w_game} from "../../utils/store.js";
+
+    // import des modèles
+    import { StateRessource } from "../../models/Enums";
+    import { InterventionCard } from "../../models/Card";
+
+    /**
+     * @param {string} type - type d'item à afficher
+     */
     export let type;
 
     let ressource, first_card;
 
+    // subscribtion au store pour mettre à jour ressource et first_card
     w_game.subscribe(value => {
         ressource = value.ressource;
         first_card = value.deck[0];
     });
 
+
+    /**
+     * Fonction qui trie la liste en fonction de l'ordre des états
+     * @param list - liste à trier
+     */
     function sorted(list){
         return list.sort((a,b) => {
             if (!((

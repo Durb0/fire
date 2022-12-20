@@ -5,7 +5,7 @@ import {w_game} from '../utils/store';
 import { TitleInformationCard } from "../models/Enums";
 
 /**
- * @brief action lorsque le joueur reçoit une carte de dilemme
+ * Action lorsque le joueur reçoit une carte de dilemme
  */
 socket.on('DilemmeCard', async (data) => {
     var card = new DilemmeCard(
@@ -26,7 +26,7 @@ socket.on('DilemmeCard', async (data) => {
 })
 
 /**
- * @brief action lorsque le joueur reçoit une carte d'information
+ * Action lorsque le joueur reçoit une carte d'information
  */
 socket.on('InformationCard',async (data) => {
     var card = new InformationCard(
@@ -45,7 +45,7 @@ socket.on('InformationCard',async (data) => {
 })
 
 /**
- * @brief action lorsque le joueur reçoit une carte d'intervention
+ * Action lorsque le joueur reçoit une carte d'intervention
  */
 socket.on('InterventionCard',async (data) => {
     var card = new InterventionCard(
@@ -71,6 +71,7 @@ socket.on('InterventionCard',async (data) => {
 
 
 /**
+ * Fonction qui appelle la carte suivante en fonction de la carte d'avant et du niveau de la relation
  * 
  * @param {int} cardId l'id de la carte d'avant 
  * @param {RelationLevel} level le niveau de la relation
@@ -80,15 +81,16 @@ function callNextCard(cardId, level){
 }
 
 /**
- * @brief fonction temporaire qui appelle 5 cartes d'intervention
- * @comment cette fonction est appelée par le constructeur de Game
+ * Fonction qui appelle une carte d'intervention de base
+ * 
  */
 async function callInterventionBaseCard(blackList = []){
         socket.emit('drawInterventionBaseCard',blackList);
 }
 
 /**
- * @brief fonction qui appelle une carte information dont le titre correspond à la demande.
+ * Fonction qui appelle une carte information dont le titre correspond à la demande.
+ * 
  * @param {TitleInformationCard} title titre de la carte cherché  
  */
 async function callInformationCard(title){

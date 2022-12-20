@@ -5,6 +5,9 @@ import { Truck } from "../models/Truck";
 
 import { w_game } from "../utils/store";
 
+/**
+ * Action lorsque le joueur reçoit les options du jeu
+ */
 socket.on('Options', function(data) {
     setCategories(data.categories);
     createCrewmans(data.nbCrewMan);
@@ -12,7 +15,10 @@ socket.on('Options', function(data) {
     createTrucks(data.trucks);
 });
 
-
+/**
+ * 
+ * @param {number} nbCrewman Nombre d'équipier
+ */
 function createCrewmans(nbCrewman){
     var crewManList = [];
     for(var i = 0; i < nbCrewman; i++){
@@ -21,7 +27,10 @@ function createCrewmans(nbCrewman){
     w_game.update(game => { game.ressource.crewmans = crewManList; return game;});
 }
 
-
+/**
+ * 
+ * @param {number} nbChef Nombre de chef
+ */
 function createChefs(nbChef){
     var chefList = [];
     for(var i = 0; i < nbChef; i++){
@@ -30,6 +39,10 @@ function createChefs(nbChef){
     w_game.update(game => { game.ressource.chefs = chefList; return game;});
 }
 
+/**
+ * 
+ * @param {Array<Truck>} trucks Liste des camions
+ */
 function createTrucks(trucks){
     var trucksList = [];
     for(var i = 0; i < trucks.length; i++){
@@ -38,7 +51,9 @@ function createTrucks(trucks){
     w_game.update(game => { game.ressource.trucks = trucksList; return game;});
 }
 
-
+/**
+ * Demande les options du jeu
+ */
 export function getOptions(){
     socket.emit('getOptions');
 }

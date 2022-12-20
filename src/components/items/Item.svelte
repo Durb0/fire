@@ -1,6 +1,18 @@
+<!--
+    @component
+    
+    Affiche un item de la liste des ressources
+-->
+
 <script>
     import { StateRessource } from "../../models/Enums";
+    /**
+     * @param {number} width - largeur de l'item
+     */
     export let width = 100;
+    /**
+     * @param {StateRessource} state - état de l'item 
+     */
     export let state;
 </script>
 

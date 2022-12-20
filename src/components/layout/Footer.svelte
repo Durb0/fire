@@ -1,10 +1,19 @@
+<!--
+  @component
+  
+  Affiche le footer de l'application, il contient les tabs pour les differentes ressources
+-->
+
 <script>
+  // import des composants
   import ItemList from "./ItemList.svelte";
   import { Tabs, TabList, Tab, TabPanel} from '../tabs/tabs.js';
+
+  // import des icones pour les tabs
   import { faTruck, faPortrait, faIdBadge } from '@fortawesome/free-solid-svg-icons';
-  
   import Fa from 'svelte-fa'
 
+  // type d'item
   const typeItem = {
     Truck: "truck",
     Chef: "chef",

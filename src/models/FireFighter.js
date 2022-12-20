@@ -6,8 +6,18 @@ import { InformationCard } from './Card';
 import { PositionType } from './Enums';
 import { OutFirefighterAction } from './Action';
 
+
+/**
+ * Classe représentant un pompier
+ */
 export class FireFighter{
 
+    /**
+     * 
+     * @param {String} name Le nom du pompier
+     * @param {number} moral Le moral du pompier
+     * @param {number} fatigue La fatigue du pompier
+     */
     constructor(name = undefined, moral = 100, fatigue = 100){
         this.id = newId(w_idFireFighter);
         this.moral = moral;
@@ -21,12 +31,13 @@ export class FireFighter{
     }
 
     /**
-     * @brief Demande une carte de départ du pompier.
+     * Demande une carte de départ du pompier.
      */
     outFirefighter(){ }
 
     /**
-     * @brief additionne un nombre au moral du pompier. Gestion des erreurs et appel une carte pompier si le moral tombe à 0.  
+     * additionne un nombre au moral du pompier. Gestion des erreurs et appel une carte pompier si le moral tombe à 0.  
+     * 
      * @param {integer} nbMoral 
      */
     updateMoral(nb_moral){
@@ -42,12 +53,26 @@ export class FireFighter{
     }
 }
 
+/**
+ * Un équipier est un pompier qui peut être affecté à une opération
+ */
 export class Crewman extends FireFighter{
+
+    /**
+     * 
+     * @param {String} name Le nom de l'équipier
+     * @param {number} moral Le moral de l'équipier
+     * @param {number} fatigue La fatiguqe de l'équipier
+     * @param {Category[]} experience La liste des catégories d'expérience de l'équipier
+     */
     constructor(name = undefined, moral = 100, fatigue = 100, experience = []){
         super(name, moral, fatigue);
         this.experience = this.testExperience();
     }
 
+    /**
+     * Demande une carte de départ de l'équipier.
+     */
     outFirefighter(){
         this.state = StateRessource.UNAVAILABLE;
         w_game.update(game => {
@@ -61,14 +86,12 @@ export class Crewman extends FireFighter{
             ));
             return game;
         })
-        
-        //TODO: call BDD
-        //callInformationCard(TitleInformationCard.DEPART_CREWMAN);
     }
 
+    /**
+     * @returns {Category[]} Une liste de catégorie d'expérience aléatoire
+     */
     testExperience(){
-        //create a random list between 0 and 5 of OperationType
-        //only categories with is_gain to 1
         var list = [];
         var nb = Math.floor(Math.random() * 5);
         for (var i = 0; i < nb; i++){
@@ -77,6 +100,9 @@ export class Crewman extends FireFighter{
         return list;
     }
 
+    /**
+     * @returns {Category[]} La liste des catégories d'expérience de l'équipier sous forme de dictionnaire 
+     */
     expToListOfDict(){
         var list = [];
         this.experience.forEach(exp => {
@@ -92,6 +118,9 @@ export class Crewman extends FireFighter{
         return list;
     }
 
+    /**
+     * @returns {Category} La catégorie d'expérience la plus représentée dans la liste des catégories d'expérience de l'équipier
+     */
     getBestExperience(){
         return this.expToListOfDict().sort((a, b) => {
             if (a.nb > b.nb){
@@ -104,22 +133,46 @@ export class Crewman extends FireFighter{
         })[0];
     }
 
+    /**
+     * 
+     * @returns {boolean} Vrai si l'équipier peut devenir chef
+     */
     canUpdateToChef(){
         return this.experience.length >= 5;
     }
 
+    /**
+     * Ajoute une catégorie d'expérience à l'équipier
+     * 
+     * @param {Category} category L'experience à ajouter à l'équipier
+     */
     addExperience(category){
         this.experience.push(category);
     }
 }
 
+/**
+ * Un chef est un pompier qui peut être affecté à une opération
+ */
 export class Chef extends FireFighter{
+
+    /**
+     * 
+     * @param {String} name Le nom du chef
+     * @param {number} moral Le moral du chef
+     * @param {number} fatigue La fatigue du chef
+     * @param {Category} speciality La spécialité du chef
+     * @param {number} power La puissance du chef sur la spécialité
+     */
     constructor(name = undefined, moral = 100, fatigue = 100, speciality = getRandomCategory(), power = Math.floor(Math.random() * 5 + 1)){
         super(name, moral, fatigue);
         this.speciality = speciality;
         this.power = power;
     }
 
+    /**
+     * Demande une carte de départ du chef.
+     */
     outFirefighter(){
         this.state = StateRessource.UNAVAILABLE;
         w_game.update(game => {
@@ -134,11 +187,14 @@ export class Chef extends FireFighter{
             return game;
             }
             );
-        //TODO: call BDD
-        //callInformationCard(TitleInformationCard.DEPART_CHEF);
     }
     
 
+    /**
+     * Met à jour les informations du chef
+     * 
+     * @param {Crewman} crewman 
+     */
     updateCrewman(crewman){
         this.id = crewman.id;
         this.name = crewman.name;
@@ -151,6 +207,10 @@ export class Chef extends FireFighter{
     }
 }
 
+/**
+ * 
+ * @returns {Category} Une catégorie aléatoire qui est une catégorie de gain
+ */
 function getRandomCategory(){
     const categs = categories.filter(categ => categ.is_gain == 1);
     return categs[Math.floor(Math.random() * categs.length)];

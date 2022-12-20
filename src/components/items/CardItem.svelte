@@ -1,63 +1,98 @@
+<!--
+    @component
+    
+    Affiche une carte de jeu
+-->
+
 <script>
+    // import de la librairie hammer pour les gestes
     import { Hammer,pan } from 'svelte-hammer';
-    import { onMount } from 'svelte';
+
+    // import du store
     import { w_game } from '../../utils/store.js';
-    import { DilemmeCard, InformationCard, InterventionCard } from '../../models/Card.js';
-    import Fa from 'svelte-fa'
-    import { faTruck, faUser } from '@fortawesome/free-solid-svg-icons';
-    import IconOperationType from '../core/IconOperationType.svelte';
-    import ProgressBar from '../core/ProgressBar.svelte';
-    import { Divider } from 'svelte-materialify';
+
+    // import des modèles
+    import { Card, DilemmeCard, InformationCard, InterventionCard } from '../../models/Card.js';
     import { PositionType } from '../../models/Enums.js';
 
-    let el;
-    let c;
-    let game;
+    // import de la librairie fontawesome pour les icones
+    import Fa from 'svelte-fa'
+    import { faTruck, faUser } from '@fortawesome/free-solid-svg-icons';
 
+    // import des composants
+    import IconOperationType from '../core/IconOperationType.svelte';
+    import ProgressBar from '../core/ProgressBar.svelte';
+
+    let el; // Réference html de l'interieur de la carte
+    let c; // Réference html de la carte
+    let game; // Le jeu
+
+    /**
+     * @param {Card} card - carte à afficher
+     */
     export let card;
+    /**
+     * @param {number} index - index de la carte dans la liste
+     */
     export let index;
 
+    // subscribtion au store pour mettre à jour la variable game
     w_game.subscribe(value => {
         game = value;
     });
 
-    //check if card is the first card
+    /**
+     * Fonction appelée lors du début du glissement de la carte
+     * @param event
+     */
     function handlePanStart(event) {
+        // si la carte est la première de la liste, on lui ajoute la classe moving
         if(index == 0){
             event.target.classList.add("moving");
             event.target.style.transition = "none";
         }
     }
 
+    /**
+     * Fonction appelée lors du mouvement de la carte
+     * @param event
+     */
     function handlePanMove(event) {
-        /*if (event.detail.deltaX === 0) {
-            return;
-        }*/
         if (event.detail.center.x ===0 && event.detail.center.y === 0) {
             return;
         }
+
+        // on récupère les déplacements
         var deltaX = event.detail.deltaX;
         var deltaY = event.detail.deltaY;
 
         
-
+        // on calcule la rotation et la translation
         var xMulti = deltaX * 0.03;
         var yMulti = deltaY * 0.02;
         var rotate = xMulti * yMulti;
         
-
+        // on applique la transformation
         event.target.style.transform = 'translate(' + deltaX + 'px, ' + deltaY + 'px) rotate(' + rotate + 'deg)';
     }
 
+    /**
+     * Fonction appelée lors de la fin du glissement de la carte
+     * @param event
+     */
     function handlePanEnd(event) {
+        // on supprime la classe moving
         event.target.classList.remove("moving");
         event.target.style.transition = "all 0.3s ease-in-out";
 
         var moveOutWidth = document.body.clientWidth;
+
+        // on récupère les déplacements
         var keep = (Math.abs(event.detail.deltaX) < 80 && Math.abs(event.detail.deltaY) < 80) || (Math.abs(event.detail.velocityX) < 0.5 && Math.abs(event.detail.velocityY) < 0.5) ;
 
         event.target.classList.toggle("removed", !keep);
 
+        // on vérifie que la carte est une intervention et que la vitesse est valide
         if(keep || (card.constructor.name == "InterventionCard" && !card.means_move.isValideForIntervention())){
             console.log("Impossible d'envoyer ces moyens sur une intervention ou la carte est lachée sans vitesse.")
             event.target.style.transform = '';
@@ -71,6 +106,7 @@
             var rotate = xMulti * yMulti;
             event.target.style.transform = 'translate(' + toX + 'px, ' + (toY + event.detail.deltaY) + 'px) rotate(' + rotate + 'deg)';
 
+            // on supprime la carte de la liste et on applique ses effets
             card.swipeCard(game);
         }
     }
@@ -269,5 +305,4 @@
         grid-row: 1;
         grid-column: 1;
     }
-
 </style>

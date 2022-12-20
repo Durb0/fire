@@ -1,11 +1,18 @@
-<script>
-	import { getContext } from 'svelte';
-	import { TABS } from './Tabs.svelte';
+<!--
+    @component
+    
+    Affiche le bouton qui permet de sélectionner un onglet
+-->
 
+<script>
+    // import du contexte
+	import { getContext } from 'svelte';
+
+    // je ne sais pas ce que c'est j'ai copié collé depuis internet
+	import { TABS } from './Tabs.svelte';
 	const tab = {};
 	const { registerTab, selectTab, selectedTab } = getContext(TABS);
-
-	registerTab(tab);
+    registerTab(tab);
 </script>
 
 <style>

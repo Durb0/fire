@@ -1,24 +1,28 @@
 import { Ressource } from "./Ressource";
 import { w_game } from "../utils/store";
 import { getOptions } from "../services/game_service";
-import { callInterventionBaseCard, c } from "../services/card_service";
+import { callInterventionBaseCard } from "../services/card_service";
 import { InformationCard, InterventionCard } from "./Card";
 import { UpgradeChefAction } from "./Action";
 import { PositionType } from "./Enums";
 import { sleep } from "../utils/time";
+import { Crewman } from "./FireFighter";
 
+/**
+ * Classe représentant une partie
+ */
 export class Game{
 
     constructor(){
         this.deck = [];
-        this.popularity = 100;
+        this.popularity = 50;
         this.operations_in_progress = [];
         this.operations_closed = [];
         this.ressource = new Ressource();
     }
 
     /**
-     * @brief départ d'une partie
+     * Début d'une partie
      */
     start(){
             getOptions();
@@ -28,10 +32,9 @@ export class Game{
     }
 
     /**
-     * @brief Pioche une nouveau carte en fonction d'un taux de chance dans le temps
+     * Pioche une nouveau carte en fonction d'un taux de chance dans le temps
      * 
-     * @param {integer} luck pourcentage de chance de piocher une nouvelle carte
-     * @param {integer} time temps d'attendre entre chaque essai de pioche
+     * @param {number} luck pourcentage de chance de piocher une nouvelle carte
      */
     async luckToDrawNewOperation(luck){
         while(this.popularity>0){
@@ -44,6 +47,10 @@ export class Game{
         }
     }
 
+    /**
+     * 
+     * @returns {Array} liste des titres des cartes en cours et en base
+     */
     getBlackList(){
         let blackList = [];
         this.operations_in_progress.forEach(op => blackList.push(op.title));
@@ -56,9 +63,9 @@ export class Game{
     }
 
     /**
-     * @brief modifie le morale de tout les pompiers du joueur qui se trouve en caserne dans le temps 
+     * Modifie le morale de tout les pompiers du joueur qui se trouve en caserne dans le temps 
+     * 
      * @param {integer} nb_moral taux de moral à modifier
-     * @param {integer} time temps d'attente entre chaque modification
      */
     async updateMoralFirefighter(nb_moral){
         while(this.popularity>0){
@@ -69,7 +76,7 @@ export class Game{
     }
 
     /**
-     * @brief Retire la première carte du Deck.
+     * Retire la première carte du Deck.
      */
     removeFirstCard(){
         w_game.update(game => {
@@ -78,6 +85,10 @@ export class Game{
         });
     }
 
+    /**
+     * 
+     * @returns {Card} la première carte du deck
+     */
     firstCard(){
         if (this.deck.length > 0){
             return this.deck[0];
@@ -85,6 +96,11 @@ export class Game{
         return null;
     }
 
+    /**
+     * Ajouter une opération dans les opérations en cours
+     * 
+     * @param {Operation} my_op 
+     */
     addOperationInProgress(my_op){
         w_game.update(game => {
             game.operations_in_progress.push(my_op);
@@ -93,14 +109,20 @@ export class Game{
     }
 
     /**
-     * @brief Cherche l'opération en cours où le titre correspond au paramètre.
-     * @param {*} title 
-     * @returns 
+     * Cherche l'opération en cours où le titre correspond au paramètre.
+     * 
+     * @param {String} title 
+     * @returns {Operation} l'opération cherchée
      */
     findOperationInProgress(title){
         return this.operations_in_progress.find(op => op.title == title);
     }
 
+    /**
+     * Archive une opération dans les opérations finis
+     * 
+     * @param {Operation} op l'opération à archiver
+     */
     archiveOperation(op){
         w_game.update(game => {
             game.operations_closed.push(op);
@@ -110,6 +132,11 @@ export class Game{
     }
 
 
+    /**
+     * Termine une opération en cours
+     * 
+     * @param {String} title Le titre de l'opération
+     */
     endOperation(title){
         w_game.update(game => {
             let op = game.findOperationInProgress(title);
@@ -126,8 +153,9 @@ export class Game{
     }
 
     /**
-     * @brief modifie la popularité de la game.
-     * @param {integer} nb_popularity nombre de popularité a modifier
+     * Modifie la popularité de la game.
+     * 
+     * @param {number} nb_popularity nombre de popularité a modifier
      */
     updatePopularity(nb_popularity){
         let my_pop = this.popularity + nb_popularity;
@@ -141,6 +169,10 @@ export class Game{
         }
     }
 
+    /**
+     * 
+     * @param {Array<Crewman>} crews 
+     */
     createCardsInformationsNewChef(crews){
         crews.forEach(crew => {
             this.deck.push(new InformationCard(
@@ -154,6 +186,9 @@ export class Game{
         });
     }
 
+    /**
+     * Met fin au jeu
+     */
     endGame(){
         window.location.href = window.location.origin;
         w_game.set(new Game());

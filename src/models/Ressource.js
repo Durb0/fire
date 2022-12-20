@@ -1,13 +1,28 @@
 import {Chef , Crewman} from './FireFighter';
 import { StateRessource } from './Enums';
 
+/**
+ * Classe représentant les ressources de la partie
+ */
 export class Ressource{
+
+    /**
+     * 
+     * @param {Array<Chef>} chefs Liste des chefs
+     * @param {Array<Crewman>} crewmans Liste des équipiers
+     * @param {Array<Truck>} trucks Liste des camions
+     */
     constructor(chefs = [], crewmans = [], trucks = []){
         this.chefs = chefs;
         this.crewmans = crewmans;
         this.trucks = trucks;
     }
 
+    /**
+     * Ajoute un pompier à la liste des ressources
+     * 
+     * @param {FireFighter} fireFighter Le pompier à ajouter
+     */
     addFireFighter(fireFighter){
         if(fireFighter instanceof Chef){
             this.chefs.push(fireFighter);
@@ -16,6 +31,10 @@ export class Ressource{
         }
     }
 
+    /**
+     * 
+     * @param {FireFighter} fireFighter Le pompier à supprimer
+     */
     removeFireFighter(fireFighter){
         if(fireFighter instanceof Chef){
             this.chefs = this.chefs.filter(chef => chef.id != fireFighter.id);
@@ -24,29 +43,54 @@ export class Ressource{
         }
     }
 
+    /**
+     * 
+     * @param {Truck} truck Le camion à ajouter
+     */
     addTruck(truck){
         this.trucks.push(truck);
     }
+
+    /**
+     * 
+     * @param {Truck} truck Le camion à supprimer
+     */
     removeTruck(truck){
         this.trucks = this.trucks.filter(el => el.id != truck.id);
     }
 
+    /**
+     * 
+     * @returns {boolean} true si la liste des ressources est vide
+     */
     isEmpty(){
         return (this.chefs.length == 0 && this.crewmans.length == 0 && this.trucks.length == 0);
     }
 
+    /**
+     * 
+     * @returns {boolean} true si la liste des ressources est valide pour une intervention
+     */
     isValideForIntervention(){
         var nb_seat_min = 0;
         this.trucks.forEach(truck => nb_seat_min += truck.nb_seat_min);
         return (nb_seat_min <= this.chefs.length + this.crewmans.length);
     }
 
+    /**
+     * 
+     * @returns {number} le nombre de place max dans les camions
+     */
     getSizeMaxOfTrucks(){
         var size_max = 0;
         this.trucks.forEach(truck => size_max += truck.nb_seat_max);
         return size_max;
     }
 
+    /**
+     * 
+     * @returns {number} le nombre de pompier dans les ressources
+     */
     countFirefighters(){
         var len = this.chefs.length + this.crewmans.length;
         return len;
@@ -58,11 +102,22 @@ export class Ressource{
     isFull(){
         return (this.countFirefighters() == this.getSizeMaxOfTrucks());
     }
+
+    /**
+     * 
+     * @returns {Array<Category>} la liste des catégories des camions
+     */
     getCategoriesOfTrucks(){
         var categoriesTrucks = []
         this.trucks.forEach(truck => categoriesTrucks = categoriesTrucks.concat(truck.categories));
         return categoriesTrucks;
     }
+
+    /**
+     * 
+     * @param {String} type Type de ressource (truck ou chef)
+     * @returns {Array<Object>} la liste des catégories des ressources avec le nombre de ressources de chaque catégorie
+     */
     getNumbersOfCategories(type){
         var categoriesWithNumber = [];
         var catFound;
@@ -99,6 +154,11 @@ export class Ressource{
         return categoriesWithNumber;
     }
 
+    /**
+     * 
+     * @param {StateRessource} from Etat de départ
+     * @param {StateRessource} to Etat d'arrivée
+     */
     switchStates(from,to){
         this.trucks.forEach(truck => {
             if(truck.state == from){
@@ -117,6 +177,10 @@ export class Ressource{
         });
     }
 
+    /**
+     * 
+     * @returns {number} le nombre de place minimum dans les camions
+     */
     countMinSeatInTrucks(){
         var min_seat = 0;
         this.trucks.forEach(truck => {
@@ -125,12 +189,17 @@ export class Ressource{
         return min_seat;
     }
 
+    /**
+     * 
+     * @returns {Array<Crewman>} la liste des pompiers pouvant être promus
+     */
     getUpdatableCrewmans(){
         return this.crewmans.filter(crewman => crewman.canUpdateToChef() );
     }
 
     /**
-     * @brief Ajoute tous les élements de la ressource passée en paramètre dans une autre.
+     * Ajoute tous les élements de la ressource passée en paramètre dans une autre.
+     * 
      * @param {Ressource} means 
      */
     addRessources(means){
@@ -139,6 +208,10 @@ export class Ressource{
         means.crewmans.forEach(crewman => {this.crewmans.push(crewman)});
     }
 
+    /**
+     * 
+     * @returns {number} le ratio entre le nombre de place minimum dans les camions et le nombre de place maximum dans les camions
+     */
     ratioSeatsMinMax(){
         let min_seats = this.countMinSeatInTrucks();
         let max_seats = this.getSizeMaxOfTrucks();
@@ -146,6 +219,10 @@ export class Ressource{
         return (max_seats == 0 ? 0 : min_seats*100/max_seats); 
     }
 
+    /**
+     * 
+     * @returns {number} le ratio entre le nombre de place sélectionnées dans les camions et le nombre de place maximum dans les camions
+     */
     ratioSeatsSelectedMax(){
         let selected_seats = this.countFirefighters();
         let max_seats = this.getSizeMaxOfTrucks();
@@ -154,7 +231,8 @@ export class Ressource{
     }
 
     /**
-     * @brief modifie le moral de tous les pompiers valables de notre ressource
+     * Modifie le moral de tous les pompiers valables de notre ressource
+     * 
      * @param {integer} nbMoral 
      */
     updateMoralOfFirefightersAvailable(nbMoral){
@@ -171,7 +249,7 @@ export class Ressource{
     }
 
     /**
-     * @brief Met à 100% le moral des sapeurs pompiers de la ressources.
+     * Met à 100% le moral des sapeurs pompiers de la ressources.
      */
     maxMoralFirefighters(){
         this.chefs.forEach(chef => {

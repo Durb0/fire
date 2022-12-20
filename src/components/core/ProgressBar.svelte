@@ -1,8 +1,30 @@
+<!--
+    @component
+    
+    Affiche une barre de progression
+-->
+
+
 <script>
+    /**
+     * @param {string} color - couleur de la barre
+     */
     export let color = 'black';
+    /**
+     * @param {number} thickness - épaisseur de la barre
+     */
     export let thickness = 10;
+    /**
+     * @param {number} value - valeur de la barre
+     */
     export let value = 50;
+    /**
+     * @param {string} background - couleur de fond de la barre
+     */
     export let background = "transparent";
+    /**
+     * @param {number} margin - marge de la barre
+     */
     export let margin = 0;
 </script>
 

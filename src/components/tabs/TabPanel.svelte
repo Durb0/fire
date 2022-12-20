@@ -1,3 +1,9 @@
+<!--
+	@component
+	
+	Le contenu d'un onglet
+-->
+
 <script>
 	import { getContext } from 'svelte';
 	import { TABS } from './Tabs.svelte';

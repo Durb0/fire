@@ -1,3 +1,8 @@
+<!--
+    @component
+    
+    Le conteneur des onglets
+-->
 <div class="tab-list">
 	<slot></slot>
 </div>

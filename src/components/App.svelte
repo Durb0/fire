@@ -1,12 +1,25 @@
+<!--
+  @component
+  
+  L'application principale, gère le rooting et le changement de page  
+-->
+
 <script>
+  // import du système de routing
   import { Router, Route } from "svelte-routing";
+
+  // import des composants
   import MainPage from "./page/MainPage.svelte";
   import GamePage from "./page/GamePage.svelte";
+
+  //import du store
   import { w_screen} from "../utils/store.js";
 
   export let url = "";
 
-
+  /**
+   * Définit l'état de l'écran
+   */
   function defineScreen(){
     let width = window.innerWidth;
     let height = window.innerHeight;
@@ -18,10 +31,17 @@
     }
   }
 
+  /**
+   * Définit l'état de l'écran au chargement de la page
+  */
   window.addEventListener("load", function(){
 		defineScreen();
 	});
 
+
+  /**
+   * Définit l'état de l'écran à chaque redimensionnement de la fenêtre
+  */
 	window.addEventListener("resize", function(){
 		defineScreen();
   });
