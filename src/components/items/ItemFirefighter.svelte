@@ -72,7 +72,7 @@
                 firstCard.means_move.addFireFighter(firefighter);
             }
             
-        }else{
+        }else if (firefighter.state == StateRessource.SELECTED){
             // si le pompier est sélectionné on le retire de la carte
             firefighter.state = StateRessource.AVAILABLE;
             // on retire le pompier de la carte
