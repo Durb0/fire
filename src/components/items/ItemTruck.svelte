@@ -52,7 +52,7 @@
             if(truck.state == StateRessource.AVAILABLE){
                 truck.state = StateRessource.SELECTED;
                 firstCard.means_move.addTruck(truck);
-        }else{
+        }else if (truck.state == StateRessource.SELECTED){
             // sinon on le retire de la carte et on le rend disponible
             if(firstCard.means_move.countFirefighters() <= (game.deck[0].means_move.getSizeMaxOfTrucks() - truck.nb_seat_max)){
                 truck.state = StateRessource.AVAILABLE;
@@ -87,10 +87,6 @@
     
     </div>
 </Item>    
-<Snackbar class="flex-column" style="border-radius:10px; background-color: rgb(255, 207, 64); color: black;" bind:active={snackbar} bottom center timeout={5000}>
-    <h5>Impossible de retirer le véhicule</h5>
-    <p>Retirez les pompiers necessaires avant de retirer votre vehicule</p>
-</Snackbar>
 
 
 <style>
