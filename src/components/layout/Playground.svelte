@@ -7,6 +7,8 @@
 
 
 <script>
+  import { onMount } from 'svelte';
+
     //import du store
     import { w_game } from '../../utils/store.js';
 
@@ -32,6 +34,13 @@
         updateCardSize();
     });
     window.addEventListener('resize', function() {
+        updateCardSize();
+    });
+    window.addEventListener('hashchange', function() {
+        updateCardSize();
+    });
+
+    onMount(() => {
         updateCardSize();
     });
 

@@ -178,7 +178,7 @@
 
 <style>
     :root{
-        --card_size : 70%;
+        --card_size : 50%;
         --card_radius: 20px;
     }
 
